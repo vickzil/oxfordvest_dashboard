@@ -1,0 +1,19 @@
+body .account_body {
+    width: 100%!important;
+    height: 100%!important;
+    overflow: hidden;
+    background: #fff!important;
+    z-index: 900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000!important;
+}
+
+
+/*signin*/
+
+body .signin {
+    width: 100vw!important;
+    height: 100vh!important;
+    overflow-y: scroll!important;
+    z-index: 900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000!important;
+    background: #f1f0f0;
+    font-family: 'Exo 2', sans-serif;
+}
