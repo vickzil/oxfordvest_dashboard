@@ -32,4 +32,10 @@ export default {};
   overflow: hidden !important;
   z-index: 10;
 }
+
+@media screen and (max-width: 530px) {
+  .cardLaoding {
+    top: 50px !important;
+  }
+}
 </style>

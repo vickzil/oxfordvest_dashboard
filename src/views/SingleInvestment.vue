@@ -5,7 +5,7 @@
     <div class="main-content">
       <div class="container-fluid">
         <PageHeader :topPageName="topPageName" />
-        <div class="row clearfix">
+        <div class="row clearfix" v-if="user">
           <div class="col-md-12">
             <div>
               <router-link
@@ -137,7 +137,7 @@ export default {
     this.closePageLoading();
   },
   beforeRouteLeave(to, from, next) {
-    this.showPageLoading();
+    // this.showPageLoading();
     this.removeOffcanvas();
     next();
   },

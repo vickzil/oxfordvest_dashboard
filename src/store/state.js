@@ -23,6 +23,7 @@ export default {
   performInvestmentModal: false,
   investNowModal: false,
   withdrawFundModal: false,
+  addCardModal: false,
 
   // NOTIFICATIONS
   alertModalStatus: false,
@@ -63,6 +64,7 @@ export default {
   // PAYMENTS
   currentpayment: null,
   userPaymentOptions: null,
+  userPaymentFeeInfo: null,
   clickedPaymentType: null,
   userBankDetails: null,
   emailConfirmModal: false,

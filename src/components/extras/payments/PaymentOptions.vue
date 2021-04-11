@@ -64,12 +64,18 @@ export default {
   width: 80%;
   margin: 40px auto 90px;
 }
+button {
+  background: rgba(245, 0, 0, 0.07) !important;
+}
+button:hover {
+  color: #555 !important;
+}
 
 .grid-box .btn {
   padding: 10px 20px;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 990px) {
   .grid-box {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -79,7 +85,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 590px) {
   .grid-box {
     gap: 20px;
     grid-template-columns: 1fr;

@@ -9,12 +9,12 @@
         <h4>Logout Alert</h4>
         <p>Do you want to Logout?</p>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-6">
             <button class="btn btn-light btn-sm" @click="closeLogoutModal">
               Cancel
             </button>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-6">
             <button class="btn btn-success btn-sm" @click="logoutUser">
               Okay
             </button>

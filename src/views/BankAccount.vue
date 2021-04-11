@@ -20,15 +20,15 @@
                     >Bank Account</a
                   >
                 </li>
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#bankCard"
                     >Card</a
                   >
-                </li> -->
+                </li>
               </ul>
             </div>
 
-            <div class="tab-content padding-0">
+            <div class="tab-content padding-0" v-if="user">
               <div class="tab-pane active" id="bankAccount">
                 <UserBankAccount />
               </div>
@@ -51,7 +51,7 @@ import BankCard from "../components/extras/banks/BankCard";
 import PageLoadingOverlay from "../components/loaders/PageLoadingOverlay";
 import "@/mixins";
 
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "BankAccount",
   components: {
@@ -61,6 +61,10 @@ export default {
     BankCard,
   },
 
+  computed: {
+    ...mapGetters(["userPaymentFeeInfo"]),
+  },
+
   data() {
     return {
       topPageName: "Bank Account",
@@ -68,7 +72,12 @@ export default {
   },
 
   methods: {
-    ...mapActions(["currentSitePage", "closePageLoading", "showPageLoading"]),
+    ...mapActions([
+      "currentSitePage",
+      "closePageLoading",
+      "showPageLoading",
+      "getPaymentFeeInfo",
+    ]),
     removeOffcanvas: function () {
       document.body.classList.remove("offcanvas-active");
     },
@@ -77,9 +86,12 @@ export default {
   mounted() {
     this.currentSitePage(this.$router.history.current.path);
     this.closePageLoading();
+    if (this.user !== null && this.userPaymentFeeInfo == null) {
+      this.getPaymentFeeInfo();
+    }
   },
   beforeRouteLeave(to, from, next) {
-    this.showPageLoading();
+    // this.showPageLoading();
     this.removeOffcanvas();
     next();
   },

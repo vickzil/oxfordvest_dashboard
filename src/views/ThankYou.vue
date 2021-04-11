@@ -5,42 +5,44 @@
 
       <div class="more_info_grid">
         <div class="right-content">
-          <img
-            class="rtc_image"
-            src="@/assets/images/oxfordvest.png"
-            width="120"
-            height="45"
-            alt="logo"
-          />
-          <h2 class="right-content-title" style="text-align: center">
-            Thank you for <em> creating your Oxfordvest </em> account!!
-          </h2>
-          <span style="text-align: center; margin-bottom: 20px"
-            >Your account have not been Verified. Please verify your account by
-            clicking on the link we just sent to your email.</span
-          >
-
-          <div class="text-center mt-md-3">
-            <p
-              class="mb-2 font-weight-bold"
-              style="color: rgb(51, 18, 18); text-align: center"
+          <form class="form small_form">
+            <img
+              class="rtc_image"
+              src="@/assets/images/oxfordvest.png"
+              width="120"
+              height="45"
+              alt="logo"
+            />
+            <h2 class="right-content-title" style="text-align: center">
+              Thank you for <em> creating your Oxfordvest </em> account!!
+            </h2>
+            <span style="text-align: center; margin-bottom: 20px"
+              >Your account have not been Verified. Please verify your account
+              by clicking on the link we just sent to your email.</span
             >
-              Didn't receive any email?.
-            </p>
-            <router-link
-              to="/confirm"
-              class="font-weight-bold btn-sm filled-button"
-            >
-              Resend email
-            </router-link>
 
-            <p class="signupp">
-              <router-link to="/login" class="font-weight-bold">
-                Send me Back
+            <div class="text-center mt-md-3">
+              <p
+                class="mb-2 font-weight-bold"
+                style="color: rgb(51, 18, 18); text-align: center"
+              >
+                Didn't receive any email?.
+              </p>
+              <router-link
+                to="/confirm"
+                class="font-weight-bold btn-sm filled-button"
+              >
+                Resend email
               </router-link>
-              to the Login.
-            </p>
-          </div>
+
+              <p class="signupp">
+                <router-link to="/login" class="font-weight-bold">
+                  Send me Back
+                </router-link>
+                to the Login.
+              </p>
+            </div>
+          </form>
 
           <!-- <div class="text-center">
             <p class="signupp" >

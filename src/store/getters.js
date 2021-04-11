@@ -191,6 +191,10 @@ export const userBankDetails = (state) => {
   return state.userBankDetails;
 };
 
+export const addCardModal = (state) => {
+  return state.addCardModal;
+};
+
 export const makePayment = (state) => {
   return state.makePayment;
 };
@@ -210,8 +214,13 @@ export const selectPaymentOptionModal = (state) => {
 export const paymentOptions = (state) => {
   return state.paymentOptions;
 };
+
 export const userPaymentOptions = (state) => {
   return state.userPaymentOptions;
+};
+
+export const userPaymentFeeInfo = (state) => {
+  return state.userPaymentFeeInfo;
 };
 
 export const bankTransferModal = (state) => {

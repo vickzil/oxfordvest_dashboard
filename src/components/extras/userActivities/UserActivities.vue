@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-12 col-sm-12 card">
       <div class="table-responsive" v-if="userActivities.length">
-        <table class="table table-hover mb-0">
+        <table class="table table-striped mb-0">
           <thead>
             <tr>
               <th>#</th>
@@ -55,7 +55,9 @@ export default {
     userActivities() {
       let activities = this.user.userInfo.userActivities;
       let someActivities = activities.slice(0, 5);
-      let sortedActivities = someActivities.sort(function(a,b){return a.createdOn < b.createdOn ? -1 : 1});
+      let sortedActivities = someActivities.sort(function (a, b) {
+        return a.createdOn < b.createdOn ? -1 : 1;
+      });
       return sortedActivities;
     },
   },

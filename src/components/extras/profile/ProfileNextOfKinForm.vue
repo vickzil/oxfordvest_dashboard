@@ -97,13 +97,9 @@
           </div>
         </div>
         <br /><br />
-        <div class="text-right">
-          <button
-            type="submit"
-            class="btn btn-danger oxfordvest_button"
-            
-          >
-            Update Profile
+        <div class="text-md-right text-sm-center">
+          <button type="submit" class="btn btn-danger oxfordvest_button">
+            Update next of kin
           </button>
         </div>
       </form>
@@ -190,7 +186,7 @@ export default {
     submitForm: function () {
       this.setActionLoading(true);
 
-      const url = `${this.hrmURL}/v1.0/User/updateUserNextOfKin`; 
+      const url = `${this.hrmURL}/v1.0/User/updateUserNextOfKin`;
 
       var data = {
         AppId: this.AppId,

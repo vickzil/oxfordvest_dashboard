@@ -2,12 +2,12 @@
   <div class="card" v-if="user">
     <div class="header">
       <div class="row clearfix">
-        <div class="col-xl-6 col-md-5 col-sm-12">
-          <h2>My Bank Account</h2>
+        <div class="col-xl-6 col-md-5 col-sm-12 card_button_right">
+          <h2 class="header_header"><b>My Bank Account</b></h2>
         </div>
         <div class="col-xl-6 col-md-7 col-sm-12 text-md-right">
           <div
-            class="d-flex align-items-center justify-content-md-end mt-4 mt-md-0 flex-wrap"
+            class="d-flex align-items-center justify-content-md-end mt-4 mt-md-0 flex-wrap card_button_right"
           >
             <div class="mb-3 mb-xl-0">
               <a
@@ -114,4 +114,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+@media screen and (max-width: 530px) {
+  h2.header_header {
+    text-align: center !important;
+  }
+  p {
+    line-height: 1.4;
+  }
+
+  .card_button_right {
+    display: block !important;
+    text-align: center !important;
+  }
+}
+</style>

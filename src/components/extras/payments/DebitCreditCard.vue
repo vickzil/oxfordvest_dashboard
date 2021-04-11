@@ -66,7 +66,7 @@ export default {
           message:
             "Unfortunately, " +
             payment.provider +
-            " payment method is not available. Please make use of other available payment options",
+            " payment method is not available. Please try other available payment options",
         };
         this.setAlertModalStatus(payload);
       }
@@ -105,8 +105,10 @@ export default {
   color: white !important;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 970px) {
   .grid-box {
+    display: grid;
+    gap: 30px;
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -115,7 +117,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 530px) {
   .grid-box {
     gap: 20px;
     grid-template-columns: 1fr;

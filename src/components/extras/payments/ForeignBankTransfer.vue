@@ -75,10 +75,10 @@
       <p class="text-right"><b>Already made payment??</b></p>
       <button
         type="submit"
-        class="btn btn-outline-danger"
+        class="btn btn-danger oxfordvest_button"
         @click="uploadPaymentEvidence"
       >
-        Upload Payment Evidence
+        Upload Evidence
         <i style="font-size: 16px" class="fa fa-upload ml-2"></i>
       </button>
     </div>
@@ -179,5 +179,11 @@ table thead th {
 .table-responsive::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: #ffffff;
+}
+
+@media screen and (max-width: 600px) {
+  h6 {
+    font-size: 15px !important;
+  }
 }
 </style>

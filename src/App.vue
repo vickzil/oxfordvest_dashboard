@@ -29,7 +29,7 @@ import Navbar from "./components/navbar/Navbar";
 import ActionLoadingOverlay from "./components/loaders/ActionLoadingOverlay";
 import MessageLoadingOverlay from "./components/loaders/MessageLoadingOverlay";
 import AllModal from "./components/modals/AllModal";
-
+import "@/mixins";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -50,14 +50,6 @@ export default {
       "AppId",
       "RequestId",
     ]),
-    expiresAt: {
-      get: function () {
-        return sessionStorage.getItem("appexrat");
-      },
-      set: function (expiresIn) {
-        return sessionStorage.setItem("appexrat", expiresIn);
-      },
-    },
   },
   methods: {
     ...mapActions([
@@ -65,19 +57,8 @@ export default {
       "fetchUserData",
       "fetchBankNames",
       "fetchRegistrationInfo",
+      "getPaymentFeeInfo",
     ]),
-
-    isAuthenticated() {
-      let date = new Date(this.expiresAt);
-
-      let minusHour = date.setMinutes(date.getMinutes() - 60);
-
-      let newExpiry = new Date().setMinutes(new Date().getMinutes());
-
-      let newDate = newExpiry < minusHour;
-
-      return !!newDate;
-    },
 
     checkUserAuthentication: function () {
       const token = sessionStorage.getItem("appUserThemeSettingsCode");
@@ -90,12 +71,11 @@ export default {
           if (!this.isAuthenticated()) {
             this.logout();
             sessionStorage.clear();
-            this.$router.push("/").catch((error) => {
-              if (error) {
-                error;
-                console.log("not found 2");
-              }
-            });
+            // this.$router.push("/").catch((error) => {
+            //   if (error) {
+            //     error;
+            //   }
+            // });
           } else {
             var data = {
               AppId: this.AppId,
@@ -104,6 +84,10 @@ export default {
             };
             this.fetchUserData(userCode);
             this.fetchBankNames(data);
+
+            // setTimeout(() => {
+            //   this.getPaymentFeeInfo();
+            // }, 3000);
           }
         } else {
           this.logout();
@@ -340,6 +324,9 @@ textarea {
   color: rgb(134, 19, 19) !important;
   background-color: #f5dbd9 !important;
 }
+.table thead tr th {
+  font-weight: bold !important;
+}
 
 .oxfordvest_foorm .vs__selected {
   width: 75%;
@@ -351,6 +338,10 @@ textarea {
 
 .oxfordvest_foorm .vs__clear {
   display: none;
+}
+
+.vs__selected-options {
+  flex-wrap: nowrap !important;
 }
 
 .oxfordvest_foorm .vs1__combobox {
@@ -384,6 +375,21 @@ textarea {
 
   .oxfordvest_foorm .vs1__combobox {
     width: auto;
+  }
+
+  .vs__actions {
+    display: flex;
+    align-items: flex-start;
+    padding: 8px 6px 0 3px;
+  }
+}
+
+@media (max-width: 568px) {
+  .oxfordvest_button {
+    font-size: 13px !important;
+  }
+  .oxfordvest_button i {
+    font-size: 13px !important;
   }
 }
 </style>

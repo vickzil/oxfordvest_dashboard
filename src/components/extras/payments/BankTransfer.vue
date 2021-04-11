@@ -38,7 +38,21 @@
         </tbody>
       </table>
     </div>
-    <br /><br /><br />
+    <br /><br />
+
+    <div class="text-right pt-3 mt-5">
+      <p class="text-right"><b>Already made payment??</b></p>
+      <button
+        type="submit"
+        class="btn btn-danger oxfordvest_button"
+        @click="uploadPaymentEvidence"
+      >
+        Upload Evidence
+        <i style="font-size: 16px" class="fa fa-upload ml-2"></i>
+      </button>
+    </div>
+
+    <br />
   </div>
 </template>
 <script>
@@ -71,10 +85,15 @@ export default {
       "setMakePayment",
       "paymentOptionsBack",
       "setAlertModalStatus",
+      "showUploadEvidenceFormModal",
     ]),
 
     goBack: function () {
       this.paymentOptionsBack();
+    },
+
+    uploadPaymentEvidence: function () {
+      this.showUploadEvidenceFormModal();
     },
 
     proceedToPayment: function () {
@@ -102,5 +121,11 @@ export default {
 table thead th {
   color: #333 !important;
   font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  h6 {
+    font-size: 15px !important;
+  }
 }
 </style>

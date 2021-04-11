@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="table-responsive">
-      <table class="table table-hover mb-0">
+      <table class="table table-hover table-striped mb-0">
         <thead>
           <tr>
             <th>Bank Name</th>

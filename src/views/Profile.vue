@@ -49,15 +49,22 @@ export default {
   },
 
   methods: {
-    ...mapActions(["currentSitePage", "closePageLoading", "showPageLoading","fetchUserData"]),
+    ...mapActions([
+      "currentSitePage",
+      "closePageLoading",
+      "showPageLoading",
+      "fetchUserData",
+    ]),
     removeOffcanvas: function () {
       document.body.classList.remove("offcanvas-active");
     },
 
-    getUserData: function() {
-      let userCode = this.user.userInfo.user.code;
-      this.fetchUserData(userCode);
-    }
+    getUserData: function () {
+      if (this.user !== null) {
+        let userCode = this.user.userInfo.user.code;
+        this.fetchUserData(userCode);
+      }
+    },
   },
 
   mounted() {
@@ -65,7 +72,7 @@ export default {
     this.closePageLoading();
   },
   beforeRouteLeave(to, from, next) {
-    this.showPageLoading();
+    // this.showPageLoading();
     this.removeOffcanvas();
     this.getUserData();
     next();

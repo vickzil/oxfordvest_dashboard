@@ -1,5 +1,5 @@
 <template>
-  <form class="form" v-on:submit.prevent="loginUser">
+  <form class="form c" v-on:submit.prevent="loginUser">
     <transition name="fade">
       <p
         style="
@@ -209,6 +209,7 @@ export default {
       "setAlertModalStatus",
       "fetchBankNames",
       "saveUserData",
+      "getPaymentFeeInfo",
     ]),
     loginUser: function () {
       if (this.formError == false && this.emptyFields == false) {
@@ -401,6 +402,10 @@ export default {
               this.setAlertModalStatus(payload);
               this.$router.push({ path: "/dashboard" });
             }, 1500);
+
+            setTimeout(() => {
+              this.getPaymentFeeInfo();
+            }, 2500);
 
             this.formStatus = false;
             this.formText = "Login";

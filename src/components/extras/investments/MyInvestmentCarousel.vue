@@ -4,7 +4,7 @@
       <!-- <CardLoading /> -->
       <carousel
         v-if="investments.length"
-        :autoplay="false"
+        :autoplay="true"
         :nav="false"
         :dots="false"
         :stagePadding="50"
@@ -29,12 +29,9 @@
         >
           <h5>{{ investment.availableInvestmentName }}</h5>
           <p>
-            <span
-              style="font-size: 11px"
-              class="badge badge-success"
-              >{{investment.status}}</span
-            >
-            
+            <span style="font-size: 11px" class="badge badge-success">{{
+              investment.status
+            }}</span>
           </p>
           <div class="card_grid">
             <div class="invest_money">
@@ -92,7 +89,7 @@
               {{ removeTimeZone(investment.maturityDate) }}
             </div>
           </div>
-          <div class="card_grid mt-4">
+          <div class="card_grid card_grid_button mt-4">
             <div class="invest_money"></div>
             <div class="invest_button">
               <router-link
@@ -147,7 +144,6 @@ export default {
       // console.log(investment);
     },
   },
-  
 };
 </script>
 
@@ -232,5 +228,26 @@ export default {
 }
 .card_grid a.btn.btn-danger i {
   font-weight: bold !important;
+}
+
+@media screen and (max-width: 530px) {
+  .card_item {
+    padding: 30px 19px;
+  }
+  .card_item h5 {
+    font-size: 16px !important;
+  }
+  .card_grid .invest_money {
+    font-size: 12px;
+  }
+  .card_grid_button {
+    display: block;
+    text-align: center;
+  }
+
+  .card_grid_button a {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
 </style>

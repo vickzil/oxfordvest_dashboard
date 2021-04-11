@@ -7,7 +7,7 @@
         <!-- Page header section  -->
         <PageHeader :topPageName="topPageName" />
 
-        <div class="row clearfix">
+        <div class="row clearfix" v-if="user">
           <div class="col-12 mt-4">
             <div class="oxfordvest_tabs">
               <ul class="nav nav-tabs">
@@ -28,10 +28,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    data-toggle="tab"
-                    href="#Change_pin"
+                  <a class="nav-link" data-toggle="tab" href="#Change_pin"
                     >Change pin
                   </a>
                 </li>
@@ -139,7 +136,7 @@ export default {
     PageLoadingOverlay,
     PageHeader,
     ChangePasswordForm,
-    ChangePinForm
+    ChangePinForm,
   },
 
   data() {
@@ -160,7 +157,7 @@ export default {
     this.closePageLoading();
   },
   beforeRouteLeave(to, from, next) {
-    this.showPageLoading();
+    // this.showPageLoading();
     this.removeOffcanvas();
     next();
   },

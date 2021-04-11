@@ -8,7 +8,11 @@
             <br /><br />
             <div class="form-group">
               <div class="text-md-left">
-                <button type="button" class="btn btn-outline-danger" @click="resendPin">
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  @click="resendPin"
+                >
                   Resend Pin <i class="fa fa-repeat ml-2"></i>
                 </button>
               </div>
@@ -77,7 +81,7 @@
               ></span>
             </div>
           </div>
-          <div class="col-sm-12 m-t-20 text-right">
+          <div class="col-sm-12 m-t-20 text-md-right text-sm-center">
             <button type="submit" class="oxfordvest_buttons">
               {{ formText }}
               <span
@@ -165,14 +169,13 @@ export default {
         this.checkInputform();
       }
     },
-    
 
     submitForm: function () {
       this.emptyFields = true;
       this.processing = true;
       this.formText = "Please wait...";
 
-      const url = `${this.hrmURL}/v1.0/OAuth/changePin`; 
+      const url = `${this.hrmURL}/v1.0/OAuth/changePin`;
 
       var data = {
         AppId: this.AppId,
@@ -232,35 +235,35 @@ export default {
         UserCode: this.user.userInfo.user.code,
       };
 
-      axios.post(url, data).then(response => {
-        this.setActionLoading(false);
+      axios
+        .post(url, data)
+        .then((response) => {
+          this.setActionLoading(false);
 
-        let payload;
+          let payload;
 
-        if (response.data.success == true) {
+          if (response.data.success == true) {
+            payload = {
+              status: true,
+              type: "success",
+              message: "Pin sent Successfully. Please Check email ",
+            };
+          } else {
+            payload = {
+              status: true,
+              type: "error",
+              message: response.data.message,
+            };
+          }
 
-          payload = {
-            status: true,
-            type: "success",
-            message: "Pin sent Successfully. Please Check email ",
-          };
+          console.log(response);
 
-        } else {
-          payload = {
-            status: true,
-            type: "error",
-            message: response.data.message,
-          };
-        }
-
-        console.log(response);
-
-        this.setAlertModalStatus(payload);
-      }).catch(error => {
-        error;
-        this.serverErrorMessage();
-      })
-
+          this.setAlertModalStatus(payload);
+        })
+        .catch((error) => {
+          error;
+          this.serverErrorMessage();
+        });
     },
   },
 };

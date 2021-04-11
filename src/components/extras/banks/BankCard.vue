@@ -3,11 +3,11 @@
     <div class="header">
       <div class="row clearfix">
         <div class="col-xl-6 col-md-5 col-sm-6">
-          <h2>My Cards</h2>
+          <h2><b>My Cards</b></h2>
         </div>
         <div class="col-xl-6 col-md-7 col-sm-6 text-md-right">
           <div
-            class="d-flex align-items-center justify-content-md-end mt-4 mt-md-0 flex-wrap"
+            class="d-flex align-items-center justify-content-md-end mt-4 mt-md-0 flex-wrap card_button_right"
           >
             <div class="mb-3 mb-xl-0">
               <a
@@ -85,43 +85,8 @@
               This is only available to Nigerian cards/account. If non Nigerian,
               kindly ignore this.
             </p>
-            <div class="mt-3 mb-xl-0">
-              <a
-                @click="addCard"
-                href="javascript:void(0)"
-                class="btn btn-outline-danger"
-              >
-                <span> Add Card <i class="fa fa-plus ml-1"></i> </span>
-              </a>
-            </div>
             <br /><br />
           </div>
-        </div>
-        <div v-if="showPaystack" class="text-center mt-4">
-          <p class="w-80">
-            To add and verify your card ₦ 100 will be charged and saved into
-            your Wallet
-          </p>
-          <Paystack
-            :paystackkey="paystackkey"
-            :reference="reference"
-            :callback="callback"
-            :amount="amount * 100"
-            :currency="currency"
-            :firstname="user.userInfo.user.firstName"
-            :lastname="user.userInfo.user.lastName"
-            :email="user.userInfo.user.email"
-            :close="close"
-            :embed="false"
-            ref="paystackPayment"
-            class="btn btn-danger btn-lg payment_buttion"
-          >
-            Proceed
-            <i class="fe fe-credit-card ml-2"></i>
-          </Paystack>
-          <br />
-          <br />
-          <br />
         </div>
       </div>
     </div>
@@ -131,12 +96,11 @@
 <script>
 import BankTableList from "./BankTableList";
 import "@/mixins";
-import axios from "axios";
-import Paystack from "vue-paystack";
+
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     BankTableList,
-    Paystack,
   },
   data() {
     return {
@@ -149,6 +113,8 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["userPaymentFeeInfo"]),
+
     bankCards() {
       return this.user.userInfo.userCardsInfo.userCards;
     },
@@ -170,141 +136,19 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["setAddModal", "getPaymentFeeInfo", "setActionLoading"]),
     addCard: function () {
-      if (this.bankdetails.accountNumber == null) {
-        let payload = {
-          status: true,
-          type: "error",
-          message:
-            "Please you need to add your bank account details before you proceed.",
-        };
-        this.$store.dispatch("setAlertModalStatus", payload);
-      } else {
-        this.$store.dispatch("setActionLoading", true);
-        this.paymentFeeInfo();
-      }
-    },
-    paymentFeeInfo: function () {
-      this.buttonText = "Please wait...";
-      this.processing = true;
-
-      const url = `${this.walletURL}/v1.0/PaymentFee/paymentFeeInfo`;
-
-      let paymentByCard = this.user.fundWalletOptions.byCard.items.find(
-        (item) => item.provider === "paystack"
-      );
-
-      if (paymentByCard) {
-        this.paystackkey = paymentByCard.publicKey;
+      this.setActionLoading(true);
+      if (this.userPaymentFeeInfo == null) {
+        this.getPaymentFeeInfo();
       }
 
-      var data = {
-        AppId: this.AppId,
-        RequestId: this.RequestId,
-        Email: this.user.userInfo.user.email,
-        Currency: "NGN",
-        Amount: this.amount,
-        Provider: "paystack",
-      };
-
-      axios
-        .post(url, data)
-        .then((res) => {
-          if (res.data.success) {
-            let responseData = res.data.data;
-            this.reference = responseData.reference;
-            // console.log(responseData);
-            this.showPaystack = true;
-
-            // this.$refs.paystackPayment.click();
-          }
-
-          this.$store.dispatch("setActionLoading", false);
-
-          // console.log(res);
-        })
-        .catch((err) => {
-          this.serverErrorMessage();
-          console.log(err);
-          this.showPaystack = false;
-        });
-    },
-    callback: function (response) {
-      if (response.status) {
-        this.verifyPacystackCardPayment(response);
-
-        // console.log(response);
-      } else {
-        let payload = {
-          status: true,
-          type: "error",
-          message: "Card Verification not completed",
-        };
-        this.$store.dispatch("setAlertModalStatus", payload);
-      }
-      this.showPaystack = false;
-      // console.log(response);
-    },
-    verifyPacystackCardPayment: function (response) {
-      this.$store.dispatch("setActionLoading", true);
-      var data = {
-        AppId: this.AppId,
-        RequestId: this.RequestId,
-        Email: this.user.userInfo.user.email,
-        ProviderPaymentReference: response.reference,
-        TransactionReference: this.reference,
-        Provider: "paystack",
-        Currency: "NGN",
-      };
-      const url = `${this.walletURL}/v1.0/VerifyCardPayment/confirmCardPaymentStatus`;
-
-      axios
-        .post(url, data)
-        .then((response) => {
-          // console.log(response);
-
-          let payload;
-
-          if (response.data.success) {
-            payload = {
-              type: "success",
-              message: "Card Confirm successfully",
-            };
-          } else {
-            payload = {
-              type: "error",
-              message: "Error Card confirmation",
-            };
-          }
-
-          this.$store.dispatch("showAlert", payload);
-          this.$store.dispatch("setActionLoading", false);
-          this.showPaystack = false;
-        })
-        .catch((err) => {
-          console.log(err);
-
-          let payload = {
-            type: "error",
-            message: "Error Card confirmation",
-          };
-          this.showPaystack = false;
-
-          this.$store.dispatch("showAlert", payload);
-          this.$store.dispatch("setActionLoading", false);
-        });
-    },
-    close: function () {
-      // console.log("Payment closed");
-      this.showPaystack = false;
-      this.$store.dispatch("setActionLoading", false);
-
-      let payload = {
-        status: true,
-        type: "error",
-        message: "Payment not completed",
-      };
-      this.$store.dispatch("setAlertModalStatus", payload);
+      setTimeout(() => {
+        this.setActionLoading(false);
+      }, 600);
+      setTimeout(() => {
+        this.setAddModal(true);
+      }, 800);
     },
   },
 };
@@ -329,5 +173,19 @@ export default {
 .payment_buttion:hover {
   background: rgb(167, 3, 3) !important;
   color: white !important;
+}
+
+@media screen and (max-width: 530px) {
+  h2 {
+    text-align: center;
+  }
+  p {
+    line-height: 1.4;
+  }
+
+  .card_button_right {
+    display: block !important;
+    text-align: center !important;
+  }
 }
 </style>

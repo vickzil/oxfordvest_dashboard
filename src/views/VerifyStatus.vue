@@ -5,37 +5,39 @@
 
       <div class="more_info_grid">
         <div class="right-content">
-          <img
-            class="rtc_image"
-            src="@/assets/images/oxfordvest.png"
-            width="120"
-            height="45"
-            alt="logo"
-          />
-          <h2 class="right-content-title" style="text-align: center">
-            {{ pageTitle }}
-          </h2>
-          <span style="text-align: center; margin-bottom: 20px">{{
-            pageDescription1
-          }}</span>
+          <form class="form small_form">
+            <img
+              class="rtc_image"
+              src="@/assets/images/oxfordvest.png"
+              width="120"
+              height="45"
+              alt="logo"
+            />
+            <h2 class="right-content-title" style="text-align: center">
+              {{ pageTitle }}
+            </h2>
+            <span style="text-align: center; margin-bottom: 20px">{{
+              pageDescription1
+            }}</span>
 
-          <div class="text-center">
-            <router-link
-              to="/login"
-              v-if="status === 'true'"
-              class="font-weight-bold btn-sm filled-button"
-            >
-              Login
-            </router-link>
+            <div class="text-center">
+              <router-link
+                to="/login"
+                v-if="status === 'true'"
+                class="font-weight-bold btn-sm filled-button"
+              >
+                Login
+              </router-link>
 
-            <router-link
-              to="/confirm"
-              v-else
-              class="font-weight-bold btn-sm filled-button"
-            >
-              Resend email
-            </router-link>
-          </div>
+              <router-link
+                to="/confirm"
+                v-else
+                class="font-weight-bold btn-sm filled-button"
+              >
+                Resend email
+              </router-link>
+            </div>
+          </form>
 
           <!-- <div class="text-center">
             <p class="signupp" >

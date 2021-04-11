@@ -1,11 +1,11 @@
 <template>
   <div class="card animated px-4" v-if="UploadEvidenceFormModal">
     <br />
-    <button class="btn bg-light hrm_button" @click="goBack">
+    <!-- <button class="btn bg-light hrm_button" @click="goBack">
       <i class="fa fa-arrow-left"></i> Back
-    </button>
-    <br />
-    <br />
+    </button> -->
+    <!-- <br />
+    <br /> -->
     <div class="card">
       <div class="card-body">
         <form id="form_fd" v-on:submit.prevent="submitForm">
@@ -38,7 +38,7 @@
                   type="text"
                   class="form-control"
                   v-model.trim="amount"
-                  @input="checkInput(amount) || checkform"
+                  @input="checkform"
                 />
                 <transition name="fade">
                   <p
@@ -123,7 +123,7 @@
           <div class="text-right pt-3 mt-3">
             <button
               type="submit"
-              class="btn btn-danger btn-lg"
+              class="btn btn-danger btn-sm oxfordvest_button"
               v-bind:disabled="processing || emptyFields"
             >
               {{ buttonText }}
@@ -148,7 +148,7 @@ export default {
   name: "UploadEvidenceFormModal",
   data() {
     return {
-      amount: this.addComma(100),
+      amount: 100,
       currency: "",
       additionalInformation: "",
       processing: false,
@@ -192,44 +192,44 @@ export default {
         this.clearForm();
       }
     },
-    checkInput: function (input) {
-      // var regex = /^[0-9]+$/;
-      // if (!input.match(regex)) {
-      //   this.inputError = true;
-      //   this.emptyFields = true;
-      //   this.inputMessage = "please input must be numbers.";
-      //   return false;
-      // }
+    // checkInput: function (input) {
+    //   // var regex = /^[0-9]+$/;
+    //   // if (!input.match(regex)) {
+    //   //   this.inputError = true;
+    //   //   this.emptyFields = true;
+    //   //   this.inputMessage = "please input must be numbers.";
+    //   //   return false;
+    //   // }
 
-      if (this.currency == "NGN" && input < 100) {
-        this.inputMessage = "Amount must be up to 100";
-        this.inputError = true;
-        this.emptyFields = true;
+    //   if (this.currency == "NGN" && input < 100) {
+    //     this.inputMessage = "Amount must be up to 100";
+    //     this.inputError = true;
+    //     this.emptyFields = true;
 
-        return false;
-      }
-      if (!this.currency) {
-        this.emptyFields = true;
-        this.inputError = false;
-        return false;
-      }
-      if (!this.additionalInformation) {
-        this.emptyFields = true;
-        this.inputError = false;
-        return false;
-      }
+    //     return false;
+    //   }
+    //   if (!this.currency) {
+    //     this.emptyFields = true;
+    //     this.inputError = false;
+    //     return false;
+    //   }
+    //   if (!this.additionalInformation) {
+    //     this.emptyFields = true;
+    //     this.inputError = false;
+    //     return false;
+    //   }
 
-      if (!this.document) {
-        this.emptyFields = true;
-        this.inputError = false;
-        return false;
-      }
+    //   if (!this.document) {
+    //     this.emptyFields = true;
+    //     this.inputError = false;
+    //     return false;
+    //   }
 
-      this.inputError = false;
-      this.emptyFields = false;
+    //   this.inputError = false;
+    //   this.emptyFields = false;
 
-      return true;
-    },
+    //   return true;
+    // },
 
     submitForm: function () {
       this.errorMessage = "";
@@ -244,11 +244,10 @@ export default {
       }
     },
     checkform: function () {
-
-      if(isNaN(this.amount)) {
-          this.amount = parseInt(this.amount.replace(/[,]/g,''));
+      if (isNaN(this.amount)) {
+        this.amount = parseInt(this.amount.replace(/[,]/g, ""));
       }
-      
+
       if (
         !this.amount ||
         !this.currency ||
@@ -257,6 +256,23 @@ export default {
       ) {
         this.emptyFields = true;
         this.formError == true;
+        return false;
+      }
+
+      if (!this.currency) {
+        this.emptyFields = true;
+        this.inputError = false;
+        return false;
+      }
+      if (!this.additionalInformation) {
+        this.emptyFields = true;
+        this.inputError = false;
+        return false;
+      }
+
+      if (!this.document) {
+        this.emptyFields = true;
+        this.inputError = false;
         return false;
       }
       if (this.currency == "NGN" && this.amount < 100) {
@@ -282,8 +298,8 @@ export default {
 
       var fd = new FormData();
 
-      if(isNaN(this.amount)) {
-          this.amount = parseInt(this.amount.replace(/[,]/g,''));
+      if (isNaN(this.amount)) {
+        this.amount = parseInt(this.amount.replace(/[,]/g, ""));
       }
 
       fd.append("UserCode", this.user.userInfo.code);
@@ -343,7 +359,7 @@ export default {
     },
 
     clearForm: function () {
-      this.amount = null;
+      this.amount = 100;
       this.currency = "";
       this.previewDocument = "";
       this.document = null;
@@ -358,12 +374,13 @@ export default {
   },
 
   mounted() {},
-   watch: {
-    amount: function(newValue) {
-       let result = newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.$nextTick(() => this.amount = result);
-    }
-  }
+
+  watch: {
+    amount: function (newValue) {
+      let result = newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.$nextTick(() => (this.amount = result));
+    },
+  },
 };
 </script>
 <style scoped>
@@ -387,6 +404,12 @@ export default {
 }
 
 @media screen and (max-width: 600px) {
+  .card {
+    padding: 30px 7px !important;
+  }
+  .card-body {
+    padding: 30px 0px !important;
+  }
   #form_fd {
     width: 95%;
     margin: auto;

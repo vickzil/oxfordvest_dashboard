@@ -135,6 +135,13 @@ export default {
   margin-top: 6px;
 }
 
+@media screen and (max-width: 1190px) {
+  #fundWalletModal .modal-dialog {
+    max-width: 88%;
+    width: 88%;
+  }
+}
+
 @media screen and (max-width: 830px) {
   #fundWalletModal .modal-dialog {
     max-width: 90%;

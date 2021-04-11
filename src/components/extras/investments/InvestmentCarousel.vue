@@ -5,12 +5,12 @@
 
       <div v-if="investments.length">
         <carousel
-          :autoplay="false"
+          :autoplay="true"
           :nav="false"
           :dots="false"
           :stagePadding="50"
           :margin="20"
-          :autoplayTimeout="4000"
+          :autoplayTimeout="3000"
           :responsive="{
             0: {
               items: 1,
@@ -48,7 +48,7 @@
               </div>
               <div class="invest_money"></div>
             </div>
-            <div class="card_grid">
+            <div class="card_grid card_grid_button">
               <div class="invest_button">
                 <button
                   class="btn btn-outline-danger btn-sm shadow-lg"
@@ -205,5 +205,23 @@ export default {
 }
 .card_grid button.btn.btn-danger i {
   font-weight: bold !important;
+}
+
+@media screen and (max-width: 530px) {
+  .card_item {
+    padding: 30px 19px;
+  }
+  .card_item h5 {
+    font-size: 16px !important;
+  }
+  .card_grid_button {
+    display: block;
+    text-align: center;
+  }
+
+  .card_grid_button button.btn {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
 </style>

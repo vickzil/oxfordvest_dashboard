@@ -20,7 +20,8 @@
               <div class="input-group-append bg-danger">
                 <span
                   class="input-group-text text-center oxfordvest_button"
-                  id="search-mail" style="font-size: 14px!important;"
+                  id="search-mail"
+                  style="font-size: 14px !important"
                   @click="changeAcctMgt"
                 >
                   <span v-if="!showAccountMangerCode"
@@ -133,7 +134,7 @@
         </div>
       </div>
 
-      <div class="text-right">
+      <div class="text-md-right text-sm-center">
         <button
           type="button"
           class="btn btn-danger oxfordvest_button"
@@ -336,7 +337,6 @@ export default {
             type: "success",
             message: "Account Manager found",
           };
-
         } else {
           payload = {
             status: true,
@@ -344,7 +344,6 @@ export default {
             message: response.data.message,
           };
         }
-
 
         this.setAlertModalStatus(payload);
       } catch (error) {

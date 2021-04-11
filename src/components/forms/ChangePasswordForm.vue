@@ -70,7 +70,7 @@
               ></span>
             </div>
           </div>
-          <div class="col-sm-12 m-t-20 text-right">
+          <div class="col-sm-12 m-t-20 text-md-right text-sm-center">
             <button
               type="button"
               class="oxfordvest_buttons"

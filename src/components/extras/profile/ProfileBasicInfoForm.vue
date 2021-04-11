@@ -90,7 +90,6 @@
                 >Gender <span class="text-danger">*</span></label
               >
               <select class="form-control show-tick" v-model="gender">
-                
                 <option
                   :value="gen.code"
                   v-for="gen in registrationInfo.gender"
@@ -98,7 +97,6 @@
                 >
                   {{ gen.name }}
                 </option>
-
               </select>
             </div>
           </div>
@@ -129,7 +127,7 @@
             </div>
           </div>
         </div>
-        <div class="text-right">
+        <div class="text-md-right text-sm-center">
           <button
             type="submit"
             class="btn btn-danger oxfordvest_button"
@@ -181,7 +179,9 @@ export default {
     },
     middleName: {
       get() {
-        return this.user.userInfo.user.middleName == 'null' ? '' : this.user.userInfo.user.middleName
+        return this.user.userInfo.user.middleName == "null"
+          ? ""
+          : this.user.userInfo.user.middleName;
       },
       set(value) {
         return (this.user.userInfo.user.middleName = value);
@@ -213,7 +213,9 @@ export default {
     },
     homeAddress: {
       get() {
-        return this.user.userInfo.user.homeAddress == 'null' ? '' : this.user.userInfo.user.homeAddress
+        return this.user.userInfo.user.homeAddress == "null"
+          ? ""
+          : this.user.userInfo.user.homeAddress;
       },
       set(value) {
         return (this.user.userInfo.user.homeAddress = value);

@@ -5,22 +5,21 @@
 
       <div class="more_info_grid">
         <div class="right-content">
-          <img
-            class="rtc_image"
-            src="@/assets/images/oxfordvest.png"
-            width="120"
-            height="45"
-            alt="logo"
-          />
-          <h2 class="right-content-title" style="text-align: center">
-            Forgot Password
-          </h2>
-          <span style="text-align: center; margin-bottom: 20px"
-            >Enter your email address and we'll send you an email with
-            instructions to reset your password.</span
-          >
-
-          <form class="form" v-on:submit.prevent="recoverPassword">
+          <form class="form small_form" v-on:submit.prevent="recoverPassword">
+            <img
+              class="rtc_image"
+              src="@/assets/images/oxfordvest.png"
+              width="120"
+              height="45"
+              alt="logo"
+            />
+            <h2 class="right-content-title" style="text-align: center">
+              Forgot Password
+            </h2>
+            <span style="text-align: center; margin-bottom: 20px"
+              >Enter your email address and we'll send you an email with
+              instructions to reset your password.</span
+            >
             <input
               type="email"
               class="account_input"
@@ -39,13 +38,15 @@
             </div>
           </form>
 
-          <p class="signupp">
-            Forget it,
-            <router-link to="/login" class="font-weight-bold">
-              Send me Back
-            </router-link>
-            to the Login.
-          </p>
+          <div class="text-center">
+            <p class="signupp">
+              Forget it,
+              <router-link to="/login" class="font-weight-bold">
+                Send me Back
+              </router-link>
+              to the Login.
+            </p>
+          </div>
           <!-- <LoginForm2 /> -->
         </div>
         <AccountLeft />

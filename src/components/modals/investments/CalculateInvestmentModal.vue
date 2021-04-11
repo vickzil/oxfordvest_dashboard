@@ -160,7 +160,6 @@ export default {
     userAmount() {
       return this.user.userWalletBalance.availableBalance;
     },
-
   },
 
   data() {
@@ -198,10 +197,9 @@ export default {
       this.setCalCulateInvestmentModal(false);
     },
     checkInput: function (input) {
-      if(isNaN(this.amount)) {
-          this.amount = parseInt(this.amount.replace(/[,]/g,''));
+      if (isNaN(this.amount)) {
+        this.amount = parseInt(this.amount.replace(/[,]/g, ""));
       }
-
 
       if (input < this.currentInvestment.minimumAmount) {
         this.inputMessage = `Amount must be up to ${this.currentInvestment.minimumAmount} and above`;
@@ -237,8 +235,8 @@ export default {
         duration = this.currentInvestment.duration;
       }
 
-      if(isNaN(this.amount)) {
-          this.amount = parseInt(this.amount.replace(/[,]/g,''));
+      if (isNaN(this.amount)) {
+        this.amount = parseInt(this.amount.replace(/[,]/g, ""));
       }
 
       var data = {
@@ -248,7 +246,7 @@ export default {
         DurationOfInvestment: duration,
       };
 
-      console.log(data);
+      // console.log(data);
       // console.log(typeof amoutTostring);
       // console.log(amoutTostring);
 
@@ -275,7 +273,7 @@ export default {
             this.setAlertModalStatus(payload);
           }
 
-          // console.log(res);
+          console.log(res);
         })
         .catch((err) => {
           console.log(err);
@@ -285,11 +283,11 @@ export default {
     },
   },
   watch: {
-    amount: function(newValue) {
+    amount: function (newValue) {
       let result = newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.$nextTick(() => this.amount = result);
-    }
-  }
+      this.$nextTick(() => (this.amount = result));
+    },
+  },
 };
 </script>
 <style scoped>

@@ -80,7 +80,7 @@ export default {
     this.closePageLoading();
   },
   beforeRouteLeave(to, from, next) {
-    this.showPageLoading();
+    // this.showPageLoading();
     this.removeOffcanvas();
     next();
   },

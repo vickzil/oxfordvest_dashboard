@@ -30,14 +30,14 @@
           </div>
         </div>
         <br /><br /> -->
-        <div class="row clearfix">
+        <div class="row clearfix" v-if="user">
           <div class="col-md-12 col-sm-12 card">
             <InvestmentChart />
             <!-- <Chart2 /> -->
           </div>
         </div>
         <br />
-        <UserActivities />
+        <UserActivities v-if="user" />
         <br /><br />
       </div>
     </div>
@@ -106,7 +106,7 @@ export default {
     this.checkCurrentRoute();
   },
   beforeRouteLeave(to, from, next) {
-    this.showPageLoading();
+    // this.showPageLoading();
     this.removeOffcanvas();
     next();
   },

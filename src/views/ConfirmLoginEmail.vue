@@ -5,20 +5,6 @@
 
       <div class="more_info_grid">
         <div class="right-content">
-          <img
-            class="rtc_image"
-            src="@/assets/images/oxfordvest.png"
-            width="120"
-            height="45"
-            alt="logo"
-          />
-          <h2 class="right-content-title" style="text-align: center">
-            Resend confirmation email
-          </h2>
-          <span style="text-align: center; margin-bottom: 20px"
-            >Please type your email to resend your email confirmation
-            link.</span
-          >
           <ConfirmEmailForm />
 
           <p class="signupp">

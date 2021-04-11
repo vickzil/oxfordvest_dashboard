@@ -727,7 +727,7 @@ h6 {
 }
 }*/
 
-@media (max-width: 768px) {
+@media (max-width: 868px) {
   .top_image {
     display: none;
   }
@@ -797,6 +797,18 @@ h6 {
     display: block !important;
     background: transparent;
   }
+
+  .more-info form.small_form {
+    width: 60%;
+    margin: auto;
+  }
+
+  /* form.small_form  .field-icon {
+    float: right;
+    margin-left: -155px;
+    margin-top: -53px;
+    padding-right: -30px!important;
+  } */
   /* Additional styling for more info*/
   .right-content-title {
     font-size: 10px;
@@ -873,6 +885,9 @@ h6 {
         overflow: hidden !important;
     }*/
   /* Additional styling for more info*/
+  .circle_down {
+    clip-path: circle(50px at right 20px);
+  }
   .right-content-title {
     font-size: 10px;
     font-weight: 100;
@@ -930,9 +945,14 @@ h6 {
     width: 300px;
     margin: 0px auto;
   }
+
+  .account_input {
+    padding: 14px 20px;
+    width: 100%;
+  }
 }
 
-@media screen and (max-width: 536px) {
+@media screen and (max-width: 556px) {
   .just_register .more_info_grid form {
     padding-left: 0px;
     padding-right: 0px;
@@ -942,15 +962,31 @@ h6 {
     grid-gap: 0px;
     grid-template-columns: 1fr;
   }
+  .circle_down2 {
+    clip-path: circle(100px at left 680px);
+  }
+
+  .more-info form.small_form {
+    width: 100%;
+    margin: auto;
+  }
 }
 
 @media screen and (max-width: 476px) {
   .right-content {
-    padding: 30px 30px 20px !important;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30px 0px 20px !important;
+    /* overflow-x: hidden; */
   }
   .just_register .right-content {
     padding: 30px 0px 20px !important;
   }
+
+  .more-info.for_landing .right-content {
+    padding: 20px !important;
+  }
+
   .right-content {
     position: fixed;
     top: 0px;
@@ -961,6 +997,12 @@ h6 {
     margin: 0px;
     overflow-y: scroll;
     display: block !important;
+  }
+
+  .right-content form{
+    width: 100%;
+    padding: 30px 10px !important;
+    box-sizing: border-box!important;
   }
   .for_landing .right-content {
     display: flex !important;
@@ -1008,7 +1050,13 @@ h6 {
   }
   .more-info .right-content h2 {
     font-size: 19px;
-    margin-bottom: 35px;
+    margin-bottom: 15px;
+  }
+
+  .more_info_grid {
+    display: block;
+    padding: 0px!important;
+    width: 100%;
   }
   .signupp {
     text-align: center;

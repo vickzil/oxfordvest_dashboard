@@ -7,10 +7,10 @@
         <!-- Page header section  -->
         <PageHeader :topPageName="topPageName" />
 
-        <ReferralCard />
+        <ReferralCard v-if="user" />
         <br />
 
-        <UserReferrals class="card" />
+        <UserReferrals v-if="user" class="card" />
         <br /><br /><br />
       </div>
     </div>
@@ -54,7 +54,7 @@ export default {
     this.closePageLoading();
   },
   beforeRouteLeave(to, from, next) {
-    this.showPageLoading();
+    // this.showPageLoading();
     this.removeOffcanvas();
     next();
   },

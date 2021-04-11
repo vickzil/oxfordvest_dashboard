@@ -125,13 +125,13 @@
 
       <div class="row">
         <div class="col-md-6 col-sm-12">
-          <div class="form-group c_form_group">
+          <div class="form-group c_form_group disabled">
             <label><b>Bank Code</b></label>
             <input
               type="text"
               class="form-control"
               v-model="bankCode"
-              readonly
+              disabled
             />
           </div>
         </div>
@@ -141,7 +141,7 @@
             <input
               type="text"
               class="form-control form-control-lg"
-              v-model="allias" @input="checkAlias"
+              v-model="allias"
             />
           </div>
         </div>

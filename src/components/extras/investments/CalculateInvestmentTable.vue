@@ -24,28 +24,28 @@
               <span>₦</span>{{ addComma(Math.trunc(calculatedItem.principal)) }}
             </td>
             <td>
-              <span>₦</span
-              >{{ addComma(Math.trunc(calculatedItem.interestRate)) }}
+              {{ calculatedItem.interestRate }}
             </td>
             <td>
               <span>₦</span
-              >{{ addComma(Math.trunc(calculatedItem.interestPostCharges)) }}
+              >{{
+                addComma(
+                  Math.trunc(calculatedItem.interestRateAmountAfterCharges)
+                )
+              }}
             </td>
-            <td>
-              <span>₦</span
-              >{{ addComma(Math.trunc(calculatedItem.managementFee)) }}
-            </td>
+            <td><span>₦</span>{{ calculatedItem.managementFeeAmount }}</td>
             <td>{{ calculatedItem.frequency }}</td>
             <td>{{ calculatedItem.currency }}</td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <td class="text-right" colspan="6">
+            <td class="text-right" colspan="7">
               <br />
               <strong>Total Payout</strong>
             </td>
-            <td colspan="6">
+            <td colspan="7">
               <br />
               <b
                 ><span>₦</span
