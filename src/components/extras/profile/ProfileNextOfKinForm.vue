@@ -53,9 +53,10 @@
               <select class="form-control show-tick" v-model.trim="gender">
                 <option value="">Select Gender</option>
                 <option
-                  :value="gen.code"
+                  :value="gen.name"
                   v-for="gen in registrationInfo.gender"
                   :key="gen.code"
+                  :selected="gen.name == gender"
                 >
                   <!-- :selected="
                     gen.name.toLowerCase() ==
@@ -86,19 +87,26 @@
               <label class="form-label"
                 >Relationship <span class="text-danger">*</span></label
               >
-              <select class="form-control show-tick">
-                <option value="spouse">Spouse</option>
-                <option value="parent">Parent</option>
-                <option value="child">child</option>
-                <option value="sibling">sibling</option>
-                <option value="other">other</option>
+              <select class="form-control show-tick" v-model="relationship">
+                <option value="">Select Relationship</option>
+                <option
+                  :value="relationship.name"
+                  v-for="relationship in relationships"
+                  :key="relationship.code"
+                >
+                  {{ relationship.name }}
+                </option>
               </select>
             </div>
           </div>
         </div>
         <br /><br />
         <div class="text-md-right text-sm-center">
-          <button type="submit" class="btn btn-danger oxfordvest_button">
+          <button
+            type="submit"
+            class="btn btn-danger oxfordvest_button"
+            :disabled="fullName == '' || email == '' || phoneNumber == ''"
+          >
             Update next of kin
           </button>
         </div>
@@ -114,6 +122,30 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
     ...mapGetters(["userAmount", "countries", "registrationInfo"]),
+    relationships() {
+      return [
+        {
+          code: 1,
+          name: "spouse",
+        },
+        {
+          code: 2,
+          name: "parent",
+        },
+        {
+          code: 3,
+          name: "child",
+        },
+        {
+          code: 4,
+          name: "sibling",
+        },
+        {
+          code: 5,
+          name: "other",
+        },
+      ];
+    },
 
     checkGender() {
       return "male";
@@ -192,14 +224,18 @@ export default {
         AppId: this.AppId,
         RequestId: this.RequestId,
         UserCode: this.user.userInfo.user.code,
-        FirstName: this.user.userInfo.user.FirstName,
-        LastName: this.user.userInfo.user.LastName,
-        MiddleName: this.user.userInfo.user.MiddleName,
+        FirstName: this.user.userInfo.user.firstName,
+        LastName: this.user.userInfo.user.lastName,
+        MiddleName: this.user.userInfo.user.middleName,
         NextOfKinName: this.fullName,
         NextOfKinPhoneNumber: this.phoneNumber,
         NextOfKinEmail: this.email,
         NextOfKinAddress: this.homeAddress,
+        NextOfKinRelationship: this.relationship,
+        NextOfKinGender: this.gender,
       };
+
+      console.log(data);
 
       axios
         .post(url, data)

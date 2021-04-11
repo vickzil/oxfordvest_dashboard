@@ -7,7 +7,7 @@
             <h6>Change Password</h6>
             <br /><br />
 
-            <div class="form-group c_form_group">
+            <div class="form-group">
               <transition name="fade">
                 <p
                   style="
@@ -69,21 +69,18 @@
                 class="fa fa-fw fa-eye field-icon"
               ></span>
             </div>
-          </div>
-          <div class="col-sm-12 m-t-20 text-md-right text-sm-center">
-            <button
-              type="button"
-              class="oxfordvest_buttons"
-              @click="changePassword"
-            >
-              {{ formText }}
-              <span
-                class="spinner-border spinner-border-sm ml-2"
-                role="status"
-                aria-hidden="true"
-                v-if="processing"
-              ></span>
-            </button>
+
+            <div class="form-group mt-4 text-md-right text-sm-center">
+              <button type="submit" class="oxfordvest_buttons">
+                {{ formText }}
+                <span
+                  class="spinner-border spinner-border-sm ml-2"
+                  role="status"
+                  aria-hidden="true"
+                  v-if="processing"
+                ></span>
+              </button>
+            </div>
           </div>
         </div>
       </form>

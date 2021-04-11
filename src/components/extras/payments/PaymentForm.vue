@@ -396,8 +396,8 @@ export default {
       //   return false;
       // }
 
-      if(isNaN(this.amount)) {
-          this.amount = parseInt(this.amount.replace(/[,]/g,''));
+      if (isNaN(this.amount)) {
+        this.amount = parseInt(this.amount.replace(/[,]/g, ""));
       }
 
       if (this.currency == "NGN" && this.amount < 100) {
@@ -440,8 +440,8 @@ export default {
       //   return false;
       // }
 
-      if(isNaN(this.amount)) {
-          this.amount = parseInt(this.amount.replace(/[,]/g,''));
+      if (isNaN(this.amount)) {
+        this.amount = parseInt(this.amount.replace(/[,]/g, ""));
       }
 
       if (this.currency == "NGN" && this.amount < 100) {
@@ -469,8 +469,8 @@ export default {
 
       const url = `${this.walletURL}/v1.0/PaymentFee/paymentFeeInfo`;
 
-      if(isNaN(this.amount)) {
-          this.amount = parseInt(this.amount.replace(/[,]/g,''));
+      if (isNaN(this.amount)) {
+        this.amount = parseInt(this.amount.replace(/[,]/g, ""));
       }
 
       var data = {
@@ -543,7 +543,7 @@ export default {
       } else {
         this.$store.state.paymentOptionTitle = "Fill Out This Field ";
         this.paymentOptionsBack();
-        this.amount = 0;
+        this.amount = 100;
         this.currency = "";
         this.processing = false;
         this.buttonText = "Proceed";
@@ -601,7 +601,7 @@ export default {
       };
       this.setAlertModalStatus(payload);
 
-      this.amount = 0;
+      this.amount = 100;
       this.currency = "";
       this.processing = false;
       this.buttonText = "Proceed";
@@ -730,11 +730,11 @@ export default {
         });
     },
   },
-   watch: {
-    amount: function(newValue) {
+  watch: {
+    amount: function (newValue) {
       let result = newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.$nextTick(() => this.amount = result);
-    }
+      this.$nextTick(() => (this.amount = result));
+    },
   },
 
   mounted() {},

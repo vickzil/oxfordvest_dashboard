@@ -80,17 +80,18 @@
                 class="fa fa-fw fa-eye field-icon"
               ></span>
             </div>
-          </div>
-          <div class="col-sm-12 m-t-20 text-md-right text-sm-center">
-            <button type="submit" class="oxfordvest_buttons">
-              {{ formText }}
-              <span
-                class="spinner-border spinner-border-sm ml-2"
-                role="status"
-                aria-hidden="true"
-                v-if="processing"
-              ></span>
-            </button>
+
+            <div class="form-group mt-4 text-md-right text-sm-center">
+              <button type="submit" class="oxfordvest_buttons">
+                {{ formText }}
+                <span
+                  class="spinner-border spinner-border-sm ml-2"
+                  role="status"
+                  aria-hidden="true"
+                  v-if="processing"
+                ></span>
+              </button>
+            </div>
           </div>
         </div>
       </form>
@@ -246,7 +247,7 @@ export default {
             payload = {
               status: true,
               type: "success",
-              message: "Pin sent Successfully. Please Check email ",
+              message: "Pin sent Successfully. Please Check your email ",
             };
           } else {
             payload = {

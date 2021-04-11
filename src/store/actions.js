@@ -171,7 +171,7 @@ export const getPaymentFeeInfo = ({ commit, state }) => {
         commit("SAVE_PAYMENT_FEE_INFO", responseData);
       }
 
-      console.log(res);
+      // console.log(res);
     })
     .catch((err) => {
       console.log(err);

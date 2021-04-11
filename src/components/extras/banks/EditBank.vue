@@ -32,14 +32,13 @@
             <label><b>Bank Name</b></label>
             <select
               class="form-control show-tick"
-              v-model="bankName"
+              v-model="bankCode"
               @change="updateEditingStatus"
             >
               <option
                 :value="bank.code"
                 v-for="bank in bankList"
                 :key="bank.code"
-                :selected="bank.code === bankCode"
               >
                 {{ bank.name }}
               </option>
@@ -55,7 +54,7 @@
               class="form-control form-control-lg"
               placeholder="your bank name"
               v-bind:disabled="country === ''"
-              v-model="bankName"
+              v-model="bankCode"
               @input="updateEditingStatus"
             />
           </div>
@@ -66,13 +65,13 @@
 
       <div class="row">
         <div class="col-md-6 col-sm-12">
-          <div class="form-group c_form_group" :class="!bankName && 'disabled'">
+          <div class="form-group c_form_group" :class="!bankCode && 'disabled'">
             <label><b>Account Number</b></label>
             <input
               type="text"
               class="form-control form-control-lg"
               placeholder="your Account Number"
-              v-bind:disabled="!bankName"
+              v-bind:disabled="!bankCode"
               v-model="accountNumber"
               @input="updateEditingStatus"
               @blur="verifyAccountNumber"
@@ -148,7 +147,7 @@
       </div>
       <div
         class="text-right border-top-0"
-        v-if="country && accountNumber && accountName && bankName"
+        v-if="country && accountNumber && accountName && bankCode"
       >
         <button class="btn btn-danger" v-bind:disabled="processing">
           {{ formText }}
@@ -344,7 +343,7 @@ export default {
         AppId: this.AppId,
         RequestId: this.RequestId,
         Country: this.country,
-        BankCode: this.bankName,
+        BankCode: this.bankCode,
         AccountNumber: this.accountNumber,
       };
 
@@ -373,7 +372,7 @@ export default {
       if (
         !this.country &&
         !this.bank &&
-        !this.bankName &&
+        !this.bankCode &&
         !this.accountNumber &&
         !this.accountName &&
         !this.allias
