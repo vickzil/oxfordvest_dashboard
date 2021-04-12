@@ -12,6 +12,9 @@ import SingleReferral from "../views/SingleReferral.vue";
 import SingleInvestment from "../views/SingleInvestment.vue";
 import Settings from "../views/Settings.vue";
 import BankAccount from "../views/BankAccount.vue";
+import RegisteredUsers from "../views/RegisteredUsers.vue";
+import UserInvestment from "../views/UserInvestment.vue";
+import UserManualInvestment from "../views/UserManualInvestment.vue";
 
 import LandingPage from "../views/LandingPage";
 
@@ -107,6 +110,36 @@ const routes = [
     meta: {
       transition: "fade-in-down",
       title: "Oxfordvest - Settings",
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/registered-users",
+    name: "RegisteredUsers",
+    component: RegisteredUsers,
+    meta: {
+      transition: "fade-in-down",
+      title: "Oxfordvest - Registered Users",
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/users-investment",
+    name: "UserInvestment",
+    component: UserInvestment,
+    meta: {
+      transition: "fade-in-down",
+      title: "Oxfordvest - Users Investment",
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/manual-registration",
+    name: "UserManualInvestment",
+    component: UserManualInvestment,
+    meta: {
+      transition: "fade-in-down",
+      title: "Oxfordvest - Users Investment",
       requiresAuth: true,
     },
   },

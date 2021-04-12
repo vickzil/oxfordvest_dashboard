@@ -12,7 +12,7 @@ export const fetchRegistrationInfo = ({ commit, state }) => {
   axios
     .post(url, data)
     .then((response) => {
-      // console.log(response.data.data);
+      console.log(response.data.data);
       commit("REGISTRATION_INFO", response.data.data);
     })
     .catch((err) => {

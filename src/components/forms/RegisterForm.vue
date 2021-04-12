@@ -366,7 +366,7 @@ export default {
             return Subsidiary.groupCode === value;
           }
         );
-        console.log(this.subsidiaries);
+        // console.log(this.subsidiaries);
       }
     },
     toggleShowPassword: function () {
@@ -466,7 +466,7 @@ export default {
         ReferredBy: this.accMgtCode,
       };
 
-      console.log(data);
+      // console.log(data);
 
       axios
         .post(url, data)

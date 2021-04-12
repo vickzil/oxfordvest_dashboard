@@ -85,7 +85,7 @@
           </li>
           <li :class="isNavActive === '/referral' && 'active'">
             <router-link to="/referral">
-              <i class="fa fa-users"></i>
+              <i class="fa fa-paw"></i>
               <span>Referral</span>
             </router-link>
           </li>
@@ -111,6 +111,24 @@
             <router-link to="/settings">
               <i class="fa fa-cogs"></i>
               <span>Settings</span>
+            </router-link>
+          </li>
+          <li :class="isNavActive === '/manual-registration' && 'active'">
+            <router-link to="/manual-registration">
+              <i class="fa fa-street-view"></i>
+              <span>Manual Reg/Investment</span>
+            </router-link>
+          </li>
+          <li :class="isNavActive === '/registered-users' && 'active'">
+            <router-link to="/registered-users">
+              <i class="fa fa-users"></i>
+              <span>Reg. Users</span>
+            </router-link>
+          </li>
+          <li :class="isNavActive === '/users-investment' && 'active'">
+            <router-link to="/users-investment">
+              <i class="fa fa-child"></i>
+              <span>Users Investment</span>
             </router-link>
           </li>
 

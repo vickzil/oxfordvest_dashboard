@@ -21,7 +21,7 @@ export default {};
 <style scoped>
 .cardLaoding {
   position: absolute !important;
-  top: 10px !important;
+  top: 0px !important;
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;

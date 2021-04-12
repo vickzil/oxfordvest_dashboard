@@ -148,6 +148,18 @@ export const userAmount = (state) => {
   return state.userAmount;
 };
 
+export const registeredUsers = (state) => {
+  return state.registeredUsers;
+};
+
+export const UsersInvestments = (state) => {
+  return state.UsersInvestments;
+};
+
+export const manualUserReg = (state) => {
+  return state.manualUserReg;
+};
+
 export const currentpayment = (state) => {
   return state.currentpayment;
 };
