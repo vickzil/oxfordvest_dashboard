@@ -81,12 +81,17 @@ export const fetchUserData = ({ commit, state }, code) => {
     })
     .catch((err) => {
       console.log(err);
-      sessionStorage.clear();
-      router.push("/").catch((error) => {
-        if (error) {
-          error;
-        }
-      });
+
+      if (err) {
+        sessionStorage.clear();
+        setTimeout(() => {
+          router.push("/").catch((error) => {
+            if (error) {
+              error;
+            }
+          });
+        }, 3500);
+      }
     });
 };
 
