@@ -250,6 +250,10 @@ export const setVerifyAction = ({ commit }, status) => {
   commit("SET_VERIFY_ACTION", status);
 };
 
+export const closeAlertMessage = ({ commit }) => {
+  commit("CLOSE_ALERT_MESSAGE");
+};
+
 export const setCurrentClickPayload = ({ commit }, status) => {
   commit("SET_CURRENT_CLICKED_PAYLOAD", status);
 };

@@ -2,7 +2,7 @@
   <div class="card">
     <div class="header">
       <h2><b>Registered Users</b></h2>
-      <p class="text-center mt-5 mb-4"><b>Search registered users</b></p>
+      <!-- <p class="text-center mt-5 mb-4"><b>Search registered users</b></p> -->
     </div>
     <div class="row clearfix">
       <div class="col-12">
@@ -141,18 +141,16 @@
 <script>
 import "@/mixins";
 // import CustomerUserTableList from "./CustomerUserTableList"
-
-import { mapGetters, mapActions } from "vuex";
+import axios from "axios";
+import { mapGetters, mapActions, mapState } from "vuex";
 export default {
   components: {
     // CustomerUserTableList
   },
   computed: {
-    ...mapGetters(["registeredUsers", "registrationInfo"]),
-    // deposits() {
-    //   return this.user.userInfo.walletTopupsInfo
-    //     .getUserWalletTopUpsResponseData;
-    // },
+    ...mapGetters(["registrationInfo"]),
+    ...mapState(["registeredUsers"]),
+
     Users() {
       let text = this.searchText.toLowerCase();
       return this.registeredUsers.filter((user) =>
@@ -177,18 +175,50 @@ export default {
     searchUsers: function () {
       this.setActionLoading(true);
 
-      setTimeout(() => {
-        this.setActionLoading(false);
+      const url = `${this.hrmURL}/Report/searchUsers`;
 
-        var data = {
-          Email: this.email,
-          UserCode: this.userCode,
-          Status: this.status,
-          From: this.from,
-          To: this.to,
-        };
-        console.log(data);
-      }, 4000);
+      var data = {
+        AppId: this.AppId,
+        RequestId: this.RequestId,
+        UserCode: this.userCode,
+        FromDate: this.from,
+        ToDate: this.to,
+        Status: this.status,
+        Email: this.email,
+        AccountNumber: "",
+        Preview: true,
+      };
+
+      console.log(data);
+
+      axios
+        .post(url, data)
+        .then((res) => {
+          this.setActionLoading(false);
+          if (res.data.success == true) {
+            this.registeredUsers = res.data.data;
+          }
+
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.serverErrorMessage();
+          // this.refreshingAmount = false;
+        });
+
+      // setTimeout(() => {
+      //   this.setActionLoading(false);
+
+      //   var data = {
+      //     Email: this.email,
+      //     UserCode: this.userCode,
+      //     Status: this.status,
+      //     From: this.from,
+      //     To: this.to,
+      //   };
+      //   console.log(data);
+      // }, 4000);
     },
   },
 };

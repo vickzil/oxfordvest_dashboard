@@ -253,7 +253,7 @@ export default {
         Amount: removeStringFromAmount,
         Narration: this.narration,
         UserBankAccountCode: this.user.userInfo.userBankAccountInfo
-          .userBankAccount.bankCode,
+          .userBankAccount.code,
         AdditionalInfo: "",
       };
 
@@ -270,7 +270,7 @@ export default {
               let payload = {
                 status: true,
                 type: "success",
-                message: "Withrawal successfully",
+                message: "Withrawal successfull",
               };
               this.setModalLoading(false);
               this.setAlertModalStatus(payload);

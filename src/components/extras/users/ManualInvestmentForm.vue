@@ -89,7 +89,7 @@
         </div>
       </div>
       <div class="row clearfix">
-        <div class="col-md-12 col-sm-12 mt-2">
+        <div class="col-md-6 col-sm-12 mt-2">
           <div class="form-group checkbox_group">
             <span>I want to also invest in Oilvest</span>
             <label class="custom-control custom-checkbox">
@@ -108,6 +108,20 @@
             >
               <i class="fa fa-question-circle"></i
             ></label>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 mt-2">
+          <div class="form-group checkbox_group">
+            <span>Upfront pay upon investment</span>
+            <label class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                :checked="UpfrontPaidUponInvestment"
+                @change="changeUprontInput"
+              />
+              <span class="custom-control-label">&nbsp;</span>
+            </label>
           </div>
         </div>
       </div>
@@ -141,6 +155,14 @@ export default {
       },
       set(value) {
         return (this.manualUserReg.userReturnsToOilInvest = value);
+      },
+    },
+    UpfrontPaidUponInvestment: {
+      get() {
+        return this.manualUserReg.userUpfrontPaidUponInvestment;
+      },
+      set(value) {
+        return (this.manualUserReg.userUpfrontPaidUponInvestment = value);
       },
     },
     frequency: {
@@ -213,12 +235,15 @@ export default {
           }
         );
 
-        console.log(this.currentInvestment);
+        // console.log(this.currentInvestment);
       }
     },
 
     changeInput: function () {
       this.ReturnsToOilInvest = !this.ReturnsToOilInvest;
+    },
+    changeUprontInput: function () {
+      this.UpfrontPaidUponInvestment = !this.UpfrontPaidUponInvestment;
     },
     showInvestmentByOilvestInfo: function () {
       let payload = {

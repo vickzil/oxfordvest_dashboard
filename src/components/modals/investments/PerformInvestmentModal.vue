@@ -318,8 +318,11 @@ export default {
         AvailableInvestmentCode: this.currentInvestment.code,
         AmountInvested: this.amount,
         Duration: duration,
+        UpfrontPaidUponInvestment: false,
+        SourceChannel: "onlineline",
         ReturnsToOilInvest: this.ReturnsToOilInvest,
         Frequency: this.currentInvestment.frequency,
+        GroupSubsidiaryCode: this.user.userInfo.user.subsidiaryCode,
       };
 
       console.log(data);

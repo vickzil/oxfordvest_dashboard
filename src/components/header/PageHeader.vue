@@ -1,61 +1,76 @@
 <template>
-  <div
-    class="block-header top_page card p-4"
-    v-if="user"
-    :class="isNavActive === '/dashboard' && 'home-block-header'"
-  >
-    <div class="row clearfix">
-      <div class="col-lg-4 col-md-12 col-sm-12">
-        <h1>{{ topPageName }}</h1>
-        <!-- <span>Remember to wash your hands often.</span> -->
+  <div>
+    <div v-if="user && user.dashboardNotification.message">
+      <div
+        class="alert text-center alert-dismissible mt-3"
+        v-if="!isclosed"
+        :class="'alert-' + user.dashboardNotification.alertType"
+        style="cursor: pointer"
+        @click="closeAlert"
+      >
+        <a href="javascript:void(0)" class="close">&times;</a>
+        <span class="font-sm-12">{{ user.dashboardNotification.message }}</span>
       </div>
     </div>
 
-    <div class="row clearfix">
-      <div class="col-xl-6 col-md-6 col-sm-12 mt-3">
-        <div
-          class="d-flex align-items-center justify-content-md-start mt-4 mt-md-0 flex-wrap"
-        >
-          <div class="mb-3 mb-xl-0 page_account_buttons">
-            <a
-              href="javascript:void(0)"
-              class="btn btn-danger mr-2"
-              v-if="isNavActive !== '/withdrawal'"
-              @click="showAllPaymentOptions"
-              >Fund Wallet</a
-            >
-            <a
-              href="javascript:void(0)"
-              @click="showWithdrawalModal"
-              v-if="
-                isNavActive === '/dashboard' || isNavActive === '/withdrawal'
-              "
-              class="btn btn-outline-danger"
-              >Withdraw</a
-            >
-          </div>
+    <div
+      class="block-header top_page card p-4"
+      v-if="user"
+      :class="isNavActive === '/dashboard' && 'home-block-header'"
+    >
+      <div class="row clearfix">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <h1>{{ topPageName }}</h1>
+          <!-- <span>Remember to wash your hands often.</span> -->
         </div>
       </div>
-      <div class="col-lg-6 col-md-6 col-sm-12 text-lg-right text-md-right">
-        <div
-          class="d-flex align-items-center justify-content-lg-end justify-content-md-end mt-lg-2 mt-lg-0 flex-wrap"
-        >
-          <div class="border-right pr-4 mr-4 mb-2 mb-xl-0">
-            <p class="text-muted mb-1">
-              <strong>Wallet Balance</strong>
-              <span class="fa fa-money ml-2 text-success"></span>
-            </p>
-            <h5 class="mb-0 wallet_bal">
-              ₦{{ addComma(userAmount) }}
-              <span class="ml-1 mr-3">
-                <i
-                  class="fa fa-refresh font-weight-bold"
-                  :class="refreshingAmount && 'fa-spin'"
-                  style="font-size: 17px; cursor: pointer"
-                  @click="refreshUserAmount"
-                ></i>
-              </span>
-            </h5>
+
+      <div class="row clearfix">
+        <div class="col-xl-6 col-md-6 col-sm-12 mt-3">
+          <div
+            class="d-flex align-items-center justify-content-md-start mt-4 mt-md-0 flex-wrap"
+          >
+            <div class="mb-3 mb-xl-0 page_account_buttons">
+              <a
+                href="javascript:void(0)"
+                class="btn btn-danger mr-2"
+                v-if="isNavActive !== '/withdrawal'"
+                @click="showAllPaymentOptions"
+                >Fund Wallet</a
+              >
+              <a
+                href="javascript:void(0)"
+                @click="showWithdrawalModal"
+                v-if="
+                  isNavActive === '/dashboard' || isNavActive === '/withdrawal'
+                "
+                class="btn btn-outline-danger"
+                >Withdraw</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 text-lg-right text-md-right">
+          <div
+            class="d-flex align-items-center justify-content-lg-end justify-content-md-end mt-lg-2 mt-lg-0 flex-wrap"
+          >
+            <div class="border-right pr-4 mr-4 mb-2 mb-xl-0">
+              <p class="text-muted mb-1">
+                <strong>Wallet Balance</strong>
+                <span class="fa fa-money ml-2 text-success"></span>
+              </p>
+              <h5 class="mb-0 wallet_bal">
+                ₦{{ addComma(userAmount) }}
+                <span class="ml-1 mr-3">
+                  <i
+                    class="fa fa-refresh font-weight-bold"
+                    :class="refreshingAmount && 'fa-spin'"
+                    style="font-size: 17px; cursor: pointer"
+                    @click="refreshUserAmount"
+                  ></i>
+                </span>
+              </h5>
+            </div>
           </div>
         </div>
       </div>
@@ -69,7 +84,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["topPageName"],
   computed: {
-    ...mapGetters(["genReference", "currentSitePage"]),
+    ...mapGetters(["genReference", "currentSitePage", "isclosed"]),
     userAmount: {
       get() {
         return this.user.userWalletBalance.availableBalance;
@@ -100,7 +115,11 @@ export default {
       "showPaymentOptions",
       "getPaymentOptions",
       "setWithdrawalModal",
+      "closeAlertMessage",
     ]),
+    closeAlert: function () {
+      this.closeAlertMessage();
+    },
     refreshUserAmount: function () {
       this.refreshingAmount = true;
       this.getAccountBance();

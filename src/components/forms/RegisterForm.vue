@@ -305,6 +305,15 @@ export default {
         return (this.$store.state.subsidiaries = value);
       },
     },
+    accMgtCode: {
+      get() {
+        return this.$store.getters.accMgtCode;
+      },
+
+      set(value) {
+        return (this.$store.state.accMgtCode = value);
+      },
+    },
   },
   data() {
     return {
@@ -319,7 +328,6 @@ export default {
       password: "",
       cpassword: "",
       gender: "",
-      accMgtCode: "",
       country: "",
       postalCode: "",
       group: "",
@@ -472,7 +480,7 @@ export default {
         .post(url, data)
         .then((response) => {
           if (response.data.success) {
-            this.sendConfirmEmail(this.email.toLowerCase());
+            // this.sendConfirmEmail(this.email.toLowerCase());
             sessionStorage.setItem("hasStatus", this.status);
             // this.formError = true;
             this.hasError = false;

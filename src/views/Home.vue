@@ -6,30 +6,8 @@
       <div class="container-fluid">
         <!-- Page header section  -->
         <PageHeader :topPageName="topPageName" />
-
-        <!-- <div class="row section_div clearfix">
-          <div class="col-12">
-            <div class="section_title">
-              <div class="mr-3">
-                <h3>Overview</h3>
-                 <small>Statistics, Predictive Analytics Data Visualization, Big Data Analytics, etc.</small> 
-              </div>
-              <div>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <OverviewCard />
         <br />
-        <!-- <div class="row clearfix">
-          <div class="col-md-6 col-sm-12">
-            <Chart />
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <AvailableInvestmentChart />
-          </div>
-        </div>
-        <br /><br /> -->
         <div class="row clearfix" v-if="user">
           <div class="col-md-12 col-sm-12 card">
             <InvestmentChart />
@@ -38,7 +16,13 @@
         </div>
         <br />
         <UserActivities v-if="user" />
-        <br /><br />
+        <br />
+        <br />
+        <Featured />
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     </div>
   </div>
@@ -55,6 +39,7 @@ import PageLoadingOverlay from "../components/loaders/PageLoadingOverlay";
 // import Chart2 from "../components/charts/Chart2";
 import InvestmentChart from "../components/charts/InvestmentChart";
 import UserActivities from "../components/extras/userActivities/UserActivities";
+import Featured from "../components/extras/featured/Featured";
 
 import "@/mixins";
 import { mapActions } from "vuex";
@@ -67,6 +52,7 @@ export default {
     PageLoadingOverlay,
     UserActivities,
     InvestmentChart,
+    Featured,
     // Chart,
     // Chart2,
     // AvailableInvestmentChart,

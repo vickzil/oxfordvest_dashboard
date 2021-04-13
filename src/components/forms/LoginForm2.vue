@@ -308,8 +308,6 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err.type);
-          console.log(err.message);
           console.log(err);
           this.formText = "Login";
           this.emailError = false;

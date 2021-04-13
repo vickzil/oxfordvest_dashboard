@@ -67,6 +67,23 @@ export default {
     AccountCircles,
   },
 
+  computed: {
+    accMgtCode: {
+      get() {
+        return this.$store.getters.accMgtCode;
+      },
+
+      set(value) {
+        return (this.$store.state.accMgtCode = value);
+      },
+    },
+  },
+
   methods: {},
+  mounted() {
+    if (this.$route.query.code) {
+      this.accMgtCode = this.$route.query.code;
+    }
+  },
 };
 </script>

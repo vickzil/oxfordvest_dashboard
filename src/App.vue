@@ -329,7 +329,7 @@ textarea {
 }
 
 .oxfordvest_foorm .vs__selected {
-  width: 75%;
+  width: 100%;
   text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;

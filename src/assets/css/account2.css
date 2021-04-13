@@ -177,6 +177,10 @@ h6 {
   box-shadow: rgba(39, 50, 114, 0.14) 0px 0px 54px 0px;
 }
 
+.select_input {
+  width: 260px;
+}
+
 .field-icon {
   float: right;
   margin-left: -55px;
@@ -266,6 +270,7 @@ h6 {
   overflow-x: hidden;
   padding: 40px 14px 70px;
   display: block !important;
+  box-sizing: border-box;
   /* margin-bottom: 140px; */
   /* background: #fff; */
 }
@@ -302,6 +307,7 @@ h6 {
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(2, 1fr);
+  box-sizing: border-box;
 }
 
 .more-info .left-image img {
@@ -948,6 +954,10 @@ h6 {
 
   .account_input {
     padding: 14px 20px;
+    width: 100%;
+  }
+
+  .select_input {
     width: 100%;
   }
 }

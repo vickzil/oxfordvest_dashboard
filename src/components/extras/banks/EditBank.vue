@@ -223,10 +223,10 @@ export default {
     },
     allias: {
       get() {
-        return this.bankdetails.allias;
+        return this.bankdetails.alias;
       },
       set(value) {
-        return (this.bankdetails.allias = value);
+        return (this.bankdetails.alias = value);
       },
     },
 
@@ -347,7 +347,7 @@ export default {
         AccountNumber: this.accountNumber,
       };
 
-      const url = `${this.walletURL}/CountryBank/verifyAccountNumber`;
+      const url = `${this.walletURL}/v1.0/CountryBank/verifyAccountNumber`;
 
       axios
         .post(url, data)

@@ -16,6 +16,11 @@
             <i class="fa fa-align-left"></i>
           </button>
         </div>
+        <!-- <form id="navbar-search" class="navbar-form search-form">
+          <div class="alert alert-warning mb-0">
+            simply dummy text of the printing and typesetting industry.
+          </div>
+        </form> -->
       </div>
       <div class="navbar-right">
         <div id="navbar-menu">
@@ -57,14 +62,13 @@
                 </li>
               </ul>
             </li> -->
-            <li class="dropdown" v-if="user">
+            <!-- <li class="dropdown" v-if="user">
               <a
                 href="javascript:void(0);"
                 class="dropdown-toggle icon-menu"
                 data-toggle="dropdown"
               >
                 <i class="fa fa-bell-o"></i>
-                <!-- <span class="notification-dot info">4</span> -->
               </a>
               <ul class="dropdown-menu feeds_widget mt-0 animation-li-delay">
                 <li class="header theme-bg gradient mt-0 text-light">
@@ -84,7 +88,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
 
             <li style="display: none" class="hidden-xs">
               <a href="javascript:void(0);" id="btnFullscreen" class="icon-menu"
@@ -118,7 +122,9 @@ export default {
     userActivities() {
       let activities = this.user.userInfo.userActivities;
       let someActivities = activities.slice(0, 3);
-      let sortedActivities = someActivities.sort(function(a,b){return a.createdOn < b.createdOn ? -1 : 1});
+      let sortedActivities = someActivities.sort(function (a, b) {
+        return a.createdOn < b.createdOn ? -1 : 1;
+      });
       return sortedActivities;
     },
   },

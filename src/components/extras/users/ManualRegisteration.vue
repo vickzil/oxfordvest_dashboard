@@ -83,14 +83,18 @@ export default {
         InsertUserInvestment: {
           AppId: this.AppId,
           RequestId: this.RequestId,
-          Email: this.user.userInfo.user.email,
-          UserCode: this.user.userInfo.user.code,
+          Email: this.manualUserReg.userEmail,
+          UserCode: "",
           AvailableInvestmentCode: this.manualUserReg.userCurrentInvestment
             .code,
           AmountInvested: this.manualUserReg.userAmountInvested,
           Duration: duration,
           ReturnsToOilVest: this.manualUserReg.userReturnsToOilInvest,
           Frequency: this.manualUserReg.userCurrentInvestment.frequency,
+          UpfrontPaidUponInvestment: this.manualUserReg
+            .userUpfrontPaidUponInvestment,
+          SourceChannel: "offline",
+          GroupSubsidiaryCode: this.manualUserReg.userSubsidaiary,
         },
         Registration: {
           AppId: this.AppId,
@@ -101,17 +105,20 @@ export default {
           Password: this.manualUserReg.userPassword,
           ConfirmPassword: this.manualUserReg.userPassword,
           Email: this.manualUserReg.userEmail,
-          AccountType: "staff",
+          AccountType: "individual",
           PostCode: "",
-          RoleName: "staff",
+          RoleName: "individual",
           SubsidiaryCode: this.manualUserReg.userSubsidaiary,
           FirstName: this.manualUserReg.userFirstName,
           LastName: this.manualUserReg.userLastName,
           MiddleName: this.manualUserReg.userMiddleName,
           BVN: this.manualUserReg.userBvn,
           ReferredBy: this.manualUserReg.userAcctMgtCode,
+          UserCode: "",
         },
       };
+
+      console.log(data);
 
       axios
         .post(url, data)

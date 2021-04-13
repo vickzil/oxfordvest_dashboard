@@ -26,6 +26,7 @@ export default {
   addCardModal: false,
 
   // NOTIFICATIONS
+  isclosed: false,
   alertModalStatus: false,
   alertModalType: "",
   alertModalMessage: "",
@@ -50,6 +51,7 @@ export default {
   userAmount: 520,
   makePayment: false,
   registrationText: false,
+  accMgtCode: "",
   countries: [],
   isUserLoggedIn: false,
   AppId: "001",
@@ -116,6 +118,7 @@ export default {
     userDuration: null,
     userCurrentInvestment: null,
     userReturnsToOilInvest: false,
+    userUpfrontPaidUponInvestment: false,
     hasVerifiedManager: false,
     formError: false,
     emptyFields: true,

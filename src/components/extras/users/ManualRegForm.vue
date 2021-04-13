@@ -462,11 +462,10 @@ export default {
 
     checkform: function () {
       if (
-        !this.firstname ||
-        !this.lastname ||
-        !this.email ||
-        !this.country ||
-        !this.subsidiary
+        this.firstname == "" ||
+        this.lastname == "" ||
+        this.email == "" ||
+        this.country == ""
       ) {
         this.formError = true;
         this.formMessage = "Please fill out required fields";

@@ -422,6 +422,10 @@ export const SET_ADD_MODAL = (state, status) => {
   state.addCardModal = status;
 };
 
+export const CLOSE_ALERT_MESSAGE = (state) => {
+  state.isclosed = true;
+};
+
 export const SET_ALERT_MODAL_STATUS = (state, payload) => {
   setTimeout(() => {
     state.alertModalStatus = payload.status;
