@@ -121,6 +121,7 @@ const routes = [
       transition: "fade-in-down",
       title: "Oxfordvest - Registered Users",
       requiresAuth: true,
+      isAdmin: true,
     },
   },
   {
@@ -131,6 +132,7 @@ const routes = [
       transition: "fade-in-down",
       title: "Oxfordvest - Users Investment",
       requiresAuth: true,
+      isAdmin: true,
     },
   },
   {
@@ -141,6 +143,7 @@ const routes = [
       transition: "fade-in-down",
       title: "Oxfordvest - Users Investment",
       requiresAuth: true,
+      isAdmin: true,
     },
   },
   {
@@ -341,19 +344,18 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-// router.beforeEach((to, from, next) => {
-//     let userAdmin = sessionStorage.getItem('draggerability')
-//     if (to.matched.some(record => record.meta.isAdmin)) {
-//         if (userAdmin) {
-//             next()
-//         } else {
-//             next('/dashboard')
-//         }
-
-//     } else {
-//         next()
-//     }
-// })
+router.beforeEach((to, from, next) => {
+  let userAdmin = sessionStorage.getItem("draggerability");
+  if (to.matched.some((record) => record.meta.isAdmin)) {
+    if (userAdmin) {
+      next();
+    } else {
+      next("/dashboard");
+    }
+  } else {
+    next();
+  }
+});
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.guest)) {

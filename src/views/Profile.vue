@@ -5,8 +5,8 @@
     <div class="main-content">
       <div class="container-fluid">
         <!-- Page header section  -->
-        <PageHeader :topPageName="topPageName" />
-
+        <!-- <PageHeader :topPageName="topPageName" /> -->
+        <br />
         <div class="row clearfix" v-if="user">
           <div class="col-lg-4 col-md-12">
             <ProfileCard />
@@ -24,7 +24,7 @@
 <script>
 // import Map from "../components/charts/Map";
 // import Navbar from "@/components/navbar/Navbar";
-import PageHeader from "../components/header/PageHeader";
+// import PageHeader from "../components/header/PageHeader";
 import ProfileCard from "../components/extras/profile/ProfileCard";
 import ProfileForm from "../components/extras/profile/ProfileForm";
 import PageLoadingOverlay from "../components/loaders/PageLoadingOverlay";
@@ -37,7 +37,7 @@ export default {
   name: "Home",
   components: {
     PageLoadingOverlay,
-    PageHeader,
+    // PageHeader,
     ProfileCard,
     ProfileForm,
   },

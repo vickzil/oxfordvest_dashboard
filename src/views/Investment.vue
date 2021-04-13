@@ -5,7 +5,7 @@
     <div class="main-content">
       <div class="container-fluid">
         <!-- Page header section  -->
-        <PageHeader :topPageName="topPageName" />
+        <!-- <PageHeader :topPageName="topPageName" /> -->
 
         <br />
         <Investments v-if="user" />
@@ -18,7 +18,7 @@
 <script>
 // import Map from "../components/charts/Map";
 // import Navbar from "@/components/navbar/Navbar";
-import PageHeader from "../components/header/PageHeader";
+// import PageHeader from "../components/header/PageHeader";
 import PageLoadingOverlay from "../components/loaders/PageLoadingOverlay";
 import Investments from "../components/extras/investments/Investments";
 import "@/mixins";
@@ -29,7 +29,7 @@ export default {
   name: "Investment",
   components: {
     PageLoadingOverlay,
-    PageHeader,
+    // PageHeader,
     Investments,
   },
 

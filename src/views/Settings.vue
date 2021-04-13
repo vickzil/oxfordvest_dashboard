@@ -5,7 +5,7 @@
     <div class="main-content">
       <div class="container-fluid">
         <!-- Page header section  -->
-        <PageHeader :topPageName="topPageName" />
+        <!-- <PageHeader :topPageName="topPageName" /> -->
 
         <div class="row clearfix" v-if="user">
           <div class="col-12 mt-4">
@@ -122,7 +122,7 @@
 </template>
 <script>
 // import Navbar from "@/components/navbar/Navbar";
-import PageHeader from "../components/header/PageHeader";
+// import PageHeader from "../components/header/PageHeader";
 import PageLoadingOverlay from "../components/loaders/PageLoadingOverlay";
 import ChangePasswordForm from "../components/forms/ChangePasswordForm";
 import ChangePinForm from "../components/forms/ChangePinForm";
@@ -134,7 +134,7 @@ export default {
   name: "Settings",
   components: {
     PageLoadingOverlay,
-    PageHeader,
+    // PageHeader,
     ChangePasswordForm,
     ChangePinForm,
   },

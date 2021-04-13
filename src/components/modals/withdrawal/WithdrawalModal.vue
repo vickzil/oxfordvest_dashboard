@@ -272,6 +272,10 @@ export default {
                 type: "success",
                 message: "Withrawal successfull",
               };
+
+              this.amount = 200;
+              this.narration = "";
+              this.pin = "";
               this.setModalLoading(false);
               this.setAlertModalStatus(payload);
             }, 2400);
@@ -286,7 +290,7 @@ export default {
             this.setAlertModalStatus(payload);
           }
 
-          console.log(res);
+          // console.log(JSON.stringify(res));
         })
         .catch((err) => {
           console.log(err);

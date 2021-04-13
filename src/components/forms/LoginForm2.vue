@@ -354,24 +354,18 @@ export default {
             const data = response.data.data;
             console.log(data);
 
-            // let userRole = data.userInfo.roles;
+            let userRole = data.userInfo.user.roles;
 
-            // let adminRole;
-            // let isSuperAdmin;
+            let adminRole;
 
-            // if (userRole) {
-            //   adminRole = userRole.includes("admin");
-            //   isSuperAdmin = userRole.includes("superadmin");
-            // }
+            if (userRole) {
+              adminRole = userRole.includes("systemadmin");
+            }
 
-            // if (!!adminRole || !!isSuperAdmin) {
-            //   sessionStorage.setItem("draggerability", "expandedCol");
-            //   if (this.$store.getters.user) {
-            //     this.$router.push({ path: "/admin-home" });
-            //   }
-            // } else {
-            //   this.$router.push({ path: "/dashboard" });
-            // }
+            if (adminRole) {
+              // console.log(adminRole);
+              sessionStorage.setItem("draggerability", "expandedCol");
+            }
 
             let payload;
 

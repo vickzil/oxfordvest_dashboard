@@ -388,12 +388,14 @@ export default {
           // Code: "b055e88a-02ba-4e32-944c-a02c8105ea16",
           BankCode: this.bankCode,
           AccountNumber: this.accountNumber,
-          Allias: this.allias,
+          Alias: this.allias,
           UserCode: this.user.userInfo.user.code,
           AccountName: this.accountName,
           Currency: this.currency,
         };
-        console.log(data);
+        // console.log(data);
+
+        console.log(JSON.stringify(data));
 
         const url = `${this.hrmURL}/v1.0/UserBankAccount/updateUserBankAccount`;
 

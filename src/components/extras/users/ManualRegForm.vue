@@ -161,7 +161,7 @@
               :options="options"
               :reduce="(name) => name.code"
               label="name"
-              class="select_input"
+              class="form-control"
               @input="getSubsidiaries($event)"
               v-model="group"
             ></v-select>
@@ -175,7 +175,7 @@
               :options="subsidiaries"
               :reduce="(name) => name.code"
               label="name"
-              class="select_input"
+              class="form-control"
               v-model="subsidiary"
             ></v-select>
           </div>

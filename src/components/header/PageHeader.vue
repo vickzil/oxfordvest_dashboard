@@ -55,12 +55,16 @@
             class="d-flex align-items-center justify-content-lg-end justify-content-md-end mt-lg-2 mt-lg-0 flex-wrap"
           >
             <div class="border-right pr-4 mr-4 mb-2 mb-xl-0">
-              <p class="text-muted mb-1">
+              <p class="text-secondary mb-1">
                 <strong>Wallet Balance</strong>
                 <span class="fa fa-money ml-2 text-success"></span>
               </p>
               <h5 class="mb-0 wallet_bal">
-                ₦{{ addComma(userAmount) }}
+                <span
+                  class="badge"
+                  :class="userAmount > 1000 ? 'badge-success' : 'badge-danger'"
+                  >₦{{ addComma(userAmount) }}</span
+                >
                 <span class="ml-1 mr-3">
                   <i
                     class="fa fa-refresh font-weight-bold"
@@ -69,6 +73,12 @@
                     @click="refreshUserAmount"
                   ></i>
                 </span>
+                <div
+                  v-if="userAmount < 1000"
+                  class="font-12 text-center text-muted mt-2"
+                >
+                  Please Top-up your wallet
+                </div>
               </h5>
             </div>
           </div>
@@ -182,10 +192,10 @@ export default {
 .block-header {
   box-shadow: rgba(68, 88, 144, 0.1) 0px 10px 29px 0px;
 }
-.home-block-header {
+/* .home-block-header {
   background: rgba(245, 0, 0, 0.07);
   box-shadow: rgba(31, 33, 39, 0.1) 0px 10px 29px 0px;
-}
+} */
 .page_account_buttons a.btn {
   border: none;
   box-shadow: rgba(68, 88, 144, 0.1) 0px 10px 10px 0px;

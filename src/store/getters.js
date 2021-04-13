@@ -148,6 +148,10 @@ export const user = (state) => {
   return state.user;
 };
 
+export const adverts = (state) => {
+  return state.user.adverts;
+};
+
 export const userAmount = (state) => {
   return state.userAmount;
 };

@@ -5,8 +5,8 @@
     <div class="main-content">
       <div class="container-fluid">
         <!-- Page header section  -->
-        <PageHeader :topPageName="topPageName" />
-
+        <!-- <PageHeader :topPageName="topPageName" /> -->
+        <br />
         <ReferralCard v-if="user" />
         <br />
 
@@ -19,7 +19,7 @@
 <script>
 // import Map from "../components/charts/Map";
 // import Navbar from "@/components/navbar/Navbar";
-import PageHeader from "../components/header/PageHeader";
+// import PageHeader from "../components/header/PageHeader";
 import UserReferrals from "../components/extras/referral/UserReferrals";
 import ReferralCard from "../components/extras/referral/ReferralCard";
 import PageLoadingOverlay from "../components/loaders/PageLoadingOverlay";
@@ -31,7 +31,7 @@ export default {
   name: "Referral",
   components: {
     PageLoadingOverlay,
-    PageHeader,
+    // PageHeader,
     UserReferrals,
     ReferralCard,
   },

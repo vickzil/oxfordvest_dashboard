@@ -5,7 +5,7 @@
     <div class="main-content">
       <div class="container-fluid">
         <!-- Page header section  -->
-        <PageHeader :topPageName="topPageName" />
+        <!-- <PageHeader :topPageName="topPageName" /> -->
 
         <div class="row clearfix" v-if="user">
           <div class="col-lg-12 col-md-12 mt-4">
@@ -20,7 +20,7 @@
 <script>
 // import Map from "../components/charts/Map";
 // import Navbar from "@/components/navbar/Navbar";
-import PageHeader from "../components/header/PageHeader";
+// import PageHeader from "../components/header/PageHeader";
 import PageLoadingOverlay from "../components/loaders/PageLoadingOverlay";
 import InvestmentsUsers from "../components/extras/users/InvestmentsUsers";
 import "@/mixins";
@@ -31,7 +31,7 @@ export default {
   name: "UsersInvestment",
   components: {
     PageLoadingOverlay,
-    PageHeader,
+    // PageHeader,
     InvestmentsUsers,
   },
 

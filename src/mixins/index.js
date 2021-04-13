@@ -13,7 +13,7 @@ Vue.mixin({
       let adminRole;
 
       if (userRole) {
-        adminRole = userRole.includes("admin");
+        adminRole = userRole.includes("systemadmin");
       }
       return !!adminRole;
     },

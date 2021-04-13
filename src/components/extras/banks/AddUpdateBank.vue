@@ -313,7 +313,7 @@ export default {
           Country: this.country,
           BankCode: this.bank,
           AccountNumber: this.accountNumber,
-          Allias: this.allias,
+          Alias: this.allias,
           UserCode: this.user.userInfo.user.code,
           AccountName: this.accountName,
           Currency: this.currency,
