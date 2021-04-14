@@ -29,8 +29,14 @@
             :key="index"
           >
             <h5>{{ investment.name }}</h5>
-            <p>
+            <!-- <p class="mt-1 text-muted">
+              {{ investment.availableInvestmentCategoryName }}
+            </p> -->
+            <p class="mt-4">
               {{ investment.description }}
+            </p>
+            <p class="text-danger">
+              <b>{{ investment.duration }} Months</b>
             </p>
             <div class="card_grid">
               <div class="invest_money">
@@ -156,6 +162,8 @@ export default {
 }
 .card_item p {
   font-size: 14px;
+}
+.card_item p:first-child {
   margin-top: 14px;
 }
 

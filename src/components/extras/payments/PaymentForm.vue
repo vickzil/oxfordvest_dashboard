@@ -563,7 +563,7 @@ export default {
       if (response.status) {
         this.verifyPacystackCardPayment(response);
 
-        // console.log(response);
+        console.log(response);
       } else {
         let payload = {
           status: true,
@@ -671,6 +671,8 @@ export default {
               message: "Payment not completed",
             };
           }
+
+          console.log(response);
 
           this.setAlertModalStatus(payload);
           this.setFundWalletLoading(false);
