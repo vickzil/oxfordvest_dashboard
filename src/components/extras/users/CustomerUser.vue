@@ -185,6 +185,20 @@
                   </tr>
                 </tfoot>
               </table>
+              <div
+                class="dataTables_info"
+                id="tbData_info"
+                role="status"
+                aria-live="polite"
+              >
+                Showing
+                {{
+                  registeredUsers.length > 0
+                    ? sortNumber
+                    : registeredUsers.length
+                }}
+                of {{ registeredUsers.length }} entries
+              </div>
             </div>
           </div>
           <br /><br />

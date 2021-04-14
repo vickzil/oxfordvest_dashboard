@@ -319,7 +319,7 @@ export default {
         AmountInvested: this.amount,
         Duration: duration,
         UpfrontPaidUponInvestment: false,
-        SourceChannel: "onlineline",
+        SourceChannel: "online",
         ReturnsToOilInvest: this.ReturnsToOilInvest,
         Frequency: this.currentInvestment.frequency,
         GroupSubsidiaryCode: this.user.userInfo.user.subsidiaryCode,

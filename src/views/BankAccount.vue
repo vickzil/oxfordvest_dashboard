@@ -20,11 +20,11 @@
                     >Bank Account</a
                   >
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#bankCard"
                     >Card</a
                   >
-                </li>
+                </li> -->
               </ul>
             </div>
 
