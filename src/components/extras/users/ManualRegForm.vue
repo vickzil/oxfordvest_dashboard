@@ -114,7 +114,7 @@
           </div>
         </div>
       </div>
-      <div class="row clearfix">
+      <div class="row clearfix" v-if="registrationInfo">
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="form-group c_form_group">
             <label class="form-label"

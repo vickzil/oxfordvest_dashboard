@@ -49,6 +49,7 @@ export default {
   // GLOBAL PROPERTIES
   profilePlaceholder: null,
   userAmount: 520,
+  sortNumber: 10,
   makePayment: false,
   registrationText: false,
   accMgtCode: "",

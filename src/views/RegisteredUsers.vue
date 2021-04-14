@@ -42,7 +42,12 @@ export default {
   },
 
   methods: {
-    ...mapActions(["currentSitePage", "closePageLoading", "showPageLoading"]),
+    ...mapActions([
+      "currentSitePage",
+      "closePageLoading",
+      "showPageLoading",
+      "setRegisteredUsers",
+    ]),
     removeOffcanvas: function () {
       document.body.classList.remove("offcanvas-active");
     },
@@ -55,6 +60,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     // this.showPageLoading();
     this.removeOffcanvas();
+    this.setRegisteredUsers([]);
     next();
   },
 };

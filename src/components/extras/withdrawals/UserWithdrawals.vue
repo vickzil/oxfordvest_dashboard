@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="header">
-      <h2>All Withdrawals</h2>
+      <h2><b>All Withdrawals</b></h2>
     </div>
     <div class="row clearfix">
       <div class="col-12">
@@ -12,7 +12,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Search Withdrawal by amount"
+                  placeholder="Search Withdrawal by Narration"
                   v-model="searchText"
                 />
                 <div class="input-group-append">
@@ -26,20 +26,21 @@
           <div class="table-responsive">
             <table class="table table-hover mb-0">
               <thead>
-                <tr>
+                <tr class="text-center">
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Email</th>
                   <th>Amount</th>
+                  <th>Narration</th>
                   <th>Message</th>
-                  <th>Payment method</th>
-                  <th>Date</th>
+                  <th>Provider</th>
+                  <th>Ref</th>
+                  <th>Status</th>
+                  <!-- <th>Date</th> -->
                 </tr>
               </thead>
               <tbody v-if="searchWithdrawals.length">
                 <WithdrawalTableList
                   v-for="(withdrawal, index) in searchWithdrawals"
-                  :key="withdrawal.requestId"
+                  :key="withdrawal.externalId"
                   :withdrawal="withdrawal"
                   :index="index"
                 />
@@ -80,7 +81,7 @@ export default {
     searchWithdrawals() {
       let text = this.searchText.toLowerCase();
       return this.withdrawals.filter((withdrawal) =>
-        withdrawal.name.toLowerCase().match(text)
+        withdrawal.narration.toLowerCase().match(text)
       );
     },
   },

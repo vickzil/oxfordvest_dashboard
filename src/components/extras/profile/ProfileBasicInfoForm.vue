@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="header">
-      <h2>Basic Information</h2>
+      <h2><b>Basic Information</b></h2>
     </div>
     <div class="body">
       <form v-on:submit.prevent="submitForm" enctype="multipart/form-data">

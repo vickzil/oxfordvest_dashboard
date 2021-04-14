@@ -31,6 +31,19 @@ export const saveUserData = ({ commit }, data) => {
   commit("SAVE_USER_DATA", data);
 };
 
+export const setRegisteredUsers = ({ commit }, data) => {
+  // console.log(data);
+  commit("SET_REGISTERED_USERS", data);
+};
+export const setUsersInvestments = ({ commit }, data) => {
+  // console.log(data);
+  commit("SET_USERS_INVESTMENTS", data);
+};
+export const setSortedNumber = ({ commit }, data) => {
+  // console.log(data);
+  commit("SET_SORTED_NUMBER", data);
+};
+
 export const fetchUserData = ({ commit, state }, code) => {
   let userCode = sessionStorage.getItem("activeformations");
 

@@ -16,7 +16,7 @@
                 class="btn btn-danger oxfordvest_button"
                 :disabled="emptyFields == true"
               >
-                Register User
+                Invest & Register User
               </button>
             </div>
           </div>
@@ -91,6 +91,7 @@ export default {
           Duration: duration,
           ReturnsToOilVest: this.manualUserReg.userReturnsToOilInvest,
           Frequency: this.manualUserReg.userCurrentInvestment.frequency,
+          NoOfIntervals: 0,
           UpfrontPaidUponInvestment: this.manualUserReg
             .userUpfrontPaidUponInvestment,
           SourceChannel: "offline",
@@ -102,23 +103,46 @@ export default {
           PhoneNumber: this.manualUserReg.userPhone,
           Country: this.manualUserReg.userCountry,
           DateOfBirth: this.manualUserReg.userDob,
-          Password: this.manualUserReg.userPassword,
-          ConfirmPassword: this.manualUserReg.userPassword,
+          Password: "",
+          ConfirmPassword: "",
           Email: this.manualUserReg.userEmail,
           AccountType: "individual",
-          PostCode: "",
+          PostCode: "string",
           RoleName: "individual",
           SubsidiaryCode: this.manualUserReg.userSubsidaiary,
           FirstName: this.manualUserReg.userFirstName,
           LastName: this.manualUserReg.userLastName,
           MiddleName: this.manualUserReg.userMiddleName,
           BVN: this.manualUserReg.userBvn,
-          ReferredBy: this.manualUserReg.userAcctMgtCode,
           UserCode: "",
+          ReferredBy: this.manualUserReg.userAcctMgtCode,
         },
       };
 
-      console.log(data);
+      // var data = {
+      //   Registration: {
+      //     AppId: this.AppId,
+      //     RequestId: this.RequestId,
+      //     PhoneNumber: this.manualUserReg.userPhone,
+      //     Country: this.manualUserReg.userCountry,
+      //     DateOfBirth: this.manualUserReg.userDob,
+      //     Password: this.manualUserReg.userPassword,
+      //     ConfirmPassword: this.manualUserReg.userPassword,
+      //     Email: this.manualUserReg.userEmail,
+      //     AccountType: "individual",
+      //     PostCode: "",
+      //     RoleName: "individual",
+      //     SubsidiaryCode: this.manualUserReg.userSubsidaiary,
+      //     FirstName: this.manualUserReg.userFirstName,
+      //     LastName: this.manualUserReg.userLastName,
+      //     MiddleName: this.manualUserReg.userMiddleName,
+      //     BVN: this.manualUserReg.userBvn,
+      //     ReferredBy: this.manualUserReg.userAcctMgtCode,
+      //     UserCode: "",
+      //   },
+      // };
+
+      // console.log(data);
 
       axios
         .post(url, data)
@@ -145,7 +169,7 @@ export default {
             };
           }
 
-          console.log(response);
+          // console.log(response);
 
           let userCode = this.user.userInfo.user.code;
           this.fetchUserData(userCode);
@@ -153,6 +177,7 @@ export default {
           this.setAlertModalStatus(payload);
         })
         .catch((err) => {
+          // console.log(err);
           err;
           this.serverErrorMessage();
         });
@@ -160,24 +185,15 @@ export default {
 
     clearData: function () {
       this.$store.state.manualUserReg.userFirstName = "";
-      this.$store.state.manualUserReg.this.$store.state.manualUserReg.userLastName =
-        "";
-      this.$store.state.manualUserReg.this.$store.state.manualUserReg.userMiddleName =
-        "";
-      this.$store.state.manualUserReg.this.$store.state.manualUserReg.userEmail =
-        "";
-      this.$store.state.manualUserReg.this.$store.state.manualUserReg.userPhone =
-        "";
-      this.$store.state.manualUserReg.this.$store.state.manualUserReg.userAddress =
-        "";
-      this.$store.state.manualUserReg.this.$store.state.manualUserReg.userDob =
-        "";
-      this.$store.state.manualUserReg.this.$store.state.manualUserReg.userCountry =
-        "";
-      this.$store.state.manualUserReg.this.$store.state.manualUserReg.userGroups =
-        "";
-      this.$store.state.manualUserReg.this.$store.state.manualUserReg.userSubsidaiary =
-        "";
+      this.$store.state.manualUserReg.userLastName = "";
+      this.$store.state.manualUserReg.userMiddleName = "";
+      this.$store.state.manualUserReg.userEmail = "";
+      this.$store.state.manualUserReg.userPhone = "";
+      this.$store.state.manualUserReg.userAddress = "";
+      this.$store.state.manualUserReg.userDob = "";
+      this.$store.state.manualUserReg.userCountry = "";
+      this.$store.state.manualUserReg.userGroups = "";
+      this.$store.state.manualUserReg.userSubsidaiary = "";
       this.$store.state.manualUserReg.userBvn = "";
       this.$store.state.manualUserReg.userGender = "";
       this.$store.state.manualUserReg.userAcctMgtCode = "";

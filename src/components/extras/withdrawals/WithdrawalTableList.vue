@@ -1,14 +1,15 @@
 <template>
-  <tr>
+  <tr class="text-center">
     <td>{{ index + 1 }}</td>
-    <td>{{ withdrawal.name }}</td>
-    <td>{{ withdrawal.email }}</td>
+    <td>₦{{ addComma(withdrawal.payoutAmount) }}</td>
+    <td>{{ withdrawal.narration }}</td>
+    <td>{{ withdrawal.message == "" ? "none" : withdrawal.message }}</td>
+    <td>{{ withdrawal.provider }}</td>
+    <td>{{ withdrawal.externalReference }}</td>
     <td>
-      {{ withdrawal.amount }}
+      <span class="badge badge-primary">{{ withdrawal.status }}</span>
     </td>
-    <td>{{ withdrawal.message }}</td>
-    <td>{{ withdrawal.paymentMethod }}</td>
-    <td>{{ removeTimeZone(withdrawal.createdOn) }}</td>
+    <!-- <td>{{ removeTimeZone(withdrawal.createdOn) }}</td> -->
   </tr>
 </template>
 

@@ -13,6 +13,22 @@ export const SAVE_COUNTRY_BANK_NAMES = (state, data) => {
   state.countryBankName = data;
 };
 
+export const SET_REGISTERED_USERS = (state, data) => {
+  state.registeredUsers = data;
+};
+
+export const SET_USERS_INVESTMENTS = (state, data) => {
+  state.UsersInvestments = data;
+};
+
+export const SET_SORTED_NUMBER = (state, data) => {
+  if (data == "") {
+    state.sortNumber = parseInt(state.registeredUsers.length, 10);
+  } else {
+    state.sortNumber = parseInt(data, 10);
+  }
+};
+
 export const SAVE_USER_DATA = (state, data) => {
   state.user = data;
   state.isUserLoggedIn = true;

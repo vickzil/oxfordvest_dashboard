@@ -164,6 +164,10 @@ export const UsersInvestments = (state) => {
   return state.UsersInvestments;
 };
 
+export const sortNumber = (state) => {
+  return state.sortNumber;
+};
+
 export const accMgtCode = (state) => {
   return state.accMgtCode;
 };

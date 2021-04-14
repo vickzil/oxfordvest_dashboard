@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="header">
-      <h2>Next of Kin</h2>
+      <h2><b>Next of Kin</b></h2>
     </div>
     <div class="body">
       <form v-on:submit.prevent="submitForm" enctype="multipart/form-data">

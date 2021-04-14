@@ -87,42 +87,105 @@
               </div>
             </form>
           </div>
-          <div class="table-responsive">
-            <table class="table table-hover mb-0">
-              <thead>
-                <tr style="background: rgba(245, 0, 0, 0.07)">
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Code</th>
-                  <th>D.o.b</th>
-                  <th>Phone</th>
-                  <th>Acc officer Code</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody v-if="registeredUsers.length">
-                <CustomerUserTableList
-                  v-for="(user, index) in Users"
-                  :key="user.id"
-                  :user="user"
-                  :index="index"
-                />
-              </tbody>
-              <tbody v-else>
-                <tr class="text-center">
-                  <td colspan="10">
-                    <div>
-                      <br />
-                      <br />
-                      <b>No Information Found</b>
-                      <br />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="body">
+            <div class="dataTables_length mb-3" id="tbData_length">
+              <label
+                >Show
+                <select
+                  name="tbData_length"
+                  aria-controls="tbData"
+                  class=""
+                  @change="sortTable($event)"
+                >
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  <option value="">All</option>
+                </select>
+                entries</label
+              >
+            </div>
+            <div
+              class="text-center mt-3 mb-3"
+              v-if="registeredUsers.length > 0"
+            >
+              <p class="badge badge-dark">
+                <b>{{ registeredUsers.length }} user(s) Found</b>
+              </p>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr
+                    style="background: rgba(245, 0, 0, 0.07)"
+                    class="text-center"
+                  >
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Code</th>
+                    <th>D.o.b</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Acc officer Code</th>
+                    <th>Status</th>
+                    <th>Created Date</th>
+                  </tr>
+                </thead>
+                <tbody v-if="Users.length">
+                  <CustomerUserTableList
+                    v-for="(searchedUser, index) in Users"
+                    :key="searchedUser.id"
+                    :searchedUser="searchedUser"
+                    :index="index"
+                  />
+                </tbody>
+                <tbody v-else>
+                  <tr class="text-center">
+                    <td colspan="10">
+                      <div>
+                        <br />
+                        <br />
+                        <b>No Record</b>
+                        <br />
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot v-if="Users.length && searchUserTotals !== null">
+                  <tr>
+                    <td class="text-right" colspan="9">
+                      <strong>Total Active</strong>
+                    </td>
+                    <td colspan="9">
+                      <span class="badge badge-success">{{
+                        searchUserTotals.totalActive
+                      }}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-right" colspan="9">
+                      <strong>Total Inactive</strong>
+                    </td>
+                    <td colspan="9">
+                      <span class="badge badge-warning">{{
+                        searchUserTotals.totalInActive
+                      }}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-right" colspan="9">
+                      <strong>Total Users</strong>
+                    </td>
+                    <td colspan="9">
+                      <b>{{ searchUserTotals.totalNumber }}</b>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           </div>
           <br /><br />
         </div>
@@ -140,22 +203,25 @@
 
 <script>
 import "@/mixins";
-// import CustomerUserTableList from "./CustomerUserTableList"
+import CustomerUserTableList from "./CustomerUserTableList";
 import axios from "axios";
-import { mapGetters, mapActions, mapState } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
-    // CustomerUserTableList
+    CustomerUserTableList,
   },
   computed: {
-    ...mapGetters(["registrationInfo"]),
-    ...mapState(["registeredUsers"]),
+    ...mapGetters(["registrationInfo", "registeredUsers", "sortNumber"]),
 
     Users() {
       let text = this.searchText.toLowerCase();
-      return this.registeredUsers.filter((user) =>
+
+      let filteredUsers = this.registeredUsers.filter((user) =>
         user.name.toLowerCase().match(text)
       );
+
+      let sortedUser = filteredUsers.splice(0, this.sortNumber);
+      return sortedUser;
     },
   },
   data() {
@@ -167,11 +233,21 @@ export default {
       status: "",
       from: "",
       to: "",
+      searchUserTotals: null,
     };
   },
 
   methods: {
-    ...mapActions(["setActionLoading", "setAlertModalStatus"]),
+    ...mapActions([
+      "setActionLoading",
+      "setAlertModalStatus",
+      "setRegisteredUsers",
+      "setSortedNumber",
+    ]),
+
+    sortTable: function (event) {
+      this.setSortedNumber(event.target.value);
+    },
     searchUsers: function () {
       this.setActionLoading(true);
 
@@ -189,14 +265,34 @@ export default {
         Preview: true,
       };
 
-      console.log(data);
+      // console.log(data);
 
       axios
         .post(url, data)
         .then((res) => {
           this.setActionLoading(false);
-          if (res.data.success == true) {
-            this.registeredUsers = res.data.data;
+          if (res.data.users.length > 0) {
+            this.setRegisteredUsers(res.data.users);
+            console.log(res.data.users);
+
+            const { totalActive, totalInActive, totalNumber } = res.data;
+            let newPayload = {
+              totalActive,
+              totalInActive,
+              totalNumber,
+            };
+
+            this.searchUserTotals = newPayload;
+          } else {
+            let payload = {
+              status: true,
+              type: "error",
+              message: "No Record found",
+            };
+
+            this.setRegisteredUsers([]);
+
+            this.setAlertModalStatus(payload);
           }
 
           console.log(res);
@@ -204,24 +300,33 @@ export default {
         .catch((err) => {
           console.log(err);
           this.serverErrorMessage();
-          // this.refreshingAmount = false;
         });
-
-      // setTimeout(() => {
-      //   this.setActionLoading(false);
-
-      //   var data = {
-      //     Email: this.email,
-      //     UserCode: this.userCode,
-      //     Status: this.status,
-      //     From: this.from,
-      //     To: this.to,
-      //   };
-      //   console.log(data);
-      // }, 4000);
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.table-responsive::-webkit-scrollbar {
+  -webkit-appearance: none !important;
+}
+
+.table-responsive::-webkit-scrollbar:vertical {
+  width: 12px !important;
+}
+
+.table-responsive::-webkit-scrollbar:horizontal {
+  height: 12px !important;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #b1b1b1 !important;
+  border-radius: 10px !important;
+  border: 2px solid #ffffff !important;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  border-radius: 10px !important;
+  background-color: #ffffff !important;
+}
+</style>
