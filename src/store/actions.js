@@ -372,6 +372,10 @@ export const setBvnModal = ({ commit }, status) => {
   commit("SET_BVN_MODAL", status);
 };
 
+export const setTwoFactorModal = ({ commit }, status) => {
+  commit("SET_TWO_FACTOR_MODAL", status);
+};
+
 export const setUserExpireLoginTime = ({ commit }, time) => {
   commit("SET_USER_EXPIRED_LOGIN_TIME", time);
 };

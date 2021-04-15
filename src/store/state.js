@@ -25,6 +25,7 @@ export default {
   withdrawFundModal: false,
   addCardModal: false,
   bvnModal: false,
+  twoFactorModal: false,
 
   // NOTIFICATIONS
   isclosed: false,
@@ -62,9 +63,9 @@ export default {
   subsidiaries: [],
   registeredUsers: [],
   UsersInvestments: [],
-  hrmURL: "http://api.oxfordvest.com/api",
+  hrmURL: "https://api.oxfordvest.com/api",
   // hrmURL: "https://oxfordvest-api.conveyor.cloud/api",
-  walletURL: "http://walletgateway.oxfordvest.com/api",
+  walletURL: "https://walletgateway.oxfordvest.com/api",
   // walletURL: "https://oxfordvest-api.conveyor.cloud/api",
 
   // PAYMENTS

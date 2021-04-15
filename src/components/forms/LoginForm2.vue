@@ -210,6 +210,7 @@ export default {
       "fetchBankNames",
       "saveUserData",
       "getPaymentFeeInfo",
+      "setTwoFactorModal",
     ]),
     loginUser: function () {
       if (this.formError == false && this.emptyFields == false) {
@@ -266,20 +267,44 @@ export default {
       axios
         .post(url, data)
         .then((response) => {
+          console.log(response.data);
           if (response.data.success) {
             if (response.data.data.emailConfirmed) {
-              const data = response.data.data;
-              const token = response.data.data.token.token;
-              const expireTo = response.data.data.token.expireTo;
+              const twoFactor = response.data.data.token.is2FAEnabled;
+              if (twoFactor) {
+                this.setActionLoading(false);
 
-              this.expiresAt = expireTo;
+                let payload = {
+                  type: "error",
+                  status: true,
+                  message: "Please Verify Your Two Factor Authentication",
+                };
 
-              sessionStorage.setItem("appUserThemeSettingsCode", token);
-              sessionStorage.setItem("activeformations", data.code);
-              axios.defaults.headers.common["Authorization"] = token;
-              this.login(data);
+                this.setAlertModalStatus(payload);
 
-              this.fetchUserData(data.code);
+                setTimeout(() => {
+                  let payload = {
+                    type: "",
+                    status: false,
+                    message: "",
+                  };
+
+                  this.setAlertModalStatus(payload);
+                  this.setTwoFactorModal(true);
+                }, 1200);
+              } else {
+                const data = response.data.data;
+                const token = response.data.data.token.token;
+                const expireTo = response.data.data.token.expireTo;
+                this.expiresAt = expireTo;
+
+                sessionStorage.setItem("appUserThemeSettingsCode", token);
+                sessionStorage.setItem("activeformations", data.code);
+                axios.defaults.headers.common["Authorization"] = token;
+                this.login(data);
+
+                this.fetchUserData(data.code);
+              }
             } else {
               setTimeout(() => {
                 this.$router.push({ path: "/confirm" });

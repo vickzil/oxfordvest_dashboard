@@ -25,25 +25,38 @@
     <br />
     <div class="row clearfix">
       <div class="col-12">
+        <!-- <CreditCard /> -->
+
         <div class="card" v-if="bankCards.length > 0">
-          <div class="body">
-            <form>
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search Card by provider"
-                  v-model="searchText"
-                />
-                <div class="input-group-append">
-                  <span class="input-group-text" id="search-mail"
-                    ><i class="icon-magnifier"></i
-                  ></span>
-                </div>
-              </div>
-            </form>
+          <div class="body card_width_div my-4">
+            <carousel
+              :autoplay="true"
+              :nav="false"
+              :dots="false"
+              :stagePadding="50"
+              :margin="30"
+              :autoplayTimeout="3000"
+              :responsive="{
+                0: {
+                  items: 1,
+                },
+                600: {
+                  items: 2,
+                },
+                1000: {
+                  items: 3,
+                },
+              }"
+            >
+              <CreditCard2
+                v-for="(searchBank, index) in searchBanks"
+                :key="searchBank.bankCode"
+                :searchBank="searchBank"
+                :index="index"
+              />
+            </carousel>
           </div>
-          <div class="table-responsive">
+          <!-- <div class="table-responsive">
             <table class="table table-hover mb-0">
               <thead>
                 <tr class="text-center">
@@ -74,7 +87,7 @@
                 </tr>
               </tbody>
             </table>
-          </div>
+          </div> -->
         </div>
         <div class="card" v-else>
           <div
@@ -94,13 +107,21 @@
 </template>
 
 <script>
-import BankTableList from "./BankTableList";
+// import BankTableList from "./BankTableList";
+// import CreditCard from "./CreditCard";
+import CreditCard2 from "./CreditCard2";
+// import CreditCard3 from "./CreditCard3";
 import "@/mixins";
+import carousel from "vue-owl-carousel";
 
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
-    BankTableList,
+    // BankTableList,
+    // CreditCard,
+    CreditCard2,
+    // CreditCard3,
+    carousel,
   },
   data() {
     return {
@@ -116,7 +137,8 @@ export default {
     ...mapGetters(["userPaymentFeeInfo"]),
 
     bankCards() {
-      return this.user.userInfo.userCardsInfo.userCards;
+      // return [];
+      return this.user.userInfo.userCards;
     },
     searchBanks() {
       let text = this.searchText.toLowerCase();
@@ -155,6 +177,16 @@ export default {
 </script>
 
 <style scoped>
+/* .owl-stage {
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
+}
+.card_width_div {
+  padding: 0px 20px;
+   width: 400px; 
+  box-sizing: border-box;
+} */
+
 .payment_buttion {
   background: rgb(255, 0, 0) !important;
   border-radius: 4px;

@@ -6,6 +6,7 @@
     <PerformInvestmentModal />
     <WithdrawalModal />
     <AddCardModal />
+    <TwoFactorModal />
     <AddBvn />
     <CommingSoon />
     <VerifyActionModal />
@@ -20,6 +21,7 @@ import CalculateInvestmentModal from "./investments/CalculateInvestmentModal";
 import PerformInvestmentModal from "./investments/PerformInvestmentModal";
 import WithdrawalModal from "./withdrawal/WithdrawalModal";
 import AddCardModal from "./Banks/AddCardModal";
+import TwoFactorModal from "./2factorModal/TwoFactorModal";
 import AddBvn from "./bvn/AddBvn";
 import CommingSoon from "./comming-soon/CommingSoon";
 import LogoutModal from "./LogoutModal";
@@ -34,6 +36,7 @@ export default {
     WithdrawalModal,
     VerifyActionModal,
     AddCardModal,
+    TwoFactorModal,
     AddBvn,
     CommingSoon,
     LogoutModal,

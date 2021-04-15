@@ -32,14 +32,14 @@
                     >Change pin
                   </a>
                 </li>
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                   <a
                     class="nav-link"
                     data-toggle="tab"
                     href="#account_protection"
                     >Account Protection
                   </a>
-                </li> -->
+                </li>
               </ul>
             </div>
             <div class="tab-content">

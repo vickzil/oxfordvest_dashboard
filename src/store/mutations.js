@@ -442,6 +442,10 @@ export const SET_BVN_MODAL = (state, status) => {
   state.bvnModal = status;
 };
 
+export const SET_TWO_FACTOR_MODAL = (state, status) => {
+  state.twoFactorModal = status;
+};
+
 export const CLOSE_ALERT_MESSAGE = (state) => {
   state.isclosed = true;
 };
