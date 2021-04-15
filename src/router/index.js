@@ -32,6 +32,10 @@ import FourZeroFour from "../views/FourZeroFour";
 
 Vue.use(VueRouter);
 
+// store.getters["AuthStore/isAuthenticated"]
+
+// store.dispatch('AuthStore/loadUser')
+
 const routes = [
   {
     path: "/",
@@ -188,39 +192,6 @@ const routes = [
       requiresAuth: true,
     },
   },
-  // {
-  //     path: "/change-password",
-  //     name: "ChangePassword",
-  //     component: ChangePassword,
-  //     meta: {
-  //         transition: 'fade-in-down',
-  //         title: "Oxfordvest - Change Password",
-  //         requiresAuth: true,
-
-  //     },
-  // },
-  // {
-  //     path: "/admin-home",
-  //     name: "AdminLandingPage",
-  //     component: AdminLandingPage,
-  //     meta: {
-  //         transition: 'fade-in-down',
-  //         title: "Oxfordvest - Dasboard",
-  //         requiresAuth: true,
-  //         isAdmin: true
-
-  //     },
-  // },
-  // {
-  //     path: "/timeline",
-  //     name: "Timeline",
-  //     component: Timeline,
-  //     meta: {
-  //         transition: 'fade-in-down',
-  //         title: "Oxfordvest - Timeline",
-  //         requiresAuth: true,
-  //     },
-  // },
   {
     path: "/login",
     name: "Login",

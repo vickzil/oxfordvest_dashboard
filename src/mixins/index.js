@@ -116,6 +116,10 @@ Vue.mixin({
 
       return !!newDate;
     },
+    getLocalTYime(data) {
+      var d = new Date(data);
+      return d.toLocaleTimeString().replace(/:\d+ /, " ");
+    },
     serverErrorMessage: function () {
       this.setActionLoading(false);
       setTimeout(() => {

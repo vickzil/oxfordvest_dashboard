@@ -79,7 +79,7 @@ export default {
 
 .page_processing_card h4 {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
   /* margin-top: 20px; */
   margin-bottom: 20px;
 }
@@ -88,6 +88,7 @@ export default {
   font-size: 13px;
   font-weight: bold;
   margin-bottom: 19px;
+  line-height: 1.6;
 }
 
 .page_processing_card button {

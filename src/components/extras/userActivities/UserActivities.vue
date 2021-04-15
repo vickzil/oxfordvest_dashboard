@@ -22,16 +22,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(userActivity, index) in userActivities" :key="index">
-              <td>{{ index + 1 }}</td>
-              <td>
-                {{ userActivity.name }}
-              </td>
-              <td>{{ userActivity.description }}</td>
-              <td>{{ userActivity.firstName }} {{ userActivity.lastName }}</td>
-              <td>{{ userActivity.ip }}</td>
-              <td>{{ removeTimeZone(userActivity.createdOn) }}</td>
-            </tr>
+            <UserActivitiesTableList
+              v-for="(userActivity, index) in userActivities"
+              :key="index"
+              :index="index"
+              :userActivity="userActivity"
+            />
           </tbody>
         </table>
       </div>
@@ -49,8 +45,11 @@
 
 <script>
 import "@/mixins";
-
+import UserActivitiesTableList from "./UserActivitiesTableList";
 export default {
+  components: {
+    UserActivitiesTableList,
+  },
   computed: {
     userActivities() {
       let activities = this.user.userInfo.userActivities;

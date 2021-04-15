@@ -8,8 +8,21 @@
           :key="overview.id"
         >
           <div class="body">
-            <div>{{ overview.title }}</div>
-            <div class="mt-3 h4">{{ overview.count }}</div>
+            <div>
+              {{ overview.title }}
+              <span v-if="overview.url !== 'Referral'"
+                >({{ overview.count }})</span
+              >
+            </div>
+            <div class="mt-3 h5">
+              <span v-if="overview.url !== 'Referral'"
+                ><b>₦{{ addComma(overview.amount) }}</b
+                ><span style="font-size: 14px" v-if="overview.amount < 1000000"
+                  ><b>.00</b></span
+                >
+              </span>
+              <span v-else>{{ overview.count }}</span>
+            </div>
             <div class="d-flex">
               <router-link
                 :to="{ name: `${overview.url}` }"
@@ -39,11 +52,20 @@ export default {
     userInvestmentInfoCount() {
       return this.user.userInfo.userInvestmentInfo.count;
     },
+    userInvestmentInfoAmount() {
+      return this.user.userInfo.userInvestmentInfo.totalAmount;
+    },
     userWalletWithdrawalInfoCount() {
       return this.user.userInfo.userWalletWithdrawalInfo.count;
     },
+    userWalletWithdrawalInfoAmount() {
+      return this.user.userInfo.userWalletWithdrawalInfo.totalAmount;
+    },
     walletTopupsInfoCount() {
       return this.user.userInfo.walletTopupsInfo.count;
+    },
+    walletTopupsInfoAmount() {
+      return this.user.userInfo.walletTopupsInfo.totalAmount;
     },
     noOfReferrals() {
       return this.user.userInfo.referrals.noOfReferrals;
@@ -56,6 +78,7 @@ export default {
           count: this.userInvestmentInfoCount,
           url: "Investment",
           buttonText: "Investment",
+          amount: this.userInvestmentInfoAmount,
         },
         {
           id: 2,
@@ -63,6 +86,7 @@ export default {
           count: this.userWalletWithdrawalInfoCount,
           url: "Transaction",
           buttonText: "Withdrawal",
+          amount: this.userWalletWithdrawalInfoAmount,
         },
         {
           id: 3,
@@ -70,6 +94,7 @@ export default {
           count: this.walletTopupsInfoCount,
           url: "Transaction",
           buttonText: "Deposit",
+          amount: this.walletTopupsInfoAmount,
         },
         {
           id: 4,
@@ -77,6 +102,7 @@ export default {
           count: this.noOfReferrals,
           url: "Referral",
           buttonText: "Referral",
+          amount: "",
         },
       ];
     },

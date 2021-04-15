@@ -49,25 +49,25 @@
       <div class="body">
         <small class="text-muted">Email address: </small>
         <p v-if="user.userInfo.user.email">{{ user.userInfo.user.email }}</p>
-        <br>
+        <br />
         <small class="text-muted">Mobile: </small>
         <p v-if="user">{{ user.userInfo.user.phoneNumber }}</p>
-        <br>
+        <br />
         <small class="text-muted">Address: </small>
         <p v-if="user.userInfo.user.homeAddress !== 'null'">
           {{ user.userInfo.user.homeAddress }}
         </p>
         <p v-else class="text-secondary">None</p>
-        <br>
+        <br />
         <small class="text-muted">Date of Birthday: </small>
         <p v-if="user">{{ removeTimeZone(user.userInfo.user.dateOfBirth) }}</p>
-        <br>
-        <small v-if="user.userInfo.user.bvn !== 'null'" class="text-muted"
-          >BVN:
-        </small>
+        <br />
+        <small class="text-muted">BVN: </small>
         <p v-if="user.userInfo.user.bvn !== 'null'">
-          {{ user.userInfo.user.bvn }}
+          <!-- {{ user.userInfo.user.bvn }} -->
+          {{ getHiddenBvn }}
         </p>
+        <p v-else class="text-secondary">None</p>
       </div>
     </div>
   </div>
@@ -77,6 +77,15 @@
 import "@/mixins";
 
 export default {
+  computed: {
+    getHiddenBvn() {
+      let initialBVn = this.user.userInfo.user.bvn;
+      let firstThreeWord = initialBVn.slice(0, 3);
+      let LastThreeWord = initialBVn.slice(initialBVn.length - 3);
+
+      return firstThreeWord + "******" + LastThreeWord;
+    },
+  },
   methods: {
     changeProfileImage: function (event) {
       if (event.target.files[0]) {

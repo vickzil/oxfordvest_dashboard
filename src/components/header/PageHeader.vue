@@ -74,7 +74,7 @@
                   ></i>
                 </span>
                 <div
-                  v-if="userAmount < 1000"
+                  v-if="userAmount <= 0"
                   class="font-12 text-center text-muted mt-2"
                 >
                   Please Top-up your wallet

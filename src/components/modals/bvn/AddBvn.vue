@@ -1,12 +1,7 @@
 <template>
   <transition name="fade">
-    <div
-      class="overlay_div"
-      id="addCardModal"
-      tabindex="-1"
-      v-if="addCardModal"
-    >
-      <div class="overlay-close" @click="closeAddCardModal"></div>
+    <div class="overlay_div" id="bvnModal" tabindex="-1" v-if="bvnModal">
+      <div class="overlay-close" @click="closeBvnModal"></div>
       <div
         class="modal-dialog modal-dialog-centered"
         style="border-radius: 0px"
@@ -14,7 +9,7 @@
         <div class="modal-content">
           <div class="modal-header bg-light text-dark">
             <h3 class="" style="text-transform: capitalize; font-size: 16px">
-              Add Card
+              Add Bvn
               <span>
                 <img src="@/assets/images/oxfordvest.png" alt="" />
               </span>
@@ -22,19 +17,18 @@
                 id="page_fot_close"
                 class="fa fa-times"
                 title="close"
-                @click="closeAddCardModal"
+                @click="closeBvnModal"
               ></i>
             </h3>
           </div>
           <div
             class="modal-body animated px-4"
-            id="addCardModalBody"
+            id="bvnModalBody"
             style="position: relative"
           >
             <div class="text-center mt-4">
               <p class="font-15 font-weight-bold">
-                To add and verify your card ₦ 100 will be charged and saved into
-                your plan
+                Your BVN helps us protect you from fraudulent transactions
               </p>
             </div>
 
@@ -43,13 +37,14 @@
             <div class="row">
               <div class="col-md-7 mx-auto">
                 <div class="form-group">
-                  <label><b>Alias</b></label>
-                  <input type="text" class="form-control" v-model="alias" />
+                  <label><b>Bvn</b></label>
+                  <input type="number" class="form-control" v-model="bvn" />
                   <p
                     style="
-                      color: gray !important;
+                      color: green !important;
                       font-size: 13px !important;
                       margin-top: 5px;
+                      line-height: 1.5;
                     "
                   >
                     <svg
@@ -62,13 +57,14 @@
                       focusable="false"
                       tabindex="-1"
                       style="color: gray !important"
-                      fill="gray"
+                      fill="green"
                     >
                       <path
                         d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 11c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4H9v-2h2v2z"
                       ></path>
                     </svg>
-                    Please give your card a name
+                    Your BVN does not give us access to your bank account,
+                    transactions or any other information
                   </p>
                 </div>
               </div>
@@ -77,24 +73,12 @@
             <br /><br />
 
             <div class="text-md-right payStackDiv text-sm-center pt-3 mt-3">
-              <Paystack
-                :paystackkey="paystackkey"
-                :reference="reference"
-                :callback="callback"
-                :amount="amount * 100"
-                :currency="currency"
-                :firstname="user.userInfo.user.firstName"
-                :lastname="user.userInfo.user.lastName"
-                :email="user.userInfo.user.email"
-                :close="close"
-                :embed="false"
-                ref="paystackPayment"
+              <button
                 class="btn btn-danger btn-sm payment_buttion"
-                :disabled="alias == ''"
+                :disabled="bvn == ''"
               >
-                Proceed
-                <i class="fe fe-credit-card ml-2"></i>
-              </Paystack>
+                Confirm
+              </button>
             </div>
           </div>
         </div>
@@ -104,27 +88,11 @@
 </template>
 <script>
 import "@/mixins";
-import axios from "axios";
+// import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
-import Paystack from "vue-paystack";
 export default {
-  components: {
-    Paystack,
-  },
   computed: {
-    ...mapGetters(["currentInvestment", "addCardModal", "userPaymentFeeInfo"]),
-    paystackkey() {
-      let paymentByCard = this.user.fundWalletOptions.byCard.items.find(
-        (item) => item.provider === "paystack"
-      );
-
-      return paymentByCard.publicKey;
-    },
-    reference() {
-      return this.userPaymentFeeInfo == null
-        ? ""
-        : this.userPaymentFeeInfo.reference;
-    },
+    ...mapGetters(["bvnModal"]),
   },
 
   data() {
@@ -133,145 +101,64 @@ export default {
       showPaystack: false,
       amount: 100,
       currency: "NGN",
-      alias: "",
+      bvn: "",
     };
   },
 
   methods: {
     ...mapActions([
       "fetchUserData",
-      "setAddModal",
+      "setBvnModal",
       "setModalLoading",
       "setActionLoading",
       "setAlertModalStatus",
     ]),
 
-    closeAddCardModal: function () {
-      this.amount = 200;
-      this.inputError = false;
-      this.emptyFields = true;
-      this.inputMessage = "";
-      this.narration = "";
-      this.pin = "";
-      this.setAddModal(false);
-    },
-
-    callback: function (response) {
-      if (response.status) {
-        this.verifyPacystackCardPayment(response);
-      } else {
-        let payload = {
-          status: true,
-          type: "error",
-          message: "Card Verification not completed",
-        };
-        this.setAlertModalStatus(payload);
-      }
-      console.log(response);
-    },
-    verifyPacystackCardPayment: function (response) {
-      this.setActionLoading(true);
-      var data = {
-        AppId: this.AppId,
-        RequestId: this.RequestId,
-        Email: this.user.userInfo.user.email,
-        ProviderPaymentReference: response.reference,
-        TransactionReference: this.reference,
-        Provider: "paystack",
-        Currency: "NGN",
-      };
-      const url = `${this.walletURL}/v1.0/VerifyCardPayment/confirmCardPaymentStatus`;
-
-      axios
-        .post(url, data)
-        .then((response) => {
-          console.log(response);
-
-          let payload;
-
-          if (response.data.success) {
-            payload = {
-              type: "success",
-              message: "Card Confirm successfully",
-            };
-          } else {
-            payload = {
-              type: "error",
-              message: "Error Card confirmation",
-            };
-          }
-
-          this.setAlertModalStatus(payload);
-          this.setActionLoading(false);
-          this.showPaystack = false;
-        })
-        .catch((err) => {
-          console.log(err);
-
-          let payload = {
-            type: "error",
-            message: "Error Card confirmation",
-          };
-          this.showPaystack = false;
-
-          this.setAlertModalStatus(payload);
-          this.setActionLoading(false);
-        });
-    },
-
-    close: function () {
-      // this.setAddModal(false);
-      console.log("");
-
-      // let payload = {
-      //   status: true,
-      //   type: "error",
-      //   message: "Payment not completed",
-      // };
-      // this.setAlertModalStatus(payload);
+    closeBvnModal: function () {
+      this.setBvnModal(false);
     },
   },
 };
 </script>
 <style scoped>
-/* #addCardModal .modal-dialog {
-  max-width: 55%;
-  width: 55%;
-} */
+#bvnModal .modal-dialog {
+  max-width: 47%;
+  width: 47%;
+}
 
-#addCardModal img {
+#bvnModal img {
   width: 30px;
   margin-left: 40px;
 }
 
-#addCardModal .badge {
+#bvnModal .badge {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
 
-#addCardModal .modal-header {
+#bvnModal .modal-header {
   justify-content: center !important;
   position: relative;
   cursor: default !important;
 }
 
-#addCardModal .modal-body {
+#bvnModal .modal-body {
   width: 100% !important;
   position: relative !important;
   cursor: default;
 }
 
-/* .modal-open .modal#addCardModal {
+/* .modal-open .modal#bvnModal {
   overflow: hidden;
   padding-right: 0px !important;
 } */
 
-/* .modal-body#addCardModalBody {
+/* .modal-body#bvnModalBody {
   height: calc(100vh - 236px);
   overflow-y: scroll;
 } */
 
-.modal-body#addCardModalBody::-webkit-scrollbar {
+.modal-body#bvnModalBody::-webkit-scrollbar {
   width: 3px;
 }
 
@@ -348,13 +235,13 @@ export default {
 }
 
 @media screen and (max-width: 830px) {
-  #addCardModal .modal-dialog {
+  #bvnModal .modal-dialog {
     max-width: 90%;
     width: 90%;
   }
 }
 @media screen and (max-width: 600px) {
-  #addCardModal .modal-dialog {
+  #bvnModal .modal-dialog {
     max-width: 98%;
     width: 98%;
   }
@@ -373,14 +260,14 @@ export default {
   }
 }
 @media screen and (max-width: 540px) {
-  #addCardModal .modal-dialog {
+  #bvnModal .modal-dialog {
     top: unset !important;
     bottom: 0px !important;
     margin: 0px !important;
     max-width: 100%;
     width: 100%;
   }
-  #addCardModal .modal-dialog-centered {
+  #bvnModal .modal-dialog-centered {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: unset !important;

@@ -438,6 +438,10 @@ export const SET_ADD_MODAL = (state, status) => {
   state.addCardModal = status;
 };
 
+export const SET_BVN_MODAL = (state, status) => {
+  state.bvnModal = status;
+};
+
 export const CLOSE_ALERT_MESSAGE = (state) => {
   state.isclosed = true;
 };

@@ -210,12 +210,12 @@ body {
 }
 
 input:focus {
-  border: none !important;
+  border: 1px solid #ced4da !important;
   color: #212529 !important;
 }
 
 select:focus {
-  border: none !important;
+  border: 1px solid #ced4da !important;
   color: #212529 !important;
 }
 textarea {
@@ -353,6 +353,10 @@ textarea {
     margin-bottom: 14px;
     padding: 7px 12px;
     font-size: 14px;
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   .oxfordvest_tabs .nav-tabs::-webkit-scrollbar {

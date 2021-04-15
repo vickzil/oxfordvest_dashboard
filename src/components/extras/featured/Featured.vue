@@ -38,7 +38,9 @@
               :key="advert.imageUrl"
             >
               <div class="imgbox">
-                <img :src="advert.imageUrl" class="hover-shadow" />
+                <a :href="advert.link" target="_blank"
+                  ><img :src="advert.imageUrl" class="hover-shadow"
+                /></a>
               </div>
               <div class="project-details">
                 <div class="text-center">
@@ -113,6 +115,7 @@ export default {
   box-sizing: border-box;
   display: inline-block;
   width: 100% !important;
+  cursor: pointer;
 }
 
 .investment_carousel_div .project-box .imgbox {
@@ -163,18 +166,18 @@ export default {
   box-shadow: 0 1px 3px 0 rgb(60 64 67 / 30%), 0 4px 8px 3px rgb(60 64 67 / 15%);
 }
 
-.investment_carousel_div .project-box .project-details a:hover {
+/* .investment_carousel_div .project-box .project-details a:hover {
   background: #f3f3f3 !important;
   color: #222 !important;
-}
+} */
 
 .investment_carousel_div.active .project-box .project-details p {
   color: #fff;
 }
 
-.investment_carousel_div .project-box:hover .project-details {
+/* .investment_carousel_div .project-box:hover .project-details {
   transform: scaleY(1);
-}
+} */
 
 .investment_carousel_div .project-box .project-details .fa-link,
 .investment_carousel_div .project-box .project-details .fa-search {

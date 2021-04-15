@@ -41,7 +41,7 @@ export default {
       this.alertStatus(false);
       this.alertMessage("");
       this.setActionLoading(true);
-      this.logoutFromServer();
+      // this.logoutFromServer();
 
       setTimeout(() => {
         this.setActionLoading(false);

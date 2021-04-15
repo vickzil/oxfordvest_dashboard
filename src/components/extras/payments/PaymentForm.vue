@@ -482,7 +482,7 @@ export default {
         Provider: this.provider,
       };
 
-      // console.log(this.provider);
+      console.log(data);
 
       axios
         .post(url, data)
@@ -645,12 +645,14 @@ export default {
       var data = {
         AppId: this.AppId,
         RequestId: this.RequestId,
-        Email: this.user.userInfo.email,
+        Email: this.user.userInfo.user.email,
         ProviderPaymentReference: response.reference,
         TransactionReference: this.paymentForPaystackInfo.reference,
         Provider: this.paymentForPaystackInfo.provider,
         Currency: this.currency,
       };
+
+      console.log(data);
       const url = `${this.walletURL}/v1.0/VerifyCardPayment/confirmCardPaymentStatus`;
 
       axios
@@ -691,7 +693,7 @@ export default {
       var data = {
         AppId: this.AppId,
         RequestId: this.RequestId,
-        Email: this.user.userInfo.email,
+        Email: this.user.userInfo.user.email,
         ProviderPaymentReference: response.flwRef,
         TransactionReference: response.txRef,
         Currency: this.currency,

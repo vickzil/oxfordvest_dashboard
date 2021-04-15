@@ -32,6 +32,14 @@
                     >Change pin
                   </a>
                 </li>
+                <!-- <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    data-toggle="tab"
+                    href="#account_protection"
+                    >Account Protection
+                  </a>
+                </li> -->
               </ul>
             </div>
             <div class="tab-content">
@@ -112,6 +120,9 @@
               <div class="tab-pane" id="Change_pin">
                 <ChangePinForm />
               </div>
+              <div class="tab-pane" id="account_protection">
+                <TwoFactorAuth />
+              </div>
             </div>
           </div>
         </div>
@@ -126,6 +137,7 @@
 import PageLoadingOverlay from "../components/loaders/PageLoadingOverlay";
 import ChangePasswordForm from "../components/forms/ChangePasswordForm";
 import ChangePinForm from "../components/forms/ChangePinForm";
+import TwoFactorAuth from "../components/extras/settings/TwoFactorAuth";
 import "@/mixins";
 
 import { mapActions } from "vuex";
@@ -137,6 +149,7 @@ export default {
     // PageHeader,
     ChangePasswordForm,
     ChangePinForm,
+    TwoFactorAuth,
   },
 
   data() {

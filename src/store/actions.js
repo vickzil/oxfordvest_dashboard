@@ -368,6 +368,10 @@ export const setAddModal = ({ commit }, status) => {
   commit("SET_ADD_MODAL", status);
 };
 
+export const setBvnModal = ({ commit }, status) => {
+  commit("SET_BVN_MODAL", status);
+};
+
 export const setUserExpireLoginTime = ({ commit }, time) => {
   commit("SET_USER_EXPIRED_LOGIN_TIME", time);
 };

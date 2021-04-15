@@ -24,6 +24,7 @@ export default {
   investNowModal: false,
   withdrawFundModal: false,
   addCardModal: false,
+  bvnModal: false,
 
   // NOTIFICATIONS
   isclosed: false,

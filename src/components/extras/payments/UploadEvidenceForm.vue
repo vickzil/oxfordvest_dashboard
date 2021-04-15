@@ -184,7 +184,7 @@ export default {
     changePaymentEvidience: function (event) {
       this.document = event.target.files[0];
       this.previewDocument = this.document.name;
-      this.checkInput(this.amount);
+      this.checkform();
     },
     closePaymentOptionsModal: function () {
       if (!this.processing) {
@@ -302,10 +302,10 @@ export default {
         this.amount = parseInt(this.amount.replace(/[,]/g, ""));
       }
 
-      fd.append("UserCode", this.user.userInfo.code);
+      fd.append("UserCode", this.user.userInfo.user.code);
       fd.append("Currency", this.currency);
       fd.append("Amount", this.amount);
-      fd.append("Email", this.user.userInfo.email);
+      fd.append("Email", this.user.userInfo.user.email);
       fd.append("AppId", this.AppId);
       fd.append("RequestId", this.RequestId);
       fd.append("Evidence", this.document);

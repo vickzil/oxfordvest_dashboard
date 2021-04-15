@@ -247,7 +247,7 @@ export default {
             payload = {
               status: true,
               type: "success",
-              message: "Pin sent Successfully. Please Check your email ",
+              message: "Request Successfull. Please Check your email ",
             };
           } else {
             payload = {

@@ -26,7 +26,7 @@
                     role="presentation"
                     focusable="false"
                     tabindex="-1"
-                    style="color: red !important; margin-right: 10px"
+                    style="color: red !important; margin-right: 3px"
                     fill="red"
                   >
                     <path
@@ -140,7 +140,7 @@ export default {
     checkInputform: function () {
       if (!this.currentPassword || !this.password) {
         this.passwordError = true;
-        this.passwordMessage = "P;ease fill out these fields";
+        this.passwordMessage = "Please fill out these fields";
         this.emptyFields = true;
         return false;
       }

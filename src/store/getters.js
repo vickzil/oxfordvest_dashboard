@@ -172,6 +172,10 @@ export const accMgtCode = (state) => {
   return state.accMgtCode;
 };
 
+export const bvnModal = (state) => {
+  return state.bvnModal;
+};
+
 export const manualUserReg = (state) => {
   return state.manualUserReg;
 };

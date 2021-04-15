@@ -121,7 +121,7 @@
           </select>
         </div>
       </div>
-
+      <!--
       <div class="input_grid">
         <div class="form-group">
           <label class="d-flex" style="text-align: left !important"
@@ -135,21 +135,6 @@
             @input="getSubsidiaries($event)"
             v-model="group"
           ></v-select>
-          <!-- <select
-            class="account_input"
-            @change="getSubsidiaries"
-            v-model.trim="group"
-          >
-            <option value="">Select Group</option>
-            <option
-              :value="group.code"
-              v-for="(group, index) in registrationInfo.groupCompanies"
-              :key="group.code"
-              :selected="index == 0"
-            >
-              {{ group.name }}
-            </option>
-          </select> -->
         </div>
         <div class="form-group">
           <label class="d-flex" style="text-align: left !important"
@@ -162,31 +147,19 @@
             class="select_input"
             v-model="subsidiary"
           ></v-select>
-          <!-- <select
-            class="account_input"
-            v-model.trim="subsidiary"
-            @change="checkform"
-            :disabled="group == '002'"
-          >
-            <option :value="subsidiary" v-if="group === '002'">
-              No Subsidiary
-            </option>
-            <option value="" v-if="group !== '002'">Select Subsidiary</option>
-            <option
-              :value="subsidiary.code"
-              v-for="(subsidiary, index) in subsidiaries"
-              :key="subsidiary.code"
-              :selected="index === 0"
-            >
-              <span v-if="group !== '002'">{{ subsidiary.name }}</span>
-            </option>
-          </select> -->
         </div>
-      </div>
+      </div> -->
 
       <div class="input_grid">
         <div>
-          <label style="text-align: left !important">BVN</label>
+          <label style="text-align: left !important"
+            >BVN
+            <i
+              class="fa fa-question-circle ml-2"
+              style="cursor: pointer"
+              @click="showInvestmentByOilvestInfo"
+            ></i
+          ></label>
           <input
             type="number"
             @input="checkform"
@@ -246,9 +219,9 @@
       <div class="mb-5" v-if="hasVerifiedManager">
         <ul class="list-group">
           <li class="list-group-item">
-            <b class="mr-1">Fullname:</b> {{ accountMangerName }}
+            <b class="mr-1">Account Manager Name:</b> {{ accountMangerName }}
           </li>
-          <li class="list-group-item">
+          <!-- <li class="list-group-item">
             <b class="mr-1">Email:</b> {{ accountMangerEmail }}
           </li>
           <li class="list-group-item">
@@ -256,7 +229,7 @@
           </li>
           <li class="list-group-item">
             <b class="mr-1">Subsidiary:</b> {{ accountMangerSub }}
-          </li>
+          </li> -->
         </ul>
       </div>
 
@@ -282,13 +255,13 @@
 import axios from "axios";
 import "@/mixins";
 import { mapGetters, mapActions } from "vuex";
-import vSelect from "vue-select";
+// import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import CardLoading from "../loaders/CardLoading";
 export default {
   components: {
     CardLoading,
-    vSelect,
+    // vSelect,
   },
   computed: {
     ...mapGetters(["countries", "registrationInfo"]),
@@ -381,6 +354,16 @@ export default {
       this.showpassword = !this.showpassword;
     },
 
+    showInvestmentByOilvestInfo: function () {
+      let payload = {
+        status: true,
+        type: "success",
+        message:
+          "We need your BVN to verify your personal information. Your BVN does not give us access to your bank account or transactions.",
+      };
+      this.setAlertModalStatus(payload);
+    },
+
     register: function () {
       if (this.formError == false && this.emptyFields == false) {
         this.submitForm();
@@ -397,7 +380,6 @@ export default {
         !this.phone ||
         !this.dob ||
         !this.country ||
-        !this.group ||
         !this.password
       ) {
         this.formError = true;
@@ -591,7 +573,7 @@ export default {
           if (response.data.success) {
             this.hasVerifiedManager = true;
             this.accountMangerName =
-              response.data.data.firstName + "" + response.data.data.lastName;
+              response.data.data.firstName + " " + response.data.data.lastName;
             this.accountMangerEmail = response.data.data.email;
             this.accountMangerGroup = response.data.data.groupName;
             this.accountMangerSub = response.data.data.subsidiaryName;
@@ -624,6 +606,16 @@ export default {
           this.serverErrorMessage();
         });
     },
+  },
+
+  mounted() {
+    if (this.$route.query.code) {
+      this.accMgtCode = this.$route.query.code;
+
+      setTimeout(() => {
+        this.apiVerifyManagerCode();
+      }, 2000);
+    }
   },
 };
 </script>
