@@ -54,7 +54,12 @@
         <p v-if="user">{{ user.userInfo.user.phoneNumber }}</p>
         <br />
         <small class="text-muted">Address: </small>
-        <p v-if="user.userInfo.user.homeAddress !== 'null'">
+        <p
+          v-if="
+            user.userInfo.user.homeAddress !== 'null' ||
+            user.userInfo.user.homeAddress !== null
+          "
+        >
           {{ user.userInfo.user.homeAddress }}
         </p>
         <p v-else class="text-secondary">None</p>

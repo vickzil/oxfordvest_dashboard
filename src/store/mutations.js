@@ -105,6 +105,9 @@ export const LOGOUT = (state) => {
   state.logoutModal = false;
   state.isPageLoading = false;
   state.user = null;
+  state.loginToken = null;
+  state.loginUserCode = null;
+  state.loginUserExpiry = null;
   // state.appId = null;
   // state.userId = null;
   // state.emailToken = null;

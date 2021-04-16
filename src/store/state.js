@@ -48,6 +48,7 @@ export default {
   isUserAdmin: sessionStorage.getItem("draggerability") || "",
   loginToken: null,
   loginUserCode: null,
+  loginUserExpiry: null,
   user: null,
   currentSitePage: "/",
 

@@ -126,6 +126,7 @@ export default {
       "getPaymentOptions",
       "setWithdrawalModal",
       "closeAlertMessage",
+      "fetchUserData",
     ]),
     closeAlert: function () {
       this.closeAlertMessage();
@@ -176,6 +177,9 @@ export default {
         .then((res) => {
           if (res.data.success == true) {
             this.userAmount = res.data.data;
+
+            let userCode = this.user.userInfo.user.code;
+            this.fetchUserData(userCode);
           }
           this.refreshingAmount = false;
         })

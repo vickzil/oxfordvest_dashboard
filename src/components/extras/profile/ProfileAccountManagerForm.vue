@@ -299,6 +299,18 @@ export default {
       // this.codeChange = true;
     },
     fetchAccountManagerDetails: async function () {
+      if (this.user.userInfo.user.code == this.accmgtcode) {
+        let payload = {
+          status: true,
+          type: "error",
+          message:
+            "Warning: You cannot add your own user code as your Account Manager",
+        };
+
+        this.setAlertModalStatus(payload);
+
+        return;
+      }
       this.codeChange = false;
       this.setActionLoading(true);
 
@@ -332,11 +344,11 @@ export default {
 
           this.codeChange = true;
 
-          payload = {
-            status: true,
-            type: "success",
-            message: "Account Manager found",
-          };
+          // payload = {
+          //   status: true,
+          //   type: "success",
+          //   message: "Account Manager found",
+          // };
         } else {
           payload = {
             status: true,

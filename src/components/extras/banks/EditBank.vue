@@ -407,7 +407,7 @@ export default {
             let payload;
 
             if (response.data.success) {
-              let userCode = sessionStorage.getItem("activeformations");
+              let userCode = this.user.userInfo.user.code;
               this.$store.dispatch("fetchUserData", userCode);
 
               payload = {

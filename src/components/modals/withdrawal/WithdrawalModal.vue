@@ -266,6 +266,7 @@ export default {
           this.fetchUserData(userCode);
 
           if (res.data.success) {
+            this.setModalLoading(false);
             setTimeout(() => {
               let payload = {
                 status: true,
@@ -276,9 +277,10 @@ export default {
               this.amount = 200;
               this.narration = "";
               this.pin = "";
-              this.setModalLoading(false);
+
               this.setAlertModalStatus(payload);
-            }, 2400);
+              this.closewithdrawFundModal();
+            }, 1400);
           } else {
             this.setModalLoading(false);
             let payload = {

@@ -78,6 +78,7 @@ export default {
       "saveUserData",
       "getPaymentFeeInfo",
       "fetchBankNames",
+      "sendLoginDetailsToState",
     ]),
 
     closeTwoFactorModal: function () {
@@ -114,7 +115,7 @@ export default {
         AppId: this.AppId,
         RequestId: this.RequestId,
         UserCode: this.loginUserCode,
-        Token: this.loginToken,
+        Token: this.authCode,
       };
 
       // console.log(data);
@@ -137,6 +138,7 @@ export default {
             };
             this.setActionLoading(false);
             this.setAlertModalStatus(payload);
+            this.authCode = "";
           }
         })
         .catch((err) => {
@@ -172,6 +174,13 @@ export default {
           this.authCode = "";
           if (response.data.success) {
             const data = response.data.data;
+
+            let loginPayload = {
+              token: null,
+              code: null,
+              expiresAt: null,
+            };
+            this.sendLoginDetailsToState(loginPayload);
             // console.log(data);
 
             let userRole = data.userInfo.user.roles;
