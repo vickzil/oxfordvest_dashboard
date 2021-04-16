@@ -14,7 +14,7 @@
         <div class="modal-content">
           <div class="modal-header bg-light text-dark">
             <h3 class="" style="text-transform: capitalize; font-size: 16px">
-              Add phishing
+              Anti-phishing
               <span>
                 <img src="@/assets/images/oxfordvest.png" alt="" />
               </span>
@@ -32,10 +32,10 @@
             style="position: relative"
           >
             <div class="text-center mt-4">
-              <p class="font-15 font-weight-bold">
+              <!-- <p class="font-15 font-weight-bold">
                 To add and verify your card ₦ 100 will be charged and saved into
                 your plan
-              </p>
+              </p> -->
             </div>
 
             <br />

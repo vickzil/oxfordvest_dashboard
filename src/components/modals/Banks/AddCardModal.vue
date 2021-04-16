@@ -70,6 +70,7 @@
                     </svg>
                     Please give your card a name
                   </p>
+                  {{ reference }}
                 </div>
               </div>
             </div>
@@ -79,7 +80,7 @@
             <div class="text-md-right payStackDiv text-sm-center pt-3 mt-3">
               <Paystack
                 :paystackkey="paystackkey"
-                :reference="reference"
+                :reference="RequestId"
                 :callback="callback"
                 :amount="amount * 100"
                 :currency="currency"
@@ -88,7 +89,6 @@
                 :email="user.userInfo.user.email"
                 :close="close"
                 :embed="false"
-                ref="paystackPayment"
                 class="btn btn-danger btn-sm payment_buttion"
                 :disabled="alias == ''"
               >
@@ -147,12 +147,10 @@ export default {
     ]),
 
     closeAddCardModal: function () {
-      this.amount = 200;
-      this.inputError = false;
+      this.amount = 100;
+      this.showPaystack = false;
       this.emptyFields = true;
-      this.inputMessage = "";
-      this.narration = "";
-      this.pin = "";
+      this.alias = "";
       this.setAddModal(false);
     },
 
@@ -174,13 +172,13 @@ export default {
       var data = {
         AppId: this.AppId,
         RequestId: this.RequestId,
-        Email: this.user.userInfo.user.email,
-        ProviderPaymentReference: response.reference,
-        TransactionReference: this.reference,
+        UserCode: this.user.userInfo.user.code,
+        ProviderCardReference: response.reference,
         Provider: "paystack",
-        Currency: "NGN",
+        Amount: this.amount,
+        Alias: this.alias,
       };
-      const url = `${this.walletURL}/v1.0/VerifyCardPayment/confirmCardPaymentStatus`;
+      const url = `${this.hrmURL}/v1.0/UserCard/insertUserCard`;
 
       axios
         .post(url, data)

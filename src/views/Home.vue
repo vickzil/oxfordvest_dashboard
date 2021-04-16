@@ -90,6 +90,31 @@ export default {
     this.currentSitePage(this.$router.history.current.path);
     this.closePageLoading();
     this.checkCurrentRoute();
+
+    var t,
+      timeout = 50000;
+
+    function resetTimer() {
+      // console.log("reset: " + new Date().toLocaleString());
+      if (t) {
+        window.clearTimeout(t);
+      }
+      t = window.setTimeout(logout, timeout);
+    }
+
+    function logout() {
+      // this.logout();
+      sessionStorage.clear();
+      location.reload();
+      // console.log("done: " + new Date().toLocaleString());
+    }
+    resetTimer();
+
+    //And bind the events to call `resetTimer()`
+    ["click", "mousemove", "keypress"].forEach(function (name) {
+      // console.log(name);
+      document.addEventListener(name, resetTimer);
+    });
   },
   beforeRouteLeave(to, from, next) {
     // this.showPageLoading();

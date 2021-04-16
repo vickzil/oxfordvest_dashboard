@@ -73,7 +73,7 @@
       </button>
     </div>
 
-    <p class="signupp text-center" v-if="formStatus">
+    <p class="signupp text-center mb-0" v-if="formStatus">
       <router-link to="/confirm" class="font-weight-bold">
         Resend email confirmation link
       </router-link>
@@ -419,6 +419,7 @@ export default {
 
             setTimeout(() => {
               this.getPaymentFeeInfo();
+              // this.inactivityTime();
             }, 2500);
 
             this.formStatus = false;

@@ -5,6 +5,7 @@
     <div class="main-content">
       <div class="container-fluid">
         <!-- <PageHeader :topPageName="topPageName" /> -->
+        <br />
         <div class="row clearfix" v-if="user">
           <div class="col-md-12">
             <div>
@@ -31,7 +32,9 @@
                   </div>
                 </div>
                 <div>
-                  <button class="btn btn-danger btn-sm">Delete</button>
+                  <button class="btn btn-danger btn-sm" @click="deleteCard">
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -55,7 +58,9 @@
                 <hr />
                 <small class="text-muted">Card Expiry: </small>
                 <p v-if="card.cardExpireMonth">
-                  {{ card.cardExpireMonth }}/{{ card.cardExpireYear }}
+                  {{ card.cardExpireMonth }}/{{
+                    card.cardExpireYear.substr(card.cardExpireYear.length - 2)
+                  }}
                 </p>
                 <p v-else class="badge badge-default">None</p>
               </div>
@@ -71,6 +76,7 @@
 <script>
 // import Navbar from "@/components/navbar/Navbar";
 // import PageHeader from "../components/header/PageHeader";
+import axios from "axios";
 import PageLoadingOverlay from "../components/loaders/PageLoadingOverlay";
 import "@/mixins";
 
@@ -97,9 +103,56 @@ export default {
   },
 
   methods: {
-    ...mapActions(["currentSitePage", "closePageLoading", "showPageLoading"]),
+    ...mapActions([
+      "currentSitePage",
+      "closePageLoading",
+      "showPageLoading",
+      "setActionLoading",
+      "setAlertModalStatus",
+      "fetchBankNames",
+      "saveUserData",
+    ]),
     removeOffcanvas: function () {
       document.body.classList.remove("offcanvas-active");
+    },
+    deleteCard: function () {
+      this.setActionLoading(true);
+
+      const url = `${this.hrmURL}/v1.0/UserCard/deleteUserCard`;
+
+      var data = {
+        AppId: this.AppId,
+        RequestId: this.RequestId,
+        UserCode: this.user.userInfo.user.code,
+        Code: this.card.code,
+      };
+
+      axios
+        .post(url, data)
+        .then((response) => {
+          console.log(response);
+          this.setActionLoading(false);
+
+          if (response.data.success == true) {
+            let payload = {
+              status: true,
+              type: "success",
+              message: "Card Deleted!!",
+            };
+
+            this.setAlertModalStatus(payload);
+
+            setTimeout(() => {
+              this.$router.push({ path: "/bank-account" });
+            }, 800);
+          }
+
+          // this.setAlertModalStatus(payload);
+        })
+        .catch((err) => {
+          err;
+          this.serverErrorMessage();
+        });
     },
     hasHistory: function () {
       return window.history.length > 2;

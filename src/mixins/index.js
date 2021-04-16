@@ -68,7 +68,7 @@ Vue.mixin({
     },
   },
   methods: {
-    ...mapActions(["setActionLoading", "setAlertModalStatus"]),
+    ...mapActions(["setActionLoading", "setAlertModalStatus", "logout"]),
     capitalizeFirstLetter(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
     },
@@ -105,10 +105,10 @@ Vue.mixin({
     showSidebar: function () {
       $("body").removeClass("offcanvas-active");
     },
-    isAuthenticated() {
+    isAuthenticated: function () {
       let date = new Date(this.expiresAt);
 
-      let minusHour = date.setMinutes(date.getMinutes() - 60);
+      let minusHour = date.setMinutes(date.getMinutes() - 90);
 
       let newExpiry = new Date().setMinutes(new Date().getMinutes());
 
@@ -116,9 +116,42 @@ Vue.mixin({
 
       return !!newDate;
     },
-    getLocalTYime(data) {
+    getLocalTYime: function (data) {
       var d = new Date(data);
       return d.toLocaleTimeString().replace(/:\d+ /, " ");
+    },
+    formatDate: function (date) {
+      var d = new Date(date);
+      var hours = d.getHours();
+      var minutes = d.getMinutes();
+      var ampm = hours >= 12 ? "pm" : "am";
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      var strTime = hours + ":" + minutes + " " + ampm;
+      let returnedDate;
+
+      var newD = new Date();
+
+      let userdate =
+        d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+      let todaysdate =
+        newD.getDate() + "/" + (newD.getMonth() + 1) + "/" + newD.getFullYear();
+
+      if (userdate === todaysdate) {
+        returnedDate = "Today at: " + strTime;
+      } else {
+        returnedDate =
+          d.getDate() +
+          "/" +
+          (d.getMonth() + 1) +
+          "/" +
+          d.getFullYear() +
+          "  " +
+          strTime;
+      }
+
+      return returnedDate;
     },
     serverErrorMessage: function () {
       this.setActionLoading(false);
@@ -130,6 +163,28 @@ Vue.mixin({
         };
         this.setAlertModalStatus(payload);
       }, 200);
+    },
+    inactivityTime: function () {
+      var time;
+      window.onload = this.resetTimer(time);
+      // DOM Events
+      document.onmousemove = this.resetTimer(time);
+      document.onkeypress = this.resetTimer(time);
+    },
+    resetTimer: function (time) {
+      console.log(time);
+      clearTimeout(time);
+      time = setTimeout(
+        this.logoutUser,
+        Math.round(new Date(this.expiresAt).getTime() / 1000)
+      );
+    },
+    logoutUser: function () {
+      this.logout();
+
+      setTimeout(() => {
+        this.$router.push("/login");
+      }, 1200);
     },
   },
 });

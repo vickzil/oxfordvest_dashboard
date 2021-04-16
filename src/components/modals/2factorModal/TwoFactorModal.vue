@@ -122,7 +122,7 @@ export default {
       axios
         .post(url, data)
         .then((response) => {
-          // console.log(response);
+          console.log(response);
 
           this.emptyField = false;
           this.processing = false;
@@ -214,6 +214,7 @@ export default {
 
             setTimeout(() => {
               this.getPaymentFeeInfo();
+              // this.inactivityTime();
             }, 2500);
           }
         })

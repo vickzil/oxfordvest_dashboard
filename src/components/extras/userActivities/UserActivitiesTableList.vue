@@ -7,7 +7,7 @@
     <td>{{ userActivity.description }}</td>
     <td>{{ userActivity.firstName }} {{ userActivity.lastName }}</td>
     <td>{{ userActivity.ip }}</td>
-    <td>{{ checkDate }}</td>
+    <td>{{ formatDate(userActivity.createdOn) }}</td>
     <!-- <td>{{ removeTimeZone(this.userActivity.createdOn) }}</td> -->
   </tr>
 </template>

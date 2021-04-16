@@ -138,11 +138,7 @@ export default {
       "setPhishingModal",
     ]),
     showAuthForms: function () {
-      // event.preventDefault();
-      // console.log(event.target.value);
       this.twoFactorEnable = !this.twoFactorEnable;
-
-      // console.log(this.twoFactorEnable);
       this.setActionLoading(true);
 
       this.send2FactorToDb();

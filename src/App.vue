@@ -71,6 +71,7 @@ export default {
           if (!this.isAuthenticated()) {
             this.logout();
             sessionStorage.clear();
+            location.reload();
             // this.$router.push("/").catch((error) => {
             //   if (error) {
             //     error;
@@ -92,12 +93,7 @@ export default {
         } else {
           this.logout();
           sessionStorage.clear();
-          this.$router.push("/").catch((error) => {
-            if (error) {
-              error;
-              console.log("not found 3");
-            }
-          });
+          location.reload();
         }
       }
     },

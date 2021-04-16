@@ -55,11 +55,7 @@ export const fetchUserData = ({ commit, state }, code) => {
   if (!userCode) {
     commit("LOGOUT");
 
-    router.push("/").catch((error) => {
-      if (error) {
-        error;
-      }
-    });
+    location.reload();
     return;
   }
 
@@ -89,11 +85,12 @@ export const fetchUserData = ({ commit, state }, code) => {
 
           commit("LOGOUT");
 
-          router.push("/").catch((error) => {
-            if (error) {
-              error;
-            }
-          });
+          // router.push("/").catch((error) => {
+          //   if (error) {
+          //     error;
+          //   }
+          // });
+          location.reload();
         }
       }
     })
@@ -103,11 +100,7 @@ export const fetchUserData = ({ commit, state }, code) => {
       if (err) {
         sessionStorage.clear();
         setTimeout(() => {
-          router.push("/").catch((error) => {
-            if (error) {
-              error;
-            }
-          });
+          location.reload();
         }, 3500);
       }
     });

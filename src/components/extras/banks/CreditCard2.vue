@@ -71,7 +71,11 @@
               id="svgexpire"
               class="st2 st5 st9 grey"
             >
-              {{ searchBank.cardExpireMonth }}/{{ searchBank.cardExpireYear }}
+              {{ searchBank.cardExpireMonth }}/{{
+                searchBank.cardExpireYear.substr(
+                  searchBank.cardExpireYear.length - 2
+                )
+              }}
             </text>
             <text
               transform="matrix(1 0 0 1 479.3848 417.0097)"

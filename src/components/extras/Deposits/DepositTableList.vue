@@ -9,7 +9,7 @@
     <td>₦{{ addComma(deposit.amount) }}</td>
     <td>{{ deposit.message }}</td>
     <td>{{ deposit.paymentMethod }}</td>
-    <td>{{ checkDate }}</td>
+    <td>{{ formatDate(deposit.createdOn) }}</td>
   </tr>
 </template>
 
