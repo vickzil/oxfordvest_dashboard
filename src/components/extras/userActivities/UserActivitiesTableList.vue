@@ -25,12 +25,12 @@ export default {
       ) {
         //Date greater than today's date
 
-        data = this.userActivity.createdOn;
+        data = this.removeTimeZone(this.userActivity.createdOn);
       } else {
         data = this.getLocalTYime(this.userActivity.createdOn);
       }
 
-      console.log(data);
+      // console.log(data);
 
       return data;
     },

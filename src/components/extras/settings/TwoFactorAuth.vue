@@ -32,7 +32,19 @@
             <br /><br /> -->
             <div class="row">
               <div class="col-md-7">
-                <h5>Two-Factor Authentication</h5>
+                <h5>
+                  Two-Factor Authentication
+                  <i
+                    class="fa fa-question-circle ml-4"
+                    @click="showTwoFactorMessageInfo"
+                    style="
+                      cursor: pointer;
+                      display: inline-block;
+                      font-size: 14px;
+                      color: #626569;
+                    "
+                  ></i>
+                </h5>
                 <p class="mb-3">
                   Protect your Oxfordvest account from unauthorized transactions
                   using a software token.
@@ -48,30 +60,56 @@
                     />
                     <span class="slider round"></span>
                   </label>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-7">
+                <h5>
+                  Anti-phishing
                   <i
-                    class="fa fa-question-circle ml-2"
+                    class="fa fa-question-circle ml-4"
                     @click="showTwoFactorMessageInfo"
-                    style="cursor: pointer; display: inline-block"
+                    style="
+                      cursor: pointer;
+                      display: inline-block;
+                      font-size: 14px;
+                      color: #626569;
+                    "
                   ></i>
+                </h5>
+                <p class="mb-3">
+                  Protect your Oxfordvest account from unauthorized Emails.
+                </p>
+              </div>
+              <div class="col-md-5 text-md-right mt-md-4 mt-sm-4">
+                <div class="d-flex justify-content-center align-items-center">
+                  <a
+                    href="javascript:void(0)"
+                    @click="showPhishingModal"
+                    class="btn btn-danger btn-sm oxfordvest_button"
+                    >Set Up</a
+                  >
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <TwoFactorAuthForm v-else />
+      <!-- <TwoFactorAuthForm v-else /> -->
     </div>
   </div>
 </template>
 
 <script>
 import "@/mixins";
-import TwoFactorAuthForm from "../../forms/TwoFactorAuthForm";
+// import TwoFactorAuthForm from "../../forms/TwoFactorAuthForm";
 import { mapActions } from "vuex";
 import axios from "axios";
 export default {
   components: {
-    TwoFactorAuthForm,
+    // TwoFactorAuthForm,
   },
   computed: {
     getHiddenBvn() {
@@ -97,6 +135,7 @@ export default {
       "setAlertModalStatus",
       "fetchBankNames",
       "saveUserData",
+      "setPhishingModal",
     ]),
     showAuthForms: function () {
       // event.preventDefault();
@@ -107,6 +146,14 @@ export default {
       this.setActionLoading(true);
 
       this.send2FactorToDb();
+    },
+    showPhishingModal: function () {
+      this.setActionLoading(true);
+
+      setTimeout(() => {
+        this.setActionLoading(false);
+        this.setPhishingModal(true);
+      }, 1800);
     },
 
     showTwoFactorMessageInfo: function () {

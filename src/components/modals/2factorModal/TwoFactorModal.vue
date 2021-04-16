@@ -41,12 +41,25 @@
   </transition>
 </template>
 <script>
-// import axios from "axios";
+import axios from "axios";
 import "@/mixins";
 import { mapActions, mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["twoFactorModal"]),
+    ...mapGetters([
+      "twoFactorModal",
+      "loginToken",
+      "loginUserCode",
+      "loginUserExpiry",
+    ]),
+    expiresAt: {
+      get: function () {
+        return sessionStorage.getItem("appexrat");
+      },
+      set: function (expiresIn) {
+        return sessionStorage.setItem("appexrat", expiresIn);
+      },
+    },
   },
 
   data() {
@@ -62,11 +75,17 @@ export default {
       "setTwoFactorModal",
       "setActionLoading",
       "setAlertModalStatus",
+      "saveUserData",
+      "getPaymentFeeInfo",
+      "fetchBankNames",
     ]),
 
     closeTwoFactorModal: function () {
       if (!this.processing) {
         this.setTwoFactorModal(false);
+        this.authCode = "";
+        this.emptyField = true;
+        this.processing = false;
       }
     },
     processForm: function () {
@@ -85,33 +104,124 @@ export default {
       this.setActionLoading(true);
       this.emptyField = true;
 
-      setTimeout(() => {
-        this.setActionLoading(false);
-
-        let payload = {
-          status: true,
-          type: "error",
-          message: "Code Error",
-        };
-        this.emptyField = false;
-        this.processing = false;
-
-        this.setAlertModalStatus(payload);
-      }, 3210);
+      this.send2FactorCodeToDb();
     },
 
-    // logoutUser: function () {
-    //   this.alertStatus(false);
-    //   this.alertMessage("");
-    //   this.setActionLoading(true);
-    //   // this.logoutFromServer();
+    send2FactorCodeToDb: function () {
+      const url = `${this.hrmURL}/v1.0/OAuth/validate2FATokenAsync`;
 
-    //   setTimeout(() => {
-    //     this.setActionLoading(false);
-    //     this.logout();
-    //     this.$router.push("/login");
-    //   }, 1210);
-    // },
+      var data = {
+        AppId: this.AppId,
+        RequestId: this.RequestId,
+        UserCode: this.loginUserCode,
+        Token: this.loginToken,
+      };
+
+      // console.log(data);
+
+      axios
+        .post(url, data)
+        .then((response) => {
+          // console.log(response);
+
+          this.emptyField = false;
+          this.processing = false;
+
+          if (response.data.success == true) {
+            this.fetchUserData();
+          } else {
+            let payload = {
+              status: true,
+              type: "error",
+              message: response.data.message,
+            };
+            this.setActionLoading(false);
+            this.setAlertModalStatus(payload);
+          }
+        })
+        .catch((err) => {
+          err;
+          this.emptyField = false;
+          this.processing = false;
+          this.serverErrorMessage();
+        });
+    },
+
+    fetchUserData: function () {
+      this.setActionLoading(true);
+
+      var bankData = {
+        AppId: this.AppId,
+        RequestId: this.RequestId,
+        Country: "NG",
+      };
+
+      this.fetchBankNames(bankData);
+
+      let data = {
+        AppId: this.AppId,
+        RequestId: this.RequestId,
+        UserCode: this.loginUserCode,
+      };
+      const url = `${this.hrmURL}/v1.0/Dashboard/getDashboardInfo`;
+
+      axios
+        .post(url, data)
+        .then((response) => {
+          this.setTwoFactorModal(false);
+          this.authCode = "";
+          if (response.data.success) {
+            const data = response.data.data;
+            // console.log(data);
+
+            let userRole = data.userInfo.user.roles;
+
+            let adminRole;
+
+            if (userRole) {
+              adminRole = userRole.includes("systemadmin");
+            }
+
+            if (adminRole) {
+              // console.log(adminRole);
+              sessionStorage.setItem("draggerability", "expandedCol");
+            }
+
+            let payload;
+
+            this.setActionLoading(false);
+            payload = {
+              status: true,
+              type: "success",
+              message: "Two Factor Code Verified!!",
+            };
+            this.setAlertModalStatus(payload);
+            this.expiresAt = this.loginUserExpiry;
+            sessionStorage.setItem("appUserThemeSettingsCode", this.loginToken);
+            sessionStorage.setItem("activeformations", this.loginUserCode);
+            axios.defaults.headers.common["Authorization"] = this.loginToken;
+
+            setTimeout(() => {
+              this.saveUserData(data);
+              let payload = {
+                status: false,
+                type: "",
+                message: "",
+              };
+              this.setAlertModalStatus(payload);
+              this.$router.push({ path: "/dashboard" });
+            }, 1500);
+
+            setTimeout(() => {
+              this.getPaymentFeeInfo();
+            }, 2500);
+          }
+        })
+        .catch((err) => {
+          this.serverErrorMessage();
+          console.log(err);
+        });
+    },
   },
 };
 </script>

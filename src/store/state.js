@@ -26,6 +26,7 @@ export default {
   addCardModal: false,
   bvnModal: false,
   twoFactorModal: false,
+  phishingModal: false,
 
   // NOTIFICATIONS
   isclosed: false,
@@ -45,6 +46,8 @@ export default {
   status: false,
   token: sessionStorage.getItem("appUserThemeSettingsCode") || "",
   isUserAdmin: sessionStorage.getItem("draggerability") || "",
+  loginToken: null,
+  loginUserCode: null,
   user: null,
   currentSitePage: "/",
 

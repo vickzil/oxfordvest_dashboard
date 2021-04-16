@@ -10,7 +10,7 @@
         <ReferralCard v-if="user" />
         <br />
 
-        <UserReferrals v-if="user" class="card" />
+        <UserReferrals v-if="user" />
         <br /><br /><br />
       </div>
     </div>

@@ -82,11 +82,11 @@
         </div>
         <br />
         <br />
-        <div class="row clearfix">
+        <!-- <div class="row clearfix">
           <div class="col-md-12">
             <Chart2 />
           </div>
-        </div>
+        </div> -->
 
         <br /><br /><br />
       </div>
@@ -97,7 +97,7 @@
 // import Navbar from "@/components/navbar/Navbar";
 import PageHeader from "../components/header/PageHeader";
 import PageLoadingOverlay from "../components/loaders/PageLoadingOverlay";
-import Chart2 from "../components/charts/Chart2";
+// import Chart2 from "../components/charts/Chart2";
 import "@/mixins";
 
 import { mapActions } from "vuex";
@@ -108,7 +108,7 @@ export default {
   components: {
     PageLoadingOverlay,
     PageHeader,
-    Chart2,
+    // Chart2,
   },
 
   data() {

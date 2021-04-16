@@ -42,6 +42,12 @@ export const AUTH_SUCCESS = (state, data) => {
   // console.log(data)
 };
 
+export const SEND_LOGIN_DETAILS_TO_STATE = (state, data) => {
+  state.loginToken = data.token;
+  state.loginUserCode = data.code;
+  state.loginUserExpiry = data.expiresAt;
+};
+
 export const AUTH_ERROR = (state) => {
   state.status = "error";
 };
@@ -444,6 +450,10 @@ export const SET_BVN_MODAL = (state, status) => {
 
 export const SET_TWO_FACTOR_MODAL = (state, status) => {
   state.twoFactorModal = status;
+};
+
+export const SET_PHISHING_MODAL = (state, status) => {
+  state.phishingModal = status;
 };
 
 export const CLOSE_ALERT_MESSAGE = (state) => {

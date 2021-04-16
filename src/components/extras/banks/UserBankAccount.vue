@@ -38,38 +38,42 @@
     </div>
     <br />
     <!-- {{ bankdetails }} -->
-    <div class="row clearfix">
-      <div class="col-12">
-        <BankList
-          v-if="bankdetails.accountNumber !== null && !showForm && !isEditting"
-          :bankdetails="bankdetails"
-        />
-        <div
-          class="card-body"
-          v-if="bankdetails.accountNumber == null && !showForm && !isEditting"
-        >
-          <div class="container text-center font-weight-bold mt-5">
-            <p>You don't have any bank details.</p>
-            <br />
-            <div class="text-center">
-              <button class="oxfordvest_buttons" @click="showAddBank">
-                <span class="d-flex justify-content-center align-center">
-                  <span class="mr-2">Add New</span>
-                  <i style="font-size: 22px" class="fe fe-plus"></i>
-                </span>
-              </button>
+    <div class="body">
+      <div class="row clearfix">
+        <div class="col-12">
+          <BankList
+            v-if="
+              bankdetails.accountNumber !== null && !showForm && !isEditting
+            "
+            :bankdetails="bankdetails"
+          />
+          <div
+            class="card-body"
+            v-if="bankdetails.accountNumber == null && !showForm && !isEditting"
+          >
+            <div class="container text-center font-weight-bold mt-5">
+              <p>You don't have any bank details.</p>
+              <br />
+              <div class="text-center">
+                <button class="oxfordvest_buttons" @click="showAddBank">
+                  <span class="d-flex justify-content-center align-center">
+                    <span class="mr-2">Add New</span>
+                    <i style="font-size: 22px" class="fe fe-plus"></i>
+                  </span>
+                </button>
+              </div>
+              <br /><br />
             </div>
-            <br /><br />
           </div>
+          <AddUpdateBank
+            v-if="bankdetails.accountNumber == null && showForm && !isEditting"
+            :bankdetails="bankdetails"
+          />
+          <EditBank
+            v-if="bankdetails.accountNumber !== null && showForm && isEditting"
+            :bankdetails="bankdetails"
+          />
         </div>
-        <AddUpdateBank
-          v-if="bankdetails.accountNumber == null && showForm && !isEditting"
-          :bankdetails="bankdetails"
-        />
-        <EditBank
-          v-if="bankdetails.accountNumber !== null && showForm && isEditting"
-          :bankdetails="bankdetails"
-        />
       </div>
     </div>
   </div>

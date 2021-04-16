@@ -26,7 +26,7 @@
           <div class="table-responsive">
             <table class="table table-hover mb-0">
               <thead>
-                <tr>
+                <tr class="text-center">
                   <th>#</th>
                   <th>Name</th>
                   <th>Email</th>
@@ -39,7 +39,7 @@
               <tbody v-if="searchDeposits.length">
                 <DepositTableList
                   v-for="(deposit, index) in searchDeposits"
-                  :key="deposit.requestId"
+                  :key="deposit.externalReference"
                   :deposit="deposit"
                   :index="index"
                 />

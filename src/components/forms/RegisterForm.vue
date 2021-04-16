@@ -407,19 +407,19 @@ export default {
         this.formMessage = "States in Nigeria must supply their BVN";
         return;
       }
-      if (this.group !== "002" && !this.subsidiary) {
-        this.emptyFields = true;
-        this.formError = true;
-        this.formMessage = "Please select subsidiary";
-        return;
-      }
-      if (this.group !== "002" && !this.accMgtCode) {
-        this.emptyFields = true;
-        this.formError = true;
-        this.hasVerifiedManager = false;
-        this.formMessage = "Account manager code is required!!";
-        return;
-      }
+      // if (this.group !== "002" && !this.subsidiary) {
+      //   this.emptyFields = true;
+      //   this.formError = true;
+      //   this.formMessage = "Please select subsidiary";
+      //   return;
+      // }
+      // if (this.group !== "002" && !this.accMgtCode) {
+      //   this.emptyFields = true;
+      //   this.formError = true;
+      //   this.hasVerifiedManager = false;
+      //   this.formMessage = "Account manager code is required!!";
+      //   return;
+      // }
 
       this.hasVerifiedManager = false;
       this.formError = false;

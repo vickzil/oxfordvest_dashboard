@@ -7,6 +7,7 @@
     <WithdrawalModal />
     <AddCardModal />
     <TwoFactorModal />
+    <PhishingModal />
     <AddBvn />
     <CommingSoon />
     <VerifyActionModal />
@@ -22,6 +23,7 @@ import PerformInvestmentModal from "./investments/PerformInvestmentModal";
 import WithdrawalModal from "./withdrawal/WithdrawalModal";
 import AddCardModal from "./Banks/AddCardModal";
 import TwoFactorModal from "./2factorModal/TwoFactorModal";
+import PhishingModal from "./settings/PhishingModal";
 import AddBvn from "./bvn/AddBvn";
 import CommingSoon from "./comming-soon/CommingSoon";
 import LogoutModal from "./LogoutModal";
@@ -37,6 +39,7 @@ export default {
     VerifyActionModal,
     AddCardModal,
     TwoFactorModal,
+    PhishingModal,
     AddBvn,
     CommingSoon,
     LogoutModal,

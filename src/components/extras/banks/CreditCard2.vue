@@ -1,5 +1,8 @@
 <template>
-  <div class="creditcard">
+  <router-link
+    class="creditcard"
+    :to="{ name: 'SingleCard', params: { id: searchBank.code } }"
+  >
     <div class="front">
       <div id="ccsingle"></div>
       <svg
@@ -151,7 +154,7 @@
         <g id="Back"></g>
       </svg>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>

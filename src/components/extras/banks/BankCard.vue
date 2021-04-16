@@ -30,9 +30,9 @@
         <div class="card" v-if="bankCards.length > 0">
           <div class="body card_width_div my-4">
             <carousel
-              :autoplay="true"
+              :autoplay="false"
               :nav="false"
-              :dots="false"
+              :dots="true"
               :stagePadding="50"
               :margin="30"
               :autoplayTimeout="3000"
@@ -54,6 +54,7 @@
                 :searchBank="searchBank"
                 :index="index"
               />
+              <br /><br />
             </carousel>
           </div>
           <!-- <div class="table-responsive">
@@ -177,10 +178,11 @@ export default {
 </script>
 
 <style scoped>
-/* .owl-stage {
+.owl-stage {
   padding-top: 30px !important;
   padding-bottom: 30px !important;
 }
+/*
 .card_width_div {
   padding: 0px 20px;
    width: 400px; 

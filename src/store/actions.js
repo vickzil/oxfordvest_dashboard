@@ -31,6 +31,11 @@ export const saveUserData = ({ commit }, data) => {
   commit("SAVE_USER_DATA", data);
 };
 
+export const sendLoginDetailsToState = ({ commit }, data) => {
+  // console.log(data);
+  commit("SEND_LOGIN_DETAILS_TO_STATE", data);
+};
+
 export const setRegisteredUsers = ({ commit }, data) => {
   // console.log(data);
   commit("SET_REGISTERED_USERS", data);
@@ -374,6 +379,10 @@ export const setBvnModal = ({ commit }, status) => {
 
 export const setTwoFactorModal = ({ commit }, status) => {
   commit("SET_TWO_FACTOR_MODAL", status);
+};
+
+export const setPhishingModal = ({ commit }, status) => {
+  commit("SET_PHISHING_MODAL", status);
 };
 
 export const setUserExpireLoginTime = ({ commit }, time) => {

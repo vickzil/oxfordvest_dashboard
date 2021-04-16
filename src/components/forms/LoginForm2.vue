@@ -190,6 +190,8 @@ export default {
       emptyFields: true,
       formError: false,
       showpassword: false,
+      userCode: null,
+      UserToken: null,
     };
   },
   computed: {
@@ -211,6 +213,7 @@ export default {
       "saveUserData",
       "getPaymentFeeInfo",
       "setTwoFactorModal",
+      "sendLoginDetailsToState",
     ]),
     loginUser: function () {
       if (this.formError == false && this.emptyFields == false) {
@@ -270,37 +273,25 @@ export default {
           console.log(response.data);
           if (response.data.success) {
             if (response.data.data.emailConfirmed) {
-              const twoFactor = response.data.data.token.is2FAEnabled;
+              const twoFactor = response.data.data.token.twoFactorToken;
+              const data = response.data.data;
+              const token = response.data.data.token.token;
+              const expireTo = response.data.data.token.expireTo;
               if (twoFactor) {
                 this.setActionLoading(false);
 
-                let payload = {
-                  type: "error",
-                  status: true,
-                  message: "Please Verify Your Two Factor Authentication",
+                let loginPayload = {
+                  token: twoFactor,
+                  code: data.code,
+                  expiresAt: expireTo,
                 };
-
-                this.setAlertModalStatus(payload);
-
-                setTimeout(() => {
-                  let payload = {
-                    type: "",
-                    status: false,
-                    message: "",
-                  };
-
-                  this.setAlertModalStatus(payload);
-                  this.setTwoFactorModal(true);
-                }, 1200);
+                this.sendLoginDetailsToState(loginPayload);
+                this.setTwoFactorModal(true);
               } else {
-                const data = response.data.data;
-                const token = response.data.data.token.token;
-                const expireTo = response.data.data.token.expireTo;
                 this.expiresAt = expireTo;
+                this.userCode = data.code;
+                this.UserToken = token;
 
-                sessionStorage.setItem("appUserThemeSettingsCode", token);
-                sessionStorage.setItem("activeformations", data.code);
-                axios.defaults.headers.common["Authorization"] = token;
                 this.login(data);
 
                 this.fetchUserData(data.code);
@@ -401,6 +392,10 @@ export default {
               message: "Login Successfull",
             };
             this.setAlertModalStatus(payload);
+
+            sessionStorage.setItem("appUserThemeSettingsCode", this.UserToken);
+            sessionStorage.setItem("activeformations", this.userCode);
+            axios.defaults.headers.common["Authorization"] = this.UserToken;
 
             // setTimeout(() => {
             //   payload = {

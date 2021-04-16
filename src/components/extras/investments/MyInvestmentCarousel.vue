@@ -6,7 +6,7 @@
         v-if="investments.length"
         :autoplay="true"
         :nav="false"
-        :dots="false"
+        :dots="true"
         :stagePadding="50"
         :margin="20"
         :autoplayTimeout="4000"

@@ -23,8 +23,9 @@
                   <div class="mr-3">
                     <img
                       :src="referral.photo"
-                      v-if="referral.photo"
+                      v-if="referral.photo !== ''"
                       class="rounded"
+                      style="width: 70px; height: 70px; object-fit: cover"
                       alt=""
                     />
                     <img
@@ -53,13 +54,16 @@
             <div class="card">
               <div class="body">
                 <small class="text-muted">Address: </small>
-                <p>{{ referral.homeAddress }}</p>
+                <p v-if="referral.homeAddress">{{ referral.homeAddress }}</p>
+                <p v-else class="badge badge-default">None</p>
                 <hr />
                 <small class="text-muted">Email address: </small>
-                <p>{{ referral.email }}</p>
+                <p v-if="referral.email">{{ referral.email }}</p>
+                <p v-else class="badge badge-default">None</p>
                 <hr />
                 <small class="text-muted">Mobile: </small>
-                <p>{{ referral.phoneNumber }}</p>
+                <p v-if="referral.phoneNumber">{{ referral.phoneNumber }}</p>
+                <p v-else class="badge badge-default">None</p>
               </div>
             </div>
           </div>
@@ -67,13 +71,22 @@
             <div class="card">
               <div class="body">
                 <small class="text-muted">Date of birth: </small>
-                <p>{{ removeTimeZone(referral.dateOfBirth) }}</p>
+                <p v-if="referral.dateOfBirth">
+                  {{ removeTimeZone(referral.dateOfBirth) }}
+                </p>
+                <p v-else class="badge badge-default">None</p>
                 <hr />
                 <small class="text-muted">subsidiary Name: </small>
-                <p>{{ referral.subsidiaryName }}</p>
+                <p v-if="referral.subsidiaryName">
+                  {{ referral.subsidiaryName }}
+                </p>
+                <p v-else class="badge badge-default">None</p>
                 <hr />
                 <small class="text-muted">Country: </small>
-                <p class="m-b-0">{{ referral.countryName }}</p>
+                <p v-if="referral.countryName" class="m-b-0">
+                  {{ referral.countryName }}
+                </p>
+                <p v-else class="badge badge-default">None</p>
                 <!-- {{ referral }} -->
               </div>
             </div>

@@ -68,6 +68,18 @@ export const authStatus = (state) => {
   return state.status;
 };
 
+export const loginToken = (state) => {
+  return state.loginToken;
+};
+
+export const loginUserCode = (state) => {
+  return state.loginUserCode;
+};
+
+export const loginUserExpiry = (state) => {
+  return state.loginUserExpiry;
+};
+
 export const isUserLoggedIn = (state) => {
   return state.isUserLoggedIn;
 };
@@ -175,8 +187,13 @@ export const accMgtCode = (state) => {
 export const bvnModal = (state) => {
   return state.bvnModal;
 };
+
 export const twoFactorModal = (state) => {
   return state.twoFactorModal;
+};
+
+export const phishingModal = (state) => {
+  return state.phishingModal;
 };
 
 export const manualUserReg = (state) => {
@@ -425,6 +442,12 @@ export const referralByCode = (state) => {
     return state.user.userInfo.referrals.referralData.find(
       (referral) => referral.code == referralcode
     );
+  };
+};
+
+export const cardByCode = (state) => {
+  return (cardCode) => {
+    return state.user.userInfo.userCards.find((card) => card.code == cardCode);
   };
 };
 

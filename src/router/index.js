@@ -10,6 +10,7 @@ import Deposit from "../views/Deposit.vue";
 import Referral from "../views/Referral.vue";
 import SingleReferral from "../views/SingleReferral.vue";
 import SingleInvestment from "../views/SingleInvestment.vue";
+import SingleCard from "../views/SingleCard.vue";
 import Settings from "../views/Settings.vue";
 import BankAccount from "../views/BankAccount.vue";
 import RegisteredUsers from "../views/RegisteredUsers.vue";
@@ -178,6 +179,17 @@ const routes = [
     meta: {
       transition: "fade-in-down",
       title: "Oxfordvest - Your Referral",
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/cards/:id",
+    name: "SingleCard",
+    component: SingleCard,
+    props: true,
+    meta: {
+      transition: "fade-in-down",
+      title: "Oxfordvest - Your Card",
       requiresAuth: true,
     },
   },

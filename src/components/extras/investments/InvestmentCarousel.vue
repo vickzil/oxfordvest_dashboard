@@ -5,9 +5,9 @@
 
       <div v-if="investments.length">
         <carousel
-          :autoplay="true"
+          :autoplay="false"
           :nav="false"
-          :dots="false"
+          :dots="true"
           :stagePadding="50"
           :margin="20"
           :autoplayTimeout="3000"
