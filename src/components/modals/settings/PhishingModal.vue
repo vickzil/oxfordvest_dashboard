@@ -12,7 +12,10 @@
         style="border-radius: 0px"
       >
         <div class="modal-content">
-          <div class="modal-header bg-light text-dark">
+          <div
+            class="modal-header bg-light text-dark"
+            style="border-bottom: none"
+          >
             <h3 class="" style="text-transform: capitalize; font-size: 16px">
               Anti-phishing
               <span>
@@ -43,8 +46,8 @@
             <div class="row">
               <div class="col-md-7 mx-auto">
                 <div class="form-group">
-                  <label><b>Message</b></label>
-                  <input type="text" class="form-control" v-model="message" />
+                  <label><b>Phrase</b></label>
+                  <input type="text" class="form-control" v-model="Phrase" />
                   <p
                     style="
                       color: gray !important;
@@ -68,8 +71,21 @@
                         d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 11c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4H9v-2h2v2z"
                       ></path>
                     </svg>
-                    Please give your card a name
+                    Please add a phrase that will be sent along side your
+                    emails. This is for security purposes.
                   </p>
+                  <br /><br />
+
+                  <div class="text-right pt-3 mt-3">
+                    <button
+                      type="submit"
+                      @click="submitPhishingPhrase"
+                      class="btn btn-danger btn-lg payment_buttion"
+                      v-bind:disabled="Phrase == ''"
+                    >
+                      Update Phrase
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -83,6 +99,7 @@
 </template>
 <script>
 import "@/mixins";
+import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
   computed: {
@@ -91,7 +108,7 @@ export default {
 
   data() {
     return {
-      message: "",
+      Phrase: "",
     };
   },
 
@@ -105,47 +122,53 @@ export default {
     ]),
 
     closePhishingModal: function () {
-      this.message = "";
+      this.Phrase = "";
       this.setPhishingModal(false);
     },
 
-    // verifyPacystackCardPayment: function (response) {
-    //   this.setActionLoading(true);
-    //   var data = {
-    //     AppId: this.AppId,
-    //     RequestId: this.RequestId,
-    //     TransactionReference: this.reference,
-    //   };
-    //   const url = `${this.walletURL}/v1.0/VerifyCardPayment/confirmCardPaymentStatus`;
+    submitPhishingPhrase: function () {
+      this.setActionLoading(true);
+      var data = {
+        AppId: this.AppId,
+        RequestId: this.RequestId,
+        UserCode: this.user.userInfo.user.code,
+        Phrase: this.Phrase,
+      };
+      const url = `${this.hrmURL}/v1.0/OAuth/updateAntiPhishingPhrase`;
 
-    //   axios
-    //     .post(url, data)
-    //     .then((response) => {
-    //       console.log(response);
+      axios
+        .post(url, data)
+        .then((response) => {
+          console.log(response);
 
-    //       let payload;
+          let payload;
 
-    //       if (response.data.success) {
-    //         payload = {
-    //           type: "success",
-    //           message: "Card Confirm successfully",
-    //         };
-    //       } else {
-    //         payload = {
-    //           type: "error",
-    //           message: "Error Card confirmation",
-    //         };
-    //       }
+          if (response.data.success) {
+            payload = {
+              status: true,
+              type: "success",
+              message: "Anti-Phishing Phrase Updated",
+            };
+          } else {
+            payload = {
+              status: true,
+              type: "error",
+              message: response.data.message,
+            };
+          }
 
-    //       this.setAlertModalStatus(payload);
-    //       this.setActionLoading(false);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
+          let userCode = this.user.userInfo.user.code;
+          this.fetchUserData(userCode);
 
-    //       this.serverErrorMessage();
-    //     });
-    // },
+          this.setAlertModalStatus(payload);
+          this.setActionLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+
+          this.serverErrorMessage();
+        });
+    },
   },
 };
 </script>

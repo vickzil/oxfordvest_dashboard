@@ -89,8 +89,12 @@
                     href="javascript:void(0)"
                     @click="showPhishingModal"
                     class="btn btn-danger btn-sm oxfordvest_button"
-                    >Set Up</a
-                  >
+                    >{{
+                      user.userInfo.user.antiPhishingPhrase !== ""
+                        ? "Update Phrase"
+                        : "Set Up"
+                    }}
+                  </a>
                 </div>
               </div>
             </div>
@@ -119,11 +123,20 @@ export default {
 
       return firstThreeWord + "******" + LastThreeWord;
     },
+
+    twoFactorEnable: {
+      get() {
+        return this.user.userInfo.user.is2FAEnabled;
+      },
+
+      set(value) {
+        return (this.user.userInfo.user.is2FAEnabled = value);
+      },
+    },
   },
   data() {
     return {
       showTwoFactorForm: true,
-      twoFactorEnable: false,
     };
   },
 
@@ -136,6 +149,7 @@ export default {
       "fetchBankNames",
       "saveUserData",
       "setPhishingModal",
+      "fetchUserData",
     ]),
     showAuthForms: function () {
       this.twoFactorEnable = !this.twoFactorEnable;
@@ -193,6 +207,9 @@ export default {
               newMessage = "Two Factor Authentication disabled";
               type = "error";
             }
+
+            let userCode = this.user.userInfo.user.code;
+            this.fetchUserData(userCode);
 
             let payload = {
               status: true,

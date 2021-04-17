@@ -63,6 +63,7 @@
           </ul>
         </div>
       </div>
+      <br /><br />
       <nav id="left-sidebar-nav" class="sidebar-nav">
         <ul id="main-menu" class="metismenu animation-li-delay">
           <!-- <li class="header">Hospital</li> -->
@@ -74,7 +75,7 @@
           <li :class="isNavActive === '/bank-account' && 'active'">
             <router-link to="/bank-account">
               <i class="fa fa-money"></i>
-              <span>Bank Account</span>
+              <span>Bank & Card</span>
             </router-link>
           </li>
           <li :class="isNavActive === '/investment' && 'active'">
@@ -98,7 +99,7 @@
           <li :class="isNavActive === '/transaction' && 'active'">
             <router-link to="/transaction">
               <i class="fa fa-handshake-o"></i>
-              <span>Transaction</span>
+              <span>Transactions</span>
             </router-link>
           </li>
           <li :class="isNavActive === '/profile' && 'active'">
@@ -119,7 +120,7 @@
             :class="isNavActive === '/manual-registration' && 'active'"
           >
             <router-link to="/manual-registration">
-              <i class="fa fa-street-view"></i>
+              <i class="fa fa-child"></i>
               <span>Manual Reg/Investment</span>
             </router-link>
           </li>
@@ -137,7 +138,7 @@
             :class="isNavActive === '/users-investment' && 'active'"
           >
             <router-link to="/users-investment">
-              <i class="fa fa-child"></i>
+              <i class="fa fa-street-view"></i>
               <span>Users Investment</span>
             </router-link>
           </li>

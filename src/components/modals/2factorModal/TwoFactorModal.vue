@@ -123,7 +123,7 @@ export default {
       axios
         .post(url, data)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
           this.emptyField = false;
           this.processing = false;
@@ -175,12 +175,6 @@ export default {
           if (response.data.success) {
             const data = response.data.data;
 
-            let loginPayload = {
-              token: null,
-              code: null,
-              expiresAt: null,
-            };
-            this.sendLoginDetailsToState(loginPayload);
             // console.log(data);
 
             let userRole = data.userInfo.user.roles;
@@ -223,6 +217,12 @@ export default {
 
             setTimeout(() => {
               this.getPaymentFeeInfo();
+              let loginPayload = {
+                token: null,
+                code: null,
+                expiresAt: null,
+              };
+              this.sendLoginDetailsToState(loginPayload);
               // this.inactivityTime();
             }, 2500);
           }

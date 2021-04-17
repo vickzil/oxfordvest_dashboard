@@ -257,9 +257,14 @@ export default {
       });
 
       let newData = cuBankName[0];
-      let countryBankData = newData.countryBanks;
 
-      return countryBankData;
+      let sortedBanks = newData.countryBanks.sort(function (a, b) {
+        return a.name < b.name ? -1 : 1;
+      });
+
+      // let countryBankData = newData.countryBanks;
+
+      return sortedBanks;
     },
   },
 
@@ -302,8 +307,12 @@ export default {
 
           this.currency = newData.currencies[0].code;
 
-          this.bankList = newData.countryBanks;
-          let countryBankData = newData.countryBanks;
+          let sortedBanks = newData.countryBanks.sort(function (a, b) {
+            return a.name < b.name ? -1 : 1;
+          });
+
+          this.bankList = sortedBanks;
+          let countryBankData = sortedBanks;
 
           if (countryBankData.length) {
             this.bankList = countryBankData;

@@ -270,7 +270,7 @@ export default {
       axios
         .post(url, data)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           if (response.data.success) {
             if (response.data.data.emailConfirmed) {
               const twoFactor = response.data.data.token.twoFactorToken;
@@ -281,7 +281,7 @@ export default {
                 this.setActionLoading(false);
 
                 let loginPayload = {
-                  token: twoFactor,
+                  token: token,
                   code: data.code,
                   expiresAt: expireTo,
                 };
@@ -368,7 +368,7 @@ export default {
         .then((response) => {
           if (response.data.success) {
             const data = response.data.data;
-            console.log(data);
+            // console.log(data);
 
             let userRole = data.userInfo.user.roles;
 

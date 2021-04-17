@@ -161,7 +161,10 @@
           allias !== ''
         "
       >
-        <button class="btn btn-danger" v-bind:disabled="processing">
+        <button
+          class="btn btn-danger oxfordvest_button"
+          v-bind:disabled="processing"
+        >
           {{ formText }}
           <span
             class="spinner-border spinner-border-sm ml-2"
@@ -219,8 +222,12 @@ export default {
 
           this.currency = newData.currencies[0].code;
 
-          this.bankName = newData.countryBanks;
-          let countryBankData = newData.countryBanks;
+          let sortedBanks = newData.countryBanks.sort(function (a, b) {
+            return a.name < b.name ? -1 : 1;
+          });
+
+          this.bankName = sortedBanks;
+          let countryBankData = sortedBanks;
 
           if (countryBankData.length) {
             this.bankName = countryBankData;

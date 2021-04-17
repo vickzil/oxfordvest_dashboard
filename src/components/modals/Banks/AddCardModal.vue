@@ -189,11 +189,13 @@ export default {
 
           if (response.data.success) {
             payload = {
+              status: true,
               type: "success",
               message: "Card Confirm successfully",
             };
           } else {
             payload = {
+              status: true,
               type: "error",
               message: "Error Card confirmation",
             };

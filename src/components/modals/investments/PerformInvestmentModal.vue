@@ -330,7 +330,7 @@ export default {
       axios
         .post(url, data)
         .then((res) => {
-          let userCode = sessionStorage.getItem("activeformations");
+          let userCode = this.user.userInfo.user.code;
           this.fetchUserData(userCode);
 
           if (res.data.success) {

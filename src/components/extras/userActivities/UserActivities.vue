@@ -54,10 +54,10 @@ export default {
     userActivities() {
       let activities = this.user.userInfo.userActivities;
       let someActivities = activities.slice(0, 5);
-      let sortedActivities = someActivities.sort(function (a, b) {
-        return a.createdOn < b.createdOn ? -1 : 1;
-      });
-      return sortedActivities;
+      // let sortedActivities = someActivities.sort(function (a, b) {
+      //   return a.createdOn < b.createdOn ? -1 : 1;
+      // });
+      return someActivities;
     },
   },
 };

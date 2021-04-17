@@ -54,7 +54,7 @@
             <div class="container text-center font-weight-bold mt-5">
               <p>You don't have any bank details.</p>
               <br />
-              <div class="text-center">
+              <!-- <div class="text-center">
                 <button class="oxfordvest_buttons" @click="showAddBank">
                   <span class="d-flex justify-content-center align-center">
                     <span class="mr-2">Add New</span>
@@ -62,7 +62,8 @@
                   </span>
                 </button>
               </div>
-              <br /><br />
+              <br /> -->
+              <br />
             </div>
           </div>
           <AddUpdateBank
