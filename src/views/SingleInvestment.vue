@@ -47,14 +47,14 @@
                 <small class="text-muted">Duration: </small>
                 <p>{{ investment.duration }} Months</p>
                 <hr />
-                <small class="text-muted">Daily ROI: </small>
-                <p>{{ investment.dailyROI }}</p>
+                <small class="text-muted">Is Recurring: </small>
+                <p>{{ investment.isRecurring ? "Yes" : "No" }}</p>
                 <hr />
-                <small class="text-muted">Daily Frequency: </small>
+                <small class="text-muted">Frequency: </small>
                 <p>{{ investment.frequency }}</p>
-                <hr />
+                <!-- <hr />
                 <small class="text-muted">Daily No of Intervals: </small>
-                <p>{{ investment.noOfIntervals }}</p>
+                <p>{{ investment.noOfIntervals }}</p> -->
               </div>
             </div>
           </div>
@@ -64,17 +64,21 @@
                 <small class="text-muted">Maturity Date: </small>
                 <p>{{ removeTimeZone(investment.maturityDate) }}</p>
                 <hr />
-                <small class="text-muted">New Interest Rate: </small>
-                <p>{{ investment.newInterestRate }}</p>
+                <small class="text-muted">Interest Rate: </small>
+                <p>{{ investment.newInterestRate }}%</p>
                 <hr />
-                <small class="text-muted">Old Interest Rate: </small>
+                <!-- <small class="text-muted">Old Interest Rate: </small>
                 <p class="m-b-0">{{ investment.oldInterestRate }}</p>
-                <hr />
-                <small class="text-muted">Old Interest Rate: </small>
-                <p class="m-b-0">{{ investment.oldInterestRate }}</p>
+                <hr /> -->
+                <small class="text-muted">Source Channel: </small>
+                <p class="m-b-0">{{ investment.sourceChannel }}</p>
                 <hr />
                 <small class="text-muted">status: </small>
-                <p class="m-b-0">{{ investment.status }}</p>
+                <p class="m-b-0">
+                  <span class="badge badge-success ml-0">{{
+                    investment.status
+                  }}</span>
+                </p>
                 <!-- {{ investment }} -->
               </div>
             </div>

@@ -160,6 +160,10 @@ export const user = (state) => {
   return state.user;
 };
 
+export const antiPhishingPhrase = (state) => {
+  return state.user.userInfo.user.antiPhishingPhrase;
+};
+
 export const adverts = (state) => {
   return state.user.adverts;
 };

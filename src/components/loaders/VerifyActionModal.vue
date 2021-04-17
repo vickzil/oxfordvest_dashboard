@@ -79,6 +79,7 @@ export default {
 
       try {
         let resultData = result.data;
+        resultData;
 
         let userCode = this.user.userInfo.user.code;
         this.fetchUserData(userCode);
@@ -95,7 +96,7 @@ export default {
           this.setAlertModalStatus(payload);
         }, 2000);
 
-        console.log(resultData);
+        // console.log(resultData);
       } catch (error) {
         console.log(error);
 

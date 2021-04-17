@@ -55,15 +55,21 @@
               <div class="body">
                 <small class="text-muted">Address: </small>
                 <p v-if="referral.homeAddress">{{ referral.homeAddress }}</p>
-                <p v-else class="badge badge-default">None</p>
+                <p v-else>
+                  <span class="badge badge-default">None</span>
+                </p>
                 <hr />
                 <small class="text-muted">Email address: </small>
                 <p v-if="referral.email">{{ referral.email }}</p>
-                <p v-else class="badge badge-default">None</p>
+                <p v-else>
+                  <span class="badge badge-default">None</span>
+                </p>
                 <hr />
                 <small class="text-muted">Mobile: </small>
                 <p v-if="referral.phoneNumber">{{ referral.phoneNumber }}</p>
-                <p v-else class="badge badge-default">None</p>
+                <p v-else>
+                  <span class="badge badge-default">None</span>
+                </p>
               </div>
             </div>
           </div>
@@ -74,19 +80,25 @@
                 <p v-if="referral.dateOfBirth">
                   {{ removeTimeZone(referral.dateOfBirth) }}
                 </p>
-                <p v-else class="badge badge-default">None</p>
+                <p v-else>
+                  <span class="badge badge-default">None</span>
+                </p>
                 <hr />
                 <small class="text-muted">subsidiary Name: </small>
                 <p v-if="referral.subsidiaryName">
                   {{ referral.subsidiaryName }}
                 </p>
-                <p v-else class="badge badge-default">None</p>
+                <p v-else>
+                  <span class="badge badge-default">None</span>
+                </p>
                 <hr />
                 <small class="text-muted">Country: </small>
                 <p v-if="referral.countryName" class="m-b-0">
                   {{ referral.countryName }}
                 </p>
-                <p v-else class="badge badge-default">None</p>
+                <p v-else>
+                  <span class="badge badge-default">None</span>
+                </p>
                 <!-- {{ referral }} -->
               </div>
             </div>

@@ -215,7 +215,7 @@ export default {
             payload = {
               status: true,
               type: "success",
-              message: "Payment successfully",
+              message: "Payment successfull",
             };
 
             let userCode = this.user.userInfo.user.code;
@@ -227,6 +227,8 @@ export default {
             setTimeout(() => {
               this.$router.push({ path: routerPath });
             }, 900);
+
+            this.closeSavedCardsModal();
           } else {
             payload = {
               status: true,

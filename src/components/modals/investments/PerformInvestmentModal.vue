@@ -133,7 +133,7 @@
                   </div>
                   <div class="col-md-12 col-sm-12 mt-2">
                     <div class="form-group checkbox_group">
-                      <span>Returns to Oilvest</span>
+                      <span>I want to also invest in Oilvest</span>
                       <label class="custom-control custom-checkbox">
                         <input
                           type="checkbox"
@@ -143,6 +143,13 @@
                         />
                         <span class="custom-control-label">&nbsp;</span>
                       </label>
+                      <label
+                        title=""
+                        style="cursor: pointer"
+                        @click="showInvestmentByOilvestInfo"
+                      >
+                        <i class="fa fa-question-circle"></i
+                      ></label>
                     </div>
                   </div>
                 </div>
@@ -218,6 +225,14 @@ export default {
       this.calculatedItem = null;
       this.frequency = "";
       this.setPerformInvestmentModal(false);
+    },
+    showInvestmentByOilvestInfo: function () {
+      let payload = {
+        status: true,
+        type: "success",
+        message: "You can Include this Investment to Oilvest",
+      };
+      this.setAlertModalStatus(payload);
     },
     checkInput: function (input) {
       // var regex = /^[0-9]+$/;
@@ -340,7 +355,7 @@ export default {
               let payload = {
                 status: true,
                 type: "success",
-                message: "Your Investment has been added successfully",
+                message: "Your Investment has been successfully Initiated",
               };
               this.setModalLoading(false);
               this.setAlertModalStatus(payload);

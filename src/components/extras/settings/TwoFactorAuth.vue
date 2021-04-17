@@ -3,7 +3,7 @@
     <div class="body">
       <h6><b>Account Protection</b></h6>
       <div class="row clearfix" v-if="showTwoFactorForm">
-        <div class="col-lg-5 col-md-5 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <br /><br />
           <div class="form-group">
             <!-- <div class="row">
@@ -35,7 +35,7 @@
                 <h5>
                   Two-Factor Authentication
                   <i
-                    class="fa fa-question-circle ml-4"
+                    class="fa fa-question-circle ml-2"
                     @click="showTwoFactorMessageInfo"
                     style="
                       cursor: pointer;
@@ -69,7 +69,7 @@
                 <h5>
                   Anti-phishing
                   <i
-                    class="fa fa-question-circle ml-4"
+                    class="fa fa-question-circle ml-2"
                     @click="showTwoFactorMessageInfo"
                     style="
                       cursor: pointer;
@@ -92,7 +92,7 @@
                     >{{
                       user.userInfo.user.antiPhishingPhrase !== ""
                         ? "Update Phrase"
-                        : "Set Up"
+                        : "Set Up Phrase"
                     }}
                   </a>
                 </div>

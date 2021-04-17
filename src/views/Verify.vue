@@ -61,7 +61,8 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
+          err;
           this.serverErrorMessage();
 
           setTimeout(() => {

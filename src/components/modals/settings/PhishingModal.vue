@@ -71,8 +71,8 @@
                         d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm0 11c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4H9v-2h2v2z"
                       ></path>
                     </svg>
-                    Please add a phrase that will be sent along side your
-                    emails. This is for security purposes.
+                    Please add a phrase that will be sent along side your email.
+                    This is to prevent you from acting on unauthorized E-mail.
                   </p>
                   <br /><br />
 
@@ -103,13 +103,20 @@ import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["phishingModal"]),
+    ...mapGetters(["phishingModal", "antiPhishingPhrase"]),
+
+    Phrase: {
+      get() {
+        return this.antiPhishingPhrase;
+      },
+      set(value) {
+        return (this.antiPhishingPhrase = value);
+      },
+    },
   },
 
   data() {
-    return {
-      Phrase: "",
-    };
+    return {};
   },
 
   methods: {
@@ -162,6 +169,7 @@ export default {
 
           this.setAlertModalStatus(payload);
           this.setActionLoading(false);
+          this.setPhishingModal(false);
         })
         .catch((err) => {
           console.log(err);
@@ -284,6 +292,10 @@ export default {
 .table-responsive::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: #ffffff;
+}
+
+p {
+  line-height: 1.6;
 }
 
 @media screen and (max-width: 830px) {

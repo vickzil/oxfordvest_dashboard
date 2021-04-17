@@ -44,11 +44,11 @@
                 <i class="fa fa-user"></i>My Profile
               </router-link>
             </li>
-            <li>
+            <!-- <li>
               <a href="javascript:void(0)"
                 ><i class="fa fa-envelope"></i>Messages</a
               >
-            </li>
+            </li> -->
             <li>
               <router-link to="/settings">
                 <i class="fa fa-gear"></i>Settings

@@ -8,7 +8,7 @@
             <th>Account No.</th>
             <th>Account Name</th>
             <th>Currency</th>
-            <th>status</th>
+            <!-- <th>status</th> -->
             <!-- <th>Action</th> -->
           </tr>
         </thead>
@@ -20,9 +20,9 @@
             </td>
             <td>{{ bankdetails.accountName }}</td>
             <td>{{ bankdetails.currency }}</td>
-            <td>
+            <!-- <td>
               <span class="badge badge-success">{{ bankdetails.status }}</span>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>

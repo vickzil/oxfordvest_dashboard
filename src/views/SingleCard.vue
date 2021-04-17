@@ -23,7 +23,7 @@
                 <div class="d-flex">
                   <div class="details">
                     <h5 class="mb-0">
-                      {{ card.cardBankName }}
+                      {{ card.alias }}
                     </h5>
                     <span class="badge badge-success mt-3">{{
                       card.status
@@ -42,6 +42,12 @@
           <div class="col-md-12 col-md-auto col-sm-12">
             <div class="card">
               <div class="body">
+                <small class="text-muted">Bank Name: </small>
+                <p v-if="card.cardBankName">
+                  {{ card.cardBankName }}
+                </p>
+                <p v-else class="badge badge-default">None</p>
+                <hr />
                 <small class="text-muted">Card Name: </small>
                 <p v-if="card.cardFirstName">
                   {{ card.cardFirstName }} {{ card.cardLastName }}
@@ -139,11 +145,10 @@ export default {
               type: "success",
               message: "Card Deleted!!",
             };
-
-            this.setAlertModalStatus(payload);
-
+            this.$router.push({ path: "/dashboard" });
             setTimeout(() => {
               this.$router.push({ path: "/bank-account" });
+              this.setAlertModalStatus(payload);
             }, 800);
           }
 
@@ -160,7 +165,7 @@ export default {
   },
 
   mounted() {
-    this.currentSitePage("/referral");
+    this.currentSitePage("/bank-account");
     this.closePageLoading();
   },
   beforeRouteLeave(to, from, next) {

@@ -67,6 +67,9 @@
               <div class="invest_button">
                 <button
                   class="btn btn-danger btn-sm"
+                  v-if="
+                    investment.availableInvestmentCategoryCode !== 'oilvest'
+                  "
                   @click="performInvestment(investment)"
                 >
                   Invest now

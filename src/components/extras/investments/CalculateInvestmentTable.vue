@@ -1,5 +1,6 @@
 <template>
   <div class="card p-3">
+    <!-- {{ calculatedItem }} -->
     <div class="table-responsive mt-3 mb-4">
       <table class="table table-bordered text-nowrap mb-0">
         <thead>
@@ -23,9 +24,7 @@
             <td>
               <span>₦</span>{{ addComma(Math.trunc(calculatedItem.principal)) }}
             </td>
-            <td>
-              {{ calculatedItem.interestRate }}
-            </td>
+            <td>{{ calculatedItem.interestRate }}%</td>
             <td>
               <span>₦</span
               >{{
@@ -34,7 +33,13 @@
                 )
               }}
             </td>
-            <td><span>₦</span>{{ calculatedItem.managementFeeAmount }}</td>
+            <td>
+              <span>₦</span
+              >{{
+                addComma(Math.trunc(calculatedItem.managementFeeAmount))
+              }}
+              ({{ calculatedItem.managementFeeRate + "%" }})
+            </td>
             <td>{{ calculatedItem.frequency }}</td>
             <td>{{ calculatedItem.currency }}</td>
           </tr>
