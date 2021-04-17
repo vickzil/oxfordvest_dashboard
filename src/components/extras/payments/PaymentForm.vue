@@ -482,7 +482,7 @@ export default {
         Provider: this.provider,
       };
 
-      console.log(data);
+      // console.log(data);
 
       axios
         .post(url, data)
@@ -563,7 +563,7 @@ export default {
       if (response.status) {
         this.verifyPacystackCardPayment(response);
 
-        console.log(response);
+        // console.log(response);
       } else {
         let payload = {
           status: true,
@@ -652,7 +652,7 @@ export default {
         Currency: this.currency,
       };
 
-      console.log(data);
+      // console.log(data);
       const url = `${this.walletURL}/v1.0/VerifyCardPayment/confirmCardPaymentStatus`;
 
       axios
@@ -674,7 +674,7 @@ export default {
             };
           }
 
-          console.log(response);
+          // console.log(response);
 
           this.setAlertModalStatus(payload);
           this.setFundWalletLoading(false);

@@ -235,7 +235,7 @@ export default {
         NextOfKinGender: this.gender,
       };
 
-      console.log(data);
+      // console.log(data);
 
       axios
         .post(url, data)

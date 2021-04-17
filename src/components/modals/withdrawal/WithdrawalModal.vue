@@ -198,7 +198,7 @@ export default {
         return false;
       }
 
-      console.log(this.amount);
+      // console.log(this.amount);
 
       if (this.amount < 200) {
         this.inputMessage = `Amount must be up to 200 and above for withdrawal`;
@@ -257,7 +257,7 @@ export default {
         AdditionalInfo: "",
       };
 
-      console.log(data);
+      // console.log(data);
 
       axios
         .post(url, data)

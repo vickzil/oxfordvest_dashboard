@@ -16,6 +16,7 @@ export default {
   debitCreditCardModal: false,
   uploadEvidienceModal: false,
   UploadEvidenceFormModal: false,
+  savedCardModal: false,
   addBvnModal: false,
   PaymentFormModal: false,
   commingSoonModal: false,

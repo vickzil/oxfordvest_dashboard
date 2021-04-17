@@ -282,7 +282,7 @@ export default {
         Preview: true,
       };
 
-      console.log(data);
+      // console.log(data);
 
       axios
         .post(url, data)
@@ -329,7 +329,7 @@ export default {
             this.setAlertModalStatus(payload);
           }
 
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
           console.log(err);

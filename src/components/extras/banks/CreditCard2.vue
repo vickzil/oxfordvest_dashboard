@@ -1,7 +1,7 @@
 <template>
   <router-link
     class="creditcard"
-    :to="{ name: 'SingleCard', params: { id: searchBank.code } }"
+    :to="{ name: 'SingleCard', query: { code: searchBank.code } }"
   >
     <div class="front">
       <div id="ccsingle"></div>

@@ -295,7 +295,7 @@ export default {
       }
     },
     changingCode: function () {
-      console.log(this.accmgtcode);
+      // console.log(this.accmgtcode);
       // this.codeChange = true;
     },
     fetchAccountManagerDetails: async function () {
@@ -402,7 +402,7 @@ export default {
           };
         }
 
-        console.log(response);
+        // console.log(response);
 
         this.setAlertModalStatus(payload);
       } catch (error) {

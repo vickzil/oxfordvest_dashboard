@@ -84,7 +84,7 @@ import { mapActions } from "vuex";
 
 export default {
   name: "Card",
-  props: ["id"],
+  // props: ["id"],
   components: {
     PageLoadingOverlay,
     // PageHeader,
@@ -97,7 +97,7 @@ export default {
   },
   computed: {
     card() {
-      let cardCode = this.id;
+      let cardCode = this.$route.query.code;
       return this.$store.getters.cardByCode(cardCode);
     },
   },
@@ -130,7 +130,7 @@ export default {
       axios
         .post(url, data)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.setActionLoading(false);
 
           if (response.data.success == true) {

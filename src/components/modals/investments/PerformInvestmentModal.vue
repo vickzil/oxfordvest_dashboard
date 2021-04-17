@@ -325,7 +325,7 @@ export default {
         GroupSubsidiaryCode: this.user.userInfo.user.subsidiaryCode,
       };
 
-      console.log(data);
+      // console.log(data);
 
       axios
         .post(url, data)

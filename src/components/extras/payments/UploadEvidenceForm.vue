@@ -343,7 +343,7 @@ export default {
             this.setAlertModalStatus(payload);
           }, 200);
 
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
           this.closePaymentOptionsModal();

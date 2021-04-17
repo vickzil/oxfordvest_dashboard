@@ -198,7 +198,7 @@ export default {
 
           this.email = "";
 
-          console.log(resp);
+          // console.log(resp);
         })
         .catch((err) => {
           console.log(err);

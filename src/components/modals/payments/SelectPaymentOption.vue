@@ -37,6 +37,7 @@
             <DebitCreditCard />
             <ForeignBankTransfer />
             <UploadEvidenceForm />
+            <SavedCard />
             <PaymentForm />
           </div>
         </div>
@@ -52,6 +53,7 @@ import DebitCreditCard from "../../extras/payments/DebitCreditCard";
 import ForeignBankTransfer from "../../extras/payments/ForeignBankTransfer";
 import UploadEvidenceForm from "../../extras/payments/UploadEvidenceForm";
 import PaymentForm from "../../extras/payments/PaymentForm";
+import SavedCard from "../../extras/payments/SavedCard";
 import ModalLoading from "../../loaders/ModalLoading";
 
 import { mapActions, mapGetters } from "vuex";
@@ -62,6 +64,7 @@ export default {
     DebitCreditCard,
     ForeignBankTransfer,
     UploadEvidenceForm,
+    SavedCard,
     ModalLoading,
     PaymentForm,
   },

@@ -172,7 +172,7 @@ export default {
             };
           }
 
-          console.log(response);
+          // console.log(response);
 
           this.setAlertModalStatus(payload);
         })

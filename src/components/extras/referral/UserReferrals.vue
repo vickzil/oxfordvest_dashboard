@@ -3,8 +3,6 @@
     <div class="col-lg-12 col-md-12">
       <div class="body">
         <div class="oxfordvest_tabs">
-          <br />
-          <br />
           <ul class="nav nav-tabs">
             <li class="nav-item">
               <a class="nav-link active" data-toggle="tab" href="#AllReferrals"

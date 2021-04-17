@@ -8,7 +8,10 @@
     </h6>
     <br />
     <br />
-    <div class="grid-box text-center">
+    <div
+      class="grid-box text-center"
+      :class="userPaymentOptions.bySavedCards.length && 'show2Grid'"
+    >
       <!-- <button
         type="submit"
         class="btn btn-outline-danger btn-sm border-0 hrm_button"
@@ -64,6 +67,16 @@
           <p>Transfer (USD/EUR/GBP)</p>
         </div>
       </div>
+      <div
+        class="payment_grid card"
+        @click="showSavedCardsModal"
+        v-if="userPaymentOptions.bySavedCards.length"
+      >
+        <div class="body">
+          <i class="fa fa-cc-mastercard"></i>
+          <p>Saved Cards</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -84,6 +97,7 @@ export default {
       "showBankTransferModal",
       "showDebitCreditCardModal",
       "showUploadEvidienceModal",
+      "showSavedCardsModal",
     ]),
   },
 };
@@ -95,6 +109,11 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   width: 90%;
   margin: 40px auto 90px;
+}
+
+.show2Grid {
+  grid-template-columns: repeat(2, 1fr);
+  width: 60%;
 }
 
 .payment_grid.card {
@@ -149,6 +168,7 @@ button:hover {
 @media screen and (max-width: 990px) {
   .grid-box {
     grid-template-columns: repeat(2, 1fr);
+    width: 80%;
   }
 
   .modal-body h6.text-center.font-18 {

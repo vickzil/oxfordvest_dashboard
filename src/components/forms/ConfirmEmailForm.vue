@@ -173,7 +173,7 @@ export default {
             }, 200);
           }
 
-          console.log(response);
+          // console.log(response);
 
           this.processing = false;
           this.formText = "Re-send Email";

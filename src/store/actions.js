@@ -12,7 +12,7 @@ export const fetchRegistrationInfo = ({ commit, state }) => {
   axios
     .post(url, data)
     .then((response) => {
-      console.log(response.data.data);
+      // console.log(response.data.data);
       commit("REGISTRATION_INFO", response.data.data);
     })
     .catch((err) => {
@@ -72,7 +72,7 @@ export const fetchUserData = ({ commit, state }, code) => {
     .then((response) => {
       if (response.data.success) {
         const data = response.data.data;
-        console.log(data);
+        // console.log(data);
         if (data.userInfo.user.code) {
           // console.log(data)
           commit("SAVE_USER_DATA", data);
@@ -310,6 +310,14 @@ export const showUploadEvidienceModal = ({ commit }) => {
 
 export const closeUploadEvidienceModal = ({ commit }) => {
   commit("CLOSE_UPLOAD_EVIDIENCE_MODAL");
+};
+
+export const showSavedCardsModal = ({ commit }) => {
+  commit("SHOW_SAVED_CARD_MODAL");
+};
+
+export const closeSavedCardsModal = ({ commit }) => {
+  commit("CLOSE_SAVED_CARD_MODAL");
 };
 
 export const showUploadEvidenceFormModal = ({ commit }) => {

@@ -139,7 +139,7 @@ Vue.mixin({
         newD.getDate() + "/" + (newD.getMonth() + 1) + "/" + newD.getFullYear();
 
       if (userdate === todaysdate) {
-        returnedDate = "Today at: " + strTime;
+        returnedDate = "Today, " + strTime;
       } else {
         returnedDate =
           d.getDate() +
@@ -172,7 +172,7 @@ Vue.mixin({
       document.onkeypress = this.resetTimer(time);
     },
     resetTimer: function (time) {
-      console.log(time);
+      // console.log(time);
       clearTimeout(time);
       time = setTimeout(
         this.logoutUser,

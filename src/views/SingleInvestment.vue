@@ -104,7 +104,7 @@ import { mapActions } from "vuex";
 
 export default {
   name: "Investment",
-  props: ["id"],
+  // props: ["id"],
   components: {
     PageLoadingOverlay,
     PageHeader,
@@ -118,7 +118,7 @@ export default {
   },
   computed: {
     investment() {
-      let investmentCode = this.id;
+      let investmentCode = this.$route.query.code;
       return this.$store.getters.investmentByCode(investmentCode);
     },
   },

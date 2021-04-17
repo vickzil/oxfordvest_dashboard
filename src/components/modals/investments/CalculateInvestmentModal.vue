@@ -273,7 +273,7 @@ export default {
             this.setAlertModalStatus(payload);
           }
 
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
           console.log(err);

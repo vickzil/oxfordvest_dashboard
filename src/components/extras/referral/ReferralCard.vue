@@ -7,15 +7,6 @@
             <div class="col-md-12">
               <div class="row clearfix">
                 <div class="col-md-6 col-sm-12">
-                  <div class="h5">How Referral Works</div>
-                  <p class="mt-4 ref_p">
-                    Refer your friends and get rewarded with ₦500.00 for each
-                    friend that signs up and saves using the referral code. Your
-                    friends also get ₦500.00 when they signup and fund a new
-                    investment plan.
-                  </p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-lg-right text-md-right">
                   <div class="h6">Referral Code</div>
                   <div class="card_copy" @click="copyCode">
                     <i class="fa fa-clone mr-1"></i>
@@ -31,9 +22,9 @@
                     </span>
                   </div>
 
-                  <div class="mt-3 copt_div text-lg-right text-md-right">
+                  <div class="mt-4 copt_div">
                     <div class="h6">Referral Link</div>
-                    <form class="float-right">
+                    <form class="mb-3">
                       <div class="input-group">
                         <input
                           type="text"
@@ -52,17 +43,10 @@
                       </div>
                     </form>
                   </div>
+                  <div>Total Sign ups</div>
+                  <h3 class="mb-1 ml-2">{{ referrals.noOfReferrals }}</h3>
                 </div>
               </div>
-            </div>
-
-            <div class="col-md-12">
-              <br />
-              <div class="card-value float-right text-warning">
-                <!-- <i class="wi wi-day-cloudy"></i> -->
-              </div>
-              <div>Total Sign ups</div>
-              <h3 class="mb-1">{{ referrals.noOfReferrals }}</h3>
             </div>
           </div>
         </div>
@@ -124,8 +108,8 @@ export default {
 } */
 form {
   width: 240px !important;
-  margin-right: auto;
-  text-align: right;
+  /* margin-right: auto;
+  text-align: right; */
 }
 
 .input-group-append {

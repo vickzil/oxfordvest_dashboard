@@ -32,8 +32,8 @@
                   <th>Narration</th>
                   <th>Message</th>
                   <th>Provider</th>
-                  <th>Ref</th>
                   <th>Status</th>
+                  <th>Date</th>
                   <!-- <th>Date</th> -->
                 </tr>
               </thead>

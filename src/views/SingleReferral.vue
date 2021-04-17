@@ -108,7 +108,7 @@ import { mapActions } from "vuex";
 
 export default {
   name: "Referral",
-  props: ["id"],
+  // props: ["id"],
   components: {
     PageLoadingOverlay,
     PageHeader,
@@ -121,7 +121,7 @@ export default {
   },
   computed: {
     referral() {
-      let referralCode = this.id;
+      let referralCode = this.$route.query.code;
       return this.$store.getters.referralByCode(referralCode);
     },
   },

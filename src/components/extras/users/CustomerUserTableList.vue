@@ -25,7 +25,7 @@
         >{{ searchedUser.status }}</span
       >
     </td>
-    <td>{{ removeTimeZone(searchedUser.createdOn) }}</td>
+    <td>{{ formatDate(searchedUser.createdOn) }}</td>
   </tr>
 </template>
 

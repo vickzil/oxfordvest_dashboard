@@ -95,7 +95,7 @@
               <router-link
                 :to="{
                   name: 'SingleInvestment',
-                  params: { id: investment.code },
+                  query: { code: investment.code },
                 }"
                 class="btn btn-outline-danger btn-sm"
                 >Details <i class="fa fa-eye ml-2"></i

@@ -139,7 +139,9 @@ export default {
 
     bankCards() {
       // return [];
-      return this.user.userInfo.userCards ? this.user.userInfo.userCards : [];
+      // return this.user.userInfo.userCards ? this.user.userInfo.userCards : [];
+
+      return this.user.fundWalletOptions.bySavedCards;
     },
     searchBanks() {
       let text = this.searchText.toLowerCase();

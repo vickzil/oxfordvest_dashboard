@@ -404,7 +404,7 @@ export default {
         };
         // console.log(data);
 
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
 
         const url = `${this.hrmURL}/v1.0/UserBankAccount/updateUserBankAccount`;
 
@@ -416,14 +416,16 @@ export default {
             let payload;
 
             if (response.data.success) {
-              let userCode = this.user.userInfo.user.code;
-              this.$store.dispatch("fetchUserData", userCode);
-
               payload = {
                 status: true,
                 type: "success",
                 message: "Bank Account Updated!!",
               };
+
+              this.$router.push({ path: "/dashboard" });
+              setTimeout(() => {
+                this.$router.push({ path: "/bank-account" });
+              }, 900);
 
               this.editing = false;
             } else {
@@ -433,6 +435,9 @@ export default {
                 message: response.data.message,
               };
             }
+
+            let userCode = this.user.userInfo.user.code;
+            this.$store.dispatch("fetchUserData", userCode);
             this.$store.dispatch("setAlertModalStatus", payload);
 
             this.$store.dispatch("setActionLoading", false);

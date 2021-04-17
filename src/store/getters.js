@@ -299,6 +299,10 @@ export const PaymentFormModal = (state) => {
   return state.PaymentFormModal;
 };
 
+export const savedCardModal = (state) => {
+  return state.savedCardModal;
+};
+
 export const clickedPaymentType = (state) => {
   return state.clickedPaymentType;
 };
@@ -447,7 +451,9 @@ export const referralByCode = (state) => {
 
 export const cardByCode = (state) => {
   return (cardCode) => {
-    return state.user.userInfo.userCards.find((card) => card.code == cardCode);
+    return state.user.fundWalletOptions.bySavedCards.find(
+      (card) => card.code == cardCode
+    );
   };
 };
 

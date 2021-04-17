@@ -9,7 +9,7 @@
     <td>{{ referral.phoneNumber }}</td>
     <td>
       <router-link
-        :to="{ name: 'SingleReferral', params: { id: referral.code } }"
+        :to="{ name: 'SingleReferral', query: { code: referral.code } }"
         class="btn btn-default btn-sm"
         >Details <i class="fa fa-eye"></i
       ></router-link>

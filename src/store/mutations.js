@@ -148,6 +148,7 @@ export const PAYMENT_OPTIONS_BACK = (state) => {
       state.PaymentFormModal = false;
       state.UploadEvidenceFormModal = false;
       state.modalLoading = false;
+      state.savedCardModal = false;
       state.paymentOptionTitle = "Select Payment Options";
       state.paymentOptions = true;
 
@@ -160,6 +161,7 @@ export const PAYMENT_OPTIONS_BACK = (state) => {
       state.PaymentFormModal = false;
       state.UploadEvidenceFormModal = false;
       state.modalLoading = false;
+      state.savedCardModal = false;
       state.paymentOptionTitle = "Select Payment Options";
       state.paymentOptions = true;
 
@@ -167,6 +169,20 @@ export const PAYMENT_OPTIONS_BACK = (state) => {
     }
     if (state.uploadEvidienceModal == true) {
       state.debitCreditCardModal = false;
+      state.uploadEvidienceModal = false;
+      state.bankTransferModal = false;
+      state.PaymentFormModal = false;
+      state.UploadEvidenceFormModal = false;
+      state.modalLoading = false;
+      state.savedCardModal = false;
+      state.paymentOptionTitle = "Select Payment Options";
+      state.paymentOptions = true;
+
+      return;
+    }
+    if (state.savedCardModal == true) {
+      state.debitCreditCardModal = false;
+      state.savedCardModal = false;
       state.uploadEvidienceModal = false;
       state.bankTransferModal = false;
       state.PaymentFormModal = false;
@@ -184,6 +200,7 @@ export const PAYMENT_OPTIONS_BACK = (state) => {
       state.PaymentFormModal = false;
       state.UploadEvidenceFormModal = false;
       state.modalLoading = false;
+      state.savedCardModal = false;
       state.paymentOptionTitle = "Select Payment Options";
       state.paymentOptions = false;
 
@@ -196,6 +213,7 @@ export const PAYMENT_OPTIONS_BACK = (state) => {
       state.PaymentFormModal = false;
       state.UploadEvidenceFormModal = false;
       state.modalLoading = false;
+      state.savedCardModal = false;
       state.paymentOptionTitle = "Select Payment Options";
       state.paymentOptions = false;
 
@@ -234,6 +252,7 @@ export const SHOW_PAYMENT_OPTIONS = (state) => {
   state.bankTransferModal = false;
   state.PaymentFormModal = false;
   state.UploadEvidenceFormModal = false;
+  state.savedCardModal = false;
   state.paymentOptions = true;
   state.modalLoading = false;
   state.paymentOptionTitle = "Select Payment Options";
@@ -245,6 +264,7 @@ export const CLOSE_PAYMENT_OPTIONS = (state) => {
   state.uploadEvidienceModal = false;
   state.bankTransferModal = false;
   state.PaymentFormModal = false;
+  state.savedCardModal = false;
   state.UploadEvidenceFormModal = false;
   state.paymentOptions = false;
   state.modalLoading = false;
@@ -255,6 +275,7 @@ export const SHOW_BANK_TRANSFER_MODAL = (state) => {
   state.uploadEvidienceModal = false;
   // state.bankTransferModal = false;
   state.PaymentFormModal = false;
+  state.savedCardModal = false;
   state.UploadEvidenceFormModal = false;
 
   state.modalLoading = true;
@@ -289,6 +310,7 @@ export const SHOW_DEBIT_CREDIT_CARD_MODAL = (state) => {
   state.uploadEvidienceModal = false;
   state.bankTransferModal = false;
   state.PaymentFormModal = false;
+  state.savedCardModal = false;
   state.UploadEvidenceFormModal = false;
 
   state.modalLoading = true;
@@ -338,6 +360,7 @@ export const SHOW_UPLOAD_EVIDIENCE_MODAL = (state) => {
   // state.uploadEvidienceModal = false
   state.bankTransferModal = false;
   state.PaymentFormModal = false;
+  state.savedCardModal = false;
   state.UploadEvidenceFormModal = false;
 
   state.modalLoading = true;
@@ -368,12 +391,48 @@ export const CLOSE_UPLOAD_EVIDIENCE_MODAL = (state) => {
   state.uploadEvidienceModal = false;
 };
 
+export const SHOW_SAVED_CARD_MODAL = (state) => {
+  state.debitCreditCardModal = false;
+  state.uploadEvidienceModal = false;
+  state.bankTransferModal = false;
+  state.PaymentFormModal = false;
+  state.UploadEvidenceFormModal = false;
+
+  state.modalLoading = true;
+
+  setTimeout(() => {
+    state.paymentOptions = false;
+    state.paymentOptionTitle = "Saved Cards";
+    state.modalLoading = false;
+    state.savedCardModal = true;
+    state.amount = 0;
+    state.currency = "";
+    state.processing = false;
+    state.buttonText = "Proceed";
+    state.emptyFields = true;
+    state.inputError = false;
+    state.formError = false;
+    state.payWithPaystack = false;
+    state.payWithRave = false;
+    state.paymentForPaystackInfo = null;
+    state.paymentForRaveInfo = null;
+    state.errorMessage = "";
+    state.showError = false;
+  }, 1500);
+};
+
+export const CLOSE_SAVED_CARD_MODAL = (state) => {
+  state.selectPaymentOptionModal = false;
+  state.savedCardModal = false;
+};
+
 export const SHOW_PAYMENT_FORM_MODAL = (state) => {
   state.uploadEvidienceModal = false;
   state.bankTransferModal = false;
   // state.PaymentFormModal = false;
   state.UploadEvidenceFormModal = false;
   state.paymentOptions = false;
+  state.savedCardModal = false;
   state.modalLoading = true;
 
   setTimeout(() => {
@@ -412,6 +471,7 @@ export const SHOW_UPLOAD_EVIDIENCE_FORM_MODAL = (state) => {
   }
   state.debitCreditCardModal = false;
   state.paymentOptions = false;
+  state.savedCardModal = false;
 
   state.PaymentFormModal = false;
   // state.UploadEvidenceFormModal = false;

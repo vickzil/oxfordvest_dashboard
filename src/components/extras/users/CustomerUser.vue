@@ -287,7 +287,7 @@ export default {
           this.setActionLoading(false);
           if (res.data.users.length > 0) {
             this.setRegisteredUsers(res.data.users);
-            console.log(res.data.users);
+            // console.log(res.data.users);
 
             const { totalActive, totalInActive, totalNumber } = res.data;
             let newPayload = {
@@ -309,7 +309,7 @@ export default {
             this.setAlertModalStatus(payload);
           }
 
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
           console.log(err);

@@ -70,14 +70,25 @@
                     </svg>
                     Please give your card a name
                   </p>
-                  {{ reference }}
+                  <!-- {{ reference }} -->
+                </div>
+                <div class="form-group">
+                  <label><b>Select Provider</b></label>
+                  <select class="form-control" v-model="provider">
+                    <option value="paystack">Paystack</option>
+                    <!-- <option value="rave">Rave</option> -->
+                  </select>
+                  <!-- {{ reference }} -->
                 </div>
               </div>
             </div>
 
             <br /><br />
 
-            <div class="text-md-right payStackDiv text-sm-center pt-3 mt-3">
+            <div
+              class="text-md-right payStackDiv text-sm-center pt-3 mt-3"
+              v-if="provider === 'paystack'"
+            >
               <Paystack
                 :paystackkey="paystackkey"
                 :reference="RequestId"
@@ -96,6 +107,30 @@
                 <i class="fe fe-credit-card ml-2"></i>
               </Paystack>
             </div>
+            <div
+              class="text-md-right payStackDiv text-sm-center pt-3 mt-3"
+              v-if="provider === 'rave'"
+            >
+              <Rave
+                style-class="btn btn-danger btn-lg payment_buttion"
+                :email="user.userInfo.user.email"
+                :amount="amount"
+                :reference="reference"
+                :rave-key="ravekey"
+                :callback="processRave"
+                :close="closeRave"
+                :paymentPlan="plan"
+                :customerFirstname="user.userInfo.user.firstName"
+                :customerLastname="user.userInfo.user.lastName"
+                paymentOptions="card,barter,account,ussd"
+                hostedPayemt="1"
+                customTitle="Add Card"
+                :currency="currency"
+                :disabled="alias == ''"
+              >
+                Proceed <i class="fe fe-credit-card ml-2"></i
+              ></Rave>
+            </div>
           </div>
         </div>
       </div>
@@ -107,15 +142,24 @@ import "@/mixins";
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 import Paystack from "vue-paystack";
+import Rave from "vue-ravepayment";
 export default {
   components: {
     Paystack,
+    Rave,
   },
   computed: {
     ...mapGetters(["currentInvestment", "addCardModal", "userPaymentFeeInfo"]),
     paystackkey() {
       let paymentByCard = this.user.fundWalletOptions.byCard.items.find(
         (item) => item.provider === "paystack"
+      );
+
+      return paymentByCard.publicKey;
+    },
+    ravekey() {
+      let paymentByCard = this.user.fundWalletOptions.byCard.items.find(
+        (item) => item.provider === "rave"
       );
 
       return paymentByCard.publicKey;
@@ -130,10 +174,28 @@ export default {
   data() {
     return {
       searchText: "",
+      provider: "paystack",
       showPaystack: false,
       amount: 100,
       currency: "NGN",
       alias: "",
+      plan: 2333,
+      meta: [
+        {
+          metaname: "school",
+          metavalue: "high school",
+        },
+      ],
+      sub: [
+        {
+          id: "1324",
+        },
+        {
+          id: "1221",
+        },
+      ],
+      inputMessage: "",
+      raveResponse: false,
     };
   },
 
@@ -150,13 +212,14 @@ export default {
       this.amount = 100;
       this.showPaystack = false;
       this.emptyFields = true;
+      this.raveResponse = false;
       this.alias = "";
       this.setAddModal(false);
     },
 
     callback: function (response) {
       if (response.status) {
-        this.verifyPacystackCardPayment(response);
+        this.insertUserCard(response);
       } else {
         let payload = {
           status: true,
@@ -165,25 +228,52 @@ export default {
         };
         this.setAlertModalStatus(payload);
       }
-      console.log(response);
+      // console.log(response);
     },
-    verifyPacystackCardPayment: function (response) {
+    processRave: function (response) {
+      if (response.success) {
+        let responseData = response.data.tx;
+        this.insertUserCard(responseData);
+        this.raveResponse = true;
+      } else {
+        let payload = {
+          status: true,
+          type: "error",
+          message: "Payment not completed",
+        };
+        this.setAlertModalStatus(payload);
+      }
+
+      // console.log(response);
+    },
+
+    insertUserCard: function (response) {
       this.setActionLoading(true);
+      var providerRef;
+
+      if (this.provider == "paystack") {
+        providerRef = response.reference;
+      } else {
+        providerRef = response.flwRef;
+      }
+
       var data = {
         AppId: this.AppId,
         RequestId: this.RequestId,
         UserCode: this.user.userInfo.user.code,
-        ProviderCardReference: response.reference,
-        Provider: "paystack",
+        ProviderCardReference: providerRef,
+        Provider: this.provider,
         Amount: this.amount,
         Alias: this.alias,
       };
+
       const url = `${this.hrmURL}/v1.0/UserCard/insertUserCard`;
 
       axios
         .post(url, data)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
+          this.setActionLoading(false);
 
           let payload;
 
@@ -193,29 +283,25 @@ export default {
               type: "success",
               message: "Card Confirm successfully",
             };
+
+            this.$router.push({ path: "/dashboard" });
+            setTimeout(() => {
+              this.$router.push({ path: "/bank-account" });
+            }, 900);
           } else {
             payload = {
               status: true,
               type: "error",
-              message: "Error Card confirmation",
+              message: response.data.message,
             };
           }
 
           this.setAlertModalStatus(payload);
-          this.setActionLoading(false);
-          this.showPaystack = false;
         })
         .catch((err) => {
           console.log(err);
 
-          let payload = {
-            type: "error",
-            message: "Error Card confirmation",
-          };
-          this.showPaystack = false;
-
-          this.setAlertModalStatus(payload);
-          this.setActionLoading(false);
+          this.serverErrorMessage();
         });
     },
 
@@ -229,6 +315,28 @@ export default {
       //   message: "Payment not completed",
       // };
       // this.setAlertModalStatus(payload);
+    },
+    closeRave: function () {
+      console.log("");
+      // let payload;
+
+      // if (this.raveResponse == true) {
+      //   payload = {
+      //     status: true,
+      //     type: "success",
+      //     message: "Card Added successfully",
+      //   };
+      // } else {
+      //   payload = {
+      //     status: true,
+      //     type: "error",
+      //     message: "Card Added not completed",
+      //   };
+      // }
+
+      // setTimeout(() => {
+      //   this.setAlertModalStatus(payload);
+      // }, 1000);
     },
   },
 };

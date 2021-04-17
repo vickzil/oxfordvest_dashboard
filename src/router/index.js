@@ -172,10 +172,9 @@ const routes = [
     },
   },
   {
-    path: "/referrals/:id",
+    path: "/referrals/",
     name: "SingleReferral",
     component: SingleReferral,
-    props: true,
     meta: {
       transition: "fade-in-down",
       title: "Oxfordvest - Your Referral",
@@ -183,10 +182,9 @@ const routes = [
     },
   },
   {
-    path: "/cards/:id",
+    path: "/cards",
     name: "SingleCard",
     component: SingleCard,
-    props: true,
     meta: {
       transition: "fade-in-down",
       title: "Oxfordvest - Your Card",
@@ -194,10 +192,9 @@ const routes = [
     },
   },
   {
-    path: "/investment-details/:id",
+    path: "/investment-details",
     name: "SingleInvestment",
     component: SingleInvestment,
-    props: true,
     meta: {
       transition: "fade-in-down",
       title: "Oxfordvest - Your Investments",

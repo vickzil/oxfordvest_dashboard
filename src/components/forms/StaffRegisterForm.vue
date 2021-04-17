@@ -342,7 +342,7 @@ export default {
 
           this.email = "";
 
-          console.log(resp);
+          // console.log(resp);
         })
         .catch((err) => {
           console.log(err);
@@ -403,7 +403,7 @@ export default {
           //   this.email = "";
 
           //   this.$store.dispatch("setActionLoading", false);
-          console.log(resp);
+          // console.log(resp);
         })
         .catch((err) => {
           console.log(err);
